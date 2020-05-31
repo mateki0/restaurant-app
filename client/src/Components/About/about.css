@@ -1,0 +1,19 @@
+.title-container{
+  width:100%;
+  margin-top:50px;
+  color:#5A5A5A;
+  background-color:#EFEFEF
+}
+
+.container{
+  width: 1170px;
+  margin:0 auto;
+  display:flex;
+
+}
+.container>h1{
+  font-weight:500;
+}
+.about-description{
+  margin:50px 0 50px 0;
+}

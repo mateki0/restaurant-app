@@ -1,0 +1,61 @@
+.menu-container{
+  width:1170px;
+  margin:100px auto 0 auto;
+  color:#5a5a5a;
+  display:flex;
+  flex-direction: column;
+}
+.menu-title-container{
+  margin:0 auto;
+  background: #efefef;
+  width:100%;
+  display:flex;
+  justify-content: space-around;
+}
+
+.meals-expand{
+  width:100%;
+  background-color:#efefef;
+  text-align:center;
+}
+.meals-expand>h2{
+  margin:10px;
+}
+.meals-expand:hover{
+  cursor:pointer;
+}
+
+.single-item{
+  display:flex;
+  justify-content: space-between
+}
+.drinks{
+  margin-top:100px;
+}
+.dessers{
+  margin:100px auto ;
+}
+
+
+/* animation */
+.menu-enter{
+  opacity:0;
+}
+
+.menu-enter.menu-enter-active {
+  opacity:1;
+  transition:opacity 800ms ease-in;
+}
+
+.menu-leave{
+  opacity:1;
+}
+
+.menu-leave.menu-leave-active {
+  opacity:0;
+  transition:opacity 500ms ease-in;
+}
+.cart{
+  color:#5a5a5a;
+  
+}

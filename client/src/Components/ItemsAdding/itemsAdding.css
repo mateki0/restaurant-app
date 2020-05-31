@@ -1,0 +1,13 @@
+.itemsAdding>form{
+  display:flex;
+  flex-direction: column;
+  width:20%;
+  margin:10px auto 0 auto;
+
+}
+.itemsAdding>form>*{
+  padding:5px 0;
+}
+.itemsAdding>form>button{
+  margin-top:20px;
+}

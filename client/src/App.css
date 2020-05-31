@@ -1,0 +1,67 @@
+.App {
+  text-align: center;
+
+}
+
+
+.App-link {
+  color: #61dafb;
+}
+
+
+
+/* Header */
+
+
+.body{
+  color:#5A5A5A;
+}
+.nav-div{
+  position: absolute;
+  margin-top:20px;
+  top:0;
+  left:0;
+  right:0;
+  z-index:99;
+}
+.header{
+  margin:0 auto ;
+  width:1170px;
+  background:#efefef;
+  border-bottom:1px solid #FF5200;
+  border-radius:3px;
+  display:flex;
+  z-index:99;
+}
+
+.header>ul{
+  list-style: none;
+  display:flex;
+  padding:0;
+  align-content:center;
+}
+
+.nav-link{
+  padding:15px;
+  color:#000;
+  text-decoration: none;
+  font-size:15px;
+
+}
+
+.restaurant-name{
+  color:#999999;
+  font-size:18px;
+  line-height: 20px;
+}
+.restaurant-name:hover{
+  color:#fcfcfc;
+}
+
+.small-link:hover{
+  color:#c83a3a;
+}
+.small-link-active{
+  color:#fcfcfc;
+  background: #c83a3a;
+}
