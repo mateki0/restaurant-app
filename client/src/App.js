@@ -6,6 +6,7 @@ import Footer from './Components/Footer/Footer';
 import Contact from './Components/Contact/Contact';
 import Menu from './Components/Menu/Menu';
 import Cart from './Components/Cart/Cart';
+import Register from './Components/Register/Register';
 import AddingPanel from './Components/ItemsAdding/ItemsAdding';
 import {BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom'
 
@@ -81,12 +82,12 @@ function App(props) {
         <Footer/>
       </Route>
       <Route path="/login">
-        
-      <Footer/>
+
+        <Footer/>
       </Route>
       <Route path="/register">
-
-      <Footer/>
+        <Register/>
+        <Footer/>
       </Route>
     </Switch>
     </Router>

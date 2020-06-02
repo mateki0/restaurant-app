@@ -1,4 +1,4 @@
 module.exports = {
-
-  'url' : 'your url'
+  db: 'restaurantDbUser',
+  password:'GZRRo1TaC4Bvmh5O@menu-0xci7'
 }

@@ -5,8 +5,17 @@ var http = require('http')
 module.exports = function(app, passport) {
 
   // home page
+  app.post('/login', passport.authenticate('local-login', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true,
+  }));
 
-  
+  app.post('/register', passport.authenticate('local-signup',{
+    successRedirect: '/login',
+    failureRedirect: '/register',
+    failureFlash: true,
+}))
 
   app.get('/items', (req, res) => {
     Item.find({}, function(err, item) {
