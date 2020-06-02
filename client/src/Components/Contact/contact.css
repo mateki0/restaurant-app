@@ -1,5 +1,5 @@
 .contact-container{
-  margin-top:50px;
+
   margin-bottom:50px;
 }
 .contact-form{
@@ -15,4 +15,14 @@
 }
 .contact-submit{
   margin-top:20px;
+}
+.title-container{
+margin:150px auto 0 auto;
+background: #efefef;
+width:100%;
+display:flex;
+}
+.title-container>h2{
+  margin-left:20px;
+  font-weight:500;
 }

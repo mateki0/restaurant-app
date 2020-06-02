@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {CSSTransitionGroup} from 'react-transition-group'
+import Slider from 'react-animated-slider';
+import 'react-animated-slider/build/horizontal.css';
 import './body.css';
 import burger from './burger.jpg';
 import pasta from './pasta.jpg';
@@ -10,7 +11,7 @@ import Sliders from './sliders'
 import MapContainer from '../MapContainer/MapContainer';
 function FirstPanel(){
 
-  
+
   return(
     <div className="name-container">
       <div className="name">
@@ -109,64 +110,42 @@ function WelcomeToRestaurant(){
 }
 
 function MarketingSlider(){
-
-  const burgerEl =
-    {
-      src:burger,
-      h2:'Very delicious Burger',
-      span:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tempor est vitae sapien posuere maximus.'
-    }
-  const pastaEl =
-    {
-      src:pasta,
-      h2:'Very delicious Pasta',
-      span:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tempor est vitae sapien posuere maximus.'
-    }
-  const drinkEl =
-    {
-      src:drink,
-      h2:'Try Yourself',
-      span:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tempor est vitae sapien posuere maximus.'
-    }
-
-
-  const [slider, setSlider] = useState(burgerEl);
-
-
-
-  useEffect(() => {
-    const marketingTimeout = setTimeout(() =>{
-      if(slider.src === burger){
-        setSlider(pastaEl)
+    const slides = [
+      {
+        src:burger,
+        h2:'Very delicious Burger',
+        span:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tempor est vitae sapien posuere maximus.'
+      },
+      {
+        src:pasta,
+        h2:'Very delicious Pasta',
+        span:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tempor est vitae sapien posuere maximus.'
+      },
+      {
+        src:drink,
+        h2:'Try Yourself',
+        span:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam tempor est vitae sapien posuere maximus.'
       }
-      if(slider.src === pasta){
-        setSlider(drinkEl)
-      }
-      if(slider.src === drink){
-        setSlider(burgerEl)
-      }
+    ]
 
 
-    }, 2000)
-    return () => clearTimeout(marketingTimeout)
-  })
+
+
   return(
-    <div className="breakfast-container">
-    <CSSTransitionGroup
-      transitionName="marketing"
-      transitionEnterTimeout={800}
-      transitionLeaveTimeout={500}
-    >
-    <div key={slider.src} className="marketing-slider">
-      <img src={slider.src} alt={slider.h2}/>
+    <div className="marketing-container">
+    <Slider autoplay="4000">
+      {slides.map((slide,index) =>
+    <div key={index} className="marketing-slider">
+      <img className="marketing-slider-img" src={slide.src} alt={slide.h2}/>
     <div className="marketing-description">
-      <h2>{slider.h2}</h2>
+      <h2>{slide.h2}</h2>
       <span>
-        {slider.span}
+        {slide.span}
       </span>
       </div>
     </div>
-  </CSSTransitionGroup>
+  )}
+  </Slider>
 </div>
   )
 }

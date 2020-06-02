@@ -5,9 +5,9 @@ import {Boxes, WelcomeToRestaurant} from '../Body/Body';
 
 function Title(){
   return(
-    <div className="title-container">
-      <div className="container">
-        <h1>Contact us</h1>
+    <div className="menu-container">
+      <div className="title-container">
+        <h2>Contact us</h2>
       </div>
     </div>
   )

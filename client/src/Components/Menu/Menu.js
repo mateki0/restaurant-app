@@ -4,18 +4,11 @@ import {CSSTransitionGroup} from 'react-transition-group';
 import axios from 'axios'
 
 function MenuTitle(){
-  const copyCart = {...localStorage};
-  console.log(copyCart)
-  let items = Object.values(copyCart);
-  let price = items.reduce((a,b) => parseFloat(a)+parseFloat(b));
-  console.log(process.env.REACT_APP_MAPS_KEY)
+
   return(
     <div className="menu-container">
-      <div className="menu-title-container">
+      <div className="title-container">
         <h2>Checkout our menu below</h2>
-        <div>
-         <a href ="/cart" className="cart"><h3>{price}$</h3></a>
-        </div>
       </div>
 
     </div>
@@ -25,15 +18,30 @@ function Meal(data){
   const [expanded, expandMeal] = useState(true);
   const active = {display:'grid'};
   const nonActive = {display:'none'};
-
+  let cart = {items:[]}
   function addToCart(e){
 
     const currentSibling = e.currentTarget.previousSibling.innerText;
-    localStorage.setItem(`${e.currentTarget.value}`,currentSibling.slice(0,currentSibling.length-1))
+    let obj = {
+      item: e.currentTarget.value,
+      price:currentSibling.slice(0,currentSibling.length-1),
+      count:1
+    }
+    console.log(JSON.parse(localStorage.getItem('cart')))
+    let itemsFromStorage = JSON.parse(localStorage.getItem('cart'));
+    if(JSON.parse(localStorage.getItem('cart')) === null){
+      cart.items.push(obj)
+      localStorage.setItem('cart', JSON.stringify(cart));
+    } else{
+
+      itemsFromStorage.items.push(obj);
+      localStorage.setItem('cart', JSON.stringify(itemsFromStorage));
+    }
+  // window.location.href = ''
   }
   return(
 
-    <div className="menu-container">
+    <div className="menu-container menu-meals">
       <div className="meals-expand" onClick={()=> expanded === false ? expandMeal(true) : expandMeal(false) }>
         <h2>Meals</h2>
       </div>

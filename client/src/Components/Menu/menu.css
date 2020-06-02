@@ -1,18 +1,20 @@
 .menu-container{
   width:1170px;
-  margin:100px auto 0 auto;
+  margin:0 auto 0 auto;
   color:#5a5a5a;
   display:flex;
   flex-direction: column;
 }
 .menu-title-container{
-  margin:0 auto;
+  margin:150px auto 0 auto;
   background: #efefef;
   width:100%;
   display:flex;
-  justify-content: space-around;
-}
 
+}
+.menu-meals{
+  margin-top:100px;
+}
 .meals-expand{
   width:100%;
   background-color:#efefef;
@@ -57,5 +59,5 @@
 }
 .cart{
   color:#5a5a5a;
-  
+
 }

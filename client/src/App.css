@@ -15,14 +15,16 @@
 
 .body{
   color:#5A5A5A;
+
 }
 .nav-div{
-  position: absolute;
-  margin-top:20px;
+  margin-top:25px;
   top:0;
   left:0;
   right:0;
   z-index:99;
+  position:absolute;
+  height:54px;
 }
 .header{
   margin:0 auto ;
@@ -32,13 +34,14 @@
   border-radius:3px;
   display:flex;
   z-index:99;
+  justify-content: space-between;
 }
 
 .header>ul{
   list-style: none;
   display:flex;
   padding:0;
-  align-content:center;
+
 }
 
 .nav-link{
@@ -64,4 +67,13 @@
 .small-link-active{
   color:#fcfcfc;
   background: #c83a3a;
+}
+.price-div{
+  display:flex;
+  align-items: center;
+  justify-content: flex-end
+}
+.price-href{
+  padding:15px;
+
 }

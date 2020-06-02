@@ -1,0 +1,19 @@
+.items-container{
+  width:1170px;
+  display:flex;
+  flex-direction: column;
+  margin:50px auto 0 auto;
+}
+.single-cart-item{
+  background: #efefef;
+  display:flex;
+  justify-content: space-between;
+}
+.single-cart-item>*{
+  padding:10px;
+}
+.price{
+  display:flex;
+  justify-content: flex-end;
+  padding:10px;
+}

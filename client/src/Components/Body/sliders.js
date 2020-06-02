@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-// import {CSSTransitionGroup} from 'react-transition-group'
+import Slider from 'react-animated-slider';
+import 'react-animated-slider/build/horizontal.css';
 
 import './body.css';
 import burger from './burger.jpg';
@@ -16,116 +17,87 @@ import eggs from './eggs.jpg';
 // import soup from './soup.jpg';
 
 function BreakfastSlider(){
-  const firstBreakfastCarousel =[{src:salad,name:'Salates'},{src:pancakes,name:'Pancakes'},{src:eggs, name:'Eggs'},{breakfastKey:'breakfast1'}]
-  const secondBreakfastCarousel =[{src:pasta,name:'Pasta'},{src:chicken,name:'Chicken'},{src:salad, name:'Salates'},{breakfastKey:'breakfast2'}]
-  const [breakfastCarousel, setBreakfastCarousel] = useState(firstBreakfastCarousel);
-  // useEffect(() => {
-  //   const breakfastTimeout = window.setTimeout(() =>{
-  //     breakfastCarousel[0].name === 'Salates' ? setBreakfastCarousel(secondBreakfastCarousel) : setBreakfastCarousel(firstBreakfastCarousel);
-  //
-  //
-  //   }, 3000);
-  //   return () => window.clearTimeout(breakfastTimeout);
-  // })
+  const firstBreakfastCarousel =[{src0:salad,name0:'Salates', src1:pancakes,name1:'Pancakes' ,src2:eggs, name2:'Eggs'},
+  {src0:pasta,name0:'Pasta', src1:chicken,name1:'Chicken', src2:salad, name2:'Salates'},
+  {src0:salad,name0:'Salates', src1:pancakes,name1:'Eggs' ,src2:eggs, name2:'Eggs'},
+]
+
+
   return(
-    <div className="breakfast-container">
+    <div className="lunch-container">
       <div className="breakfast-title">
         <h2>MEALS</h2>
       </div>
-      {/* <CSSTransitionGroup
-        transitionEnterTimeout={800}
-        transitionLeaveTimeout={500}
-        transitionName="breakfast"
-      > */}
-      <div key={breakfastCarousel[3].breakfastKey} className="breakfast-slider">
-        <button className="back" onClick={()=> breakfastCarousel[0].name === 'Salates' ? setBreakfastCarousel(secondBreakfastCarousel) : setBreakfastCarousel(firstBreakfastCarousel)}> b </button>
-
-          <div className="slider">
-          <img src={breakfastCarousel[0].src} alt="salad" />
-          <span>{breakfastCarousel[0].name}</span>
+      <Slider autoplay="2000">
+        {firstBreakfastCarousel.map((slide,index) =>
+      <div key={index} className="breakfast-slider">
+          <div className="sliders">
+          <img src={slide.src0} alt="salad" />
+          <span>{slide.name0}</span>
           <button type="button">Add to cart >></button>
         </div>
 
-        <div className="slider">
-          <img src={breakfastCarousel[1].src} alt="meal" />
-          <span>{breakfastCarousel[1].name}</span>
+        <div className="sliders">
+          <img src={slide.src1} alt="meal" />
+          <span>{slide.name1}</span>
           <button type="button">Add to cart >></button>
         </div>
 
-        <div className="slider">
-          <img src={breakfastCarousel[2].src} alt="drink"/>
-          <span>{breakfastCarousel[2].name}</span>
+        <div className="sliders">
+          <img src={slide.src2} alt="drink"/>
+          <span>{slide.name2}</span>
           <button type="button">Add to cart >></button>
         </div>
-
-        <button className="forward" onClick={()=> breakfastCarousel[0].name === 'Salates' ? setBreakfastCarousel(secondBreakfastCarousel) : setBreakfastCarousel(firstBreakfastCarousel)}>></button>
       </div>
-{/* </CSSTransitionGroup> */}
+    )}
+</Slider>
 
     </div>
   )
 }
 function LunchSlider(){
-  const firstLunchCarousel =[{src:desser,name:'Desser'},{src:burger,name:'Meal'},{src:drink, name:'Drink'},{lunchKey:'lunch1'}]
-  const secondLunchCarousel =[{src:pasta,name:'Pasta'},{src:chicken,name:'Chicken'},{src:pancakes, name:'Pancakes'},{lunchKey:'lunch2'}]
-  const [lunchCarousel, setLunchCarousel] = useState(firstLunchCarousel);
-  // useEffect(() => {
-  //   const lunchTimeout = window.setTimeout(() =>{
-  //     lunchCarousel[0].name === 'Desser' ? setLunchCarousel(secondLunchCarousel) : setLunchCarousel(firstLunchCarousel);
-  //
-  //
-  //   }, 3000);
-  //   return () => window.clearTimeout(lunchTimeout);
-  // })
+  const firstBreakfastCarousel =[{src0:salad,name0:'Salates', src1:pancakes,name1:'Pancakes' ,src2:eggs, name2:'Eggs'},
+  {src0:pasta,name0:'Pasta', src1:chicken,name1:'Chicken', src2:salad, name2:'Salates'},
+  {src0:salad,name0:'Salates', src1:pancakes,name1:'Eggs' ,src2:eggs, name2:'Eggs'},
+]
   return(
     <div className="lunch-container">
       <div className="breakfast-title">
         <h2>DRINKS</h2>
       </div>
 
-      {/* <CSSTransitionGroup
+      <Slider autoplay="2000">
+        {firstBreakfastCarousel.map((slide,index) =>
+      <div key={index} className="breakfast-slider">
 
-        transitionName="lunch"
-        transitionEnterTimeout={800}
-        transitionLeaveTimeout={500}
-      > */}
-      <div key={lunchCarousel[3].lunchKey} className="breakfast-slider">
-        <button className="back" onClick={()=> lunchCarousel[0].name === 'Desser' ? setLunchCarousel(secondLunchCarousel) : setLunchCarousel(firstLunchCarousel)}> b </button>
-        <div className="slider">
-          <img src={lunchCarousel[0].src} alt="salad" />
-          <span>{lunchCarousel[0].name}</span>
+        <div className="sliders">
+          <img src={slide.src0} alt="salad" />
+          <span>{slide.name0}</span>
           <button type="button">Add to cart >></button>
         </div>
-        <div className="slider">
-          <img src={lunchCarousel[1].src} alt="meal" />
-          <span>{lunchCarousel[1].name}</span>
+        <div className="sliders">
+          <img src={slide.src1} alt="meal" />
+          <span>{slide.name1}</span>
           <button type="button">Add to cart >></button>
         </div>
-        <div className="slider">
-          <img src={lunchCarousel[2].src} alt="drink"/>
-          <span>{lunchCarousel[2].name}</span>
+        <div className="sliders">
+          <img src={slide.src2} alt="drink"/>
+          <span>{slide.name2}</span>
           <button type="button">Add to cart >></button>
         </div>
-        <button className="forward" onClick={()=> lunchCarousel[0].name === 'Desser' ? setLunchCarousel(secondLunchCarousel) : setLunchCarousel(firstLunchCarousel)}>></button>
       </div>
-      {/* </CSSTransitionGroup> */}
+    )}
+  </Slider>
 
     </div>
   )
 }
 
 function DinnerSlider(){
-  const firstDinnerCarousel =[{src:salad,name:'Salates'},{src:burger,name:'Meal'},{src:drink, name:'Drink'},{dinnerKey:'dinner1'}]
-  const secondDinnerCarousel =[{src:pasta,name:'Pasta'},{src:chicken,name:'Chicken'},{src:alcohol, name:'Alcohol'},{dinnerKey:'dinner2'}]
-  const [dinnerCarousel, setDinnerCarousel] = useState(firstDinnerCarousel);
-  // useEffect(() => {
-  //   const dinnerTimeout = window.setTimeout(() =>{
-  //     carousel[0].name === 'Salates' ? setCarousel(secondCarousel) : setCarousel(firstCarousel);
-  //
-  //
-  //   }, 3000);
-  //   return () => window.clearTimeout(dinnerTimeout);
-  // });
+  const firstBreakfastCarousel =[{src0:salad,name0:'Salates', src1:pancakes,name1:'Pancakes' ,src2:eggs, name2:'Eggs'},
+  {src0:pasta,name0:'Pasta', src1:chicken,name1:'Chicken', src2:salad, name2:'Salates'},
+  {src0:salad,name0:'Salates', src1:pancakes,name1:'Eggs' ,src2:eggs, name2:'Eggs'},
+]
 
   return(
     <div className="lunch-container">
@@ -133,32 +105,27 @@ function DinnerSlider(){
         <h2>DESSERS</h2>
       </div>
 
-      {/* <CSSTransitionGroup
-
-        transitionName="dinner"
-        transitionEnterTimeout={800}
-        transitionLeaveTimeout={500}
-      > */}
-      <div key={dinnerCarousel[3].dinnerKey} className="breakfast-slider">
-        <button className="back" onClick={()=> dinnerCarousel[0].name === 'Salates' ? setDinnerCarousel(secondDinnerCarousel) : setDinnerCarousel(firstDinnerCarousel)}> b </button>
-        <div className="slider">
-          <img src={dinnerCarousel[0].src} alt="salad" />
-          <span>{dinnerCarousel[0].name}</span>
+      <Slider autoplay="2000">
+        {firstBreakfastCarousel.map((slide,index) =>
+      <div key={index} className="breakfast-slider">
+        <div className="sliders">
+          <img src={slide.src0} alt="salad" />
+          <span>{slide.name0}</span>
           <button type="button">Add to cart >></button>
         </div>
-        <div className="slider">
-          <img src={dinnerCarousel[1].src} alt="meal" />
-          <span>{dinnerCarousel[1].name}</span>
+        <div className="sliders">
+          <img src={slide.src1} alt="meal" />
+          <span>{slide.name1}</span>
           <button type="button">Add to cart >></button>
         </div>
-        <div className="slider">
-          <img src={dinnerCarousel[2].src} alt="drink"/>
-          <span>{dinnerCarousel[2].name}</span>
+        <div className="sliders">
+          <img src={slide.src2} alt="drink"/>
+          <span>{slide.name2}</span>
           <button type="button">Add to cart >></button>
         </div>
-        <button className="forward" onClick={()=> dinnerCarousel[0].name === 'Salates' ? setDinnerCarousel(secondDinnerCarousel) : setDinnerCarousel(firstDinnerCarousel)}>></button>
       </div>
-      {/* </CSSTransitionGroup> */}
+    )}
+  </Slider>
 
     </div>
   )

@@ -69,7 +69,6 @@
   color:#5A5A5A;
   width:1170px;
   margin:0 auto ;
-  position:relative;
 }
 .breakfast-title{
   width:1170px;
@@ -82,29 +81,22 @@
 }
 .breakfast-slider{
   display:flex;
-  padding-bottom:50px;
-  position:relative;
-
 }
-.slider>img{
+.sliders>img{
   width: 370px;
   max-width:100%;
   height:275px;
   max-height:275px;
 
 }
-.slider{
-  padding:0 10px;
-  width:400px;
-  width:370px;
+.sliders{
+  width:100%;
   display:flex;
   flex-direction:column;
   align-items:center;
 }
-.slider>span{
-  margin-top:5px;
-}
-.slider>button{
+
+.sliders>button{
   width:40%;
   align-self: center;
   margin-top:5px;
@@ -113,41 +105,7 @@
   background:#7DB641;
   border-color:#7DB641;
 }
-.back,.forward{
-  height:60px;
-  align-self: center;
-  top:100px;
-  position:absolute;
-}
-.back{
-  left:30px;
-}
-.forward{
-  right:30px;
-}
 
-/* slider animations */
-.breakfast-enter{
-  opacity:0;
-}
-
-.breakfast-enter.breakfast-enter-active {
-  opacity:1;
-  transition:opacity 800ms ease-in;
-}
-
-.breakfast-leave{
-  opacity:1;
-}
-
-.breakfast-leave.breakfast-leave-active {
-  position:absolute;
-  opacity:0;
-  top:88px;
-  left:0;
-  right:0;
-  transition:opacity 500ms ease-in;
-}
 
 
 .lunch-container{
@@ -156,48 +114,6 @@
   position:relative;
 }
 
-.lunch-enter{
-  opacity:0;
-}
-
-.lunch-enter.lunch-enter-active {
-  opacity:1;
-  transition:opacity 800ms ease-in;
-}
-
-.lunch-leave{
-  opacity:1;
-}
-
-.lunch-leave.lunch-leave-active {
-  position:absolute;
-  opacity:0;
-  top:88px;
-  left:0;
-  right:0;
-  transition:opacity 500ms ease-in;
-}
-.dinner-enter{
-  opacity:0;
-}
-
-.dinner-enter.dinner-enter-active {
-  opacity:1;
-  transition:opacity 800ms ease-in;
-}
-
-.dinner-leave{
-  opacity:1;
-}
-
-.dinner-leave.dinner-leave-active {
-  position:absolute;
-  opacity:0;
-  top:88px;
-  left:0;
-  right:0;
-  transition:opacity 500ms ease-in;
-}
 /*  boxes */
 .boxes{
   width:1170px;
@@ -254,9 +170,12 @@
 }
 
 /* Marketing Slider */
-.breakfast-transition{
-  position:relative;
+.marketing-container{
+  color:#5A5A5A;
+  width:1170px;
+  margin:0 auto ;
 }
+
 .marketing-slider{
   width:1170px;
   display:flex;
@@ -264,7 +183,7 @@
   padding-bottom:50px;
 }
 
-.marketing-slider>img{
+.marketing-slider-img{
   width:470px;
   max-width:100%;
   height:352px;
@@ -277,26 +196,4 @@
 .marketing-description>h2{
   font-size:50px;
   font-weight:500;
-}
-
-.marketing-enter{
-  opacity:0;
-}
-
-.marketing-enter.marketing-enter-active {
-  opacity:1;
-  transition:opacity 800ms ease-in;
-}
-
-.marketing-leave{
-  opacity:1;
-}
-
-.marketing-leave.marketing-leave-active {
-  position:absolute;
-  opacity:0;
-  top:-50px;
-  left:0;
-  right:0;
-  transition:opacity 500ms ease-in;
 }
