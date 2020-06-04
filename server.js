@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
+const path = require('path')
 var mongoose = require('mongoose');
 var passport = require('passport');
 var configDB = require('./config/database.js');
