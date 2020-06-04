@@ -16,7 +16,12 @@ mongoose.connect(`mongodb+srv://${configDB.db}:${configDB.password}.mongodb.net/
   useNewUrlParser: true
 });
 
+app.use(express.static(path.join(__dirname, 'build')));
 
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 app.use(morgan('dev')) // log req to console
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({
