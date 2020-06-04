@@ -16,6 +16,7 @@ module.exports = function(app, passport) {
   }));
 
   app.get('/login', (req, res) => {
+    console.log('')
     res.send({message:req.flash('loginMessage')})
   })
   app.get('/register', (req, res) => {
