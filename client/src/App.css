@@ -68,6 +68,9 @@
   color:#fcfcfc;
   background: #c83a3a;
 }
+.small-link-active:hover{
+  color:#fff;
+}
 .price-div{
   display:flex;
   align-items: center;
@@ -75,5 +78,26 @@
 }
 .price-href{
   padding:15px;
-
+}
+.cart:hover{
+  color:#c83a3a;
+  text-decoration:none;
+}
+.userName{
+  font-weight:500;
+  padding-right:10px;
+}
+.logout-div{
+  padding-right:10px;
+}
+.logout-div>a{
+  color:#000;
+}
+.logout-button{
+  font-weight:500;
+  padding:4px 8px;
+}
+.logout-button:hover{
+  cursor:pointer;
+  color:#c83a3a;
 }

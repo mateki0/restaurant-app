@@ -1,10 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
-import axios from 'axios';
 import mapboxgl from 'mapbox-gl'
 import './mapContainer.css';
 export default function MapContainer(){
   const [map, setMap] = useState(null);
-  const [isError, setIsError] = useState(false)
   const mapDiv = useRef(null)
 
 
@@ -43,25 +41,11 @@ export default function MapContainer(){
   }
   if (!map) initalizeMap({ setMap, mapDiv })
 }, [map])
-  //
-  // useEffect(()=> {
-  //   const fetchData = async () => {
-  //     const result = await axios(`https://api.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.mvt?access_token=${key}`);
-  //     setMaps(result.data)
-  //   }
-  //   fetchData();
-  // }, {})
-  // console.log(maps)
-  // const center = {
-  //   lat:50,
-  //   lng:19,
-  // }
-  const AnyReactComponent = ({text}) => <div>{text}</div>
-  const styles = {width:'100%', height:'450px', postion:'absolute', top:0,left:0, right:0}
+  
   return(
     <div>
     <div ref={el => (mapDiv.current = el)} id="mapDiv" />
-  
+
     </div>
     //   <maps
     //

@@ -27,3 +27,7 @@
   text-decoration:underline;
   cursor:pointer;
 }
+.back-top:hover{
+  cursor:pointer;
+  text-decoration: underline;
+}

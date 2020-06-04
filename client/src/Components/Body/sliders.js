@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 
 import './body.css';
-import burger from './burger.jpg';
+//import burger from './burger.jpg';
 import pasta from './pasta.jpg';
 import chicken from './chicken.jpg';
-import drink from './drink.jpg';
+//import drink from './drink.jpg';
 import salad from './salad.jpg';
-import alcohol from './alcohol.jpg';
+//import alcohol from './alcohol.jpg';
 // import burrito from './burrito.jpg';
-import desser from './desser.jpg';
+//import desser from './desser.jpg';
 import pancakes from './pancakes.jpg';
 // import pizza from './pizza.jpg';
 import eggs from './eggs.jpg';
@@ -34,19 +34,19 @@ function BreakfastSlider(){
           <div className="sliders">
           <img src={slide.src0} alt="salad" />
           <span>{slide.name0}</span>
-          <button type="button">Add to cart >></button>
+          <a href="/menu" className="see-menu-a">See our menu</a>
         </div>
 
         <div className="sliders">
           <img src={slide.src1} alt="meal" />
           <span>{slide.name1}</span>
-          <button type="button">Add to cart >></button>
+          <a href="/menu" className="see-menu-a">See our menu</a>
         </div>
 
         <div className="sliders">
           <img src={slide.src2} alt="drink"/>
           <span>{slide.name2}</span>
-          <button type="button">Add to cart >></button>
+          <a href="/menu" className="see-menu-a">See our menu</a>
         </div>
       </div>
     )}
@@ -73,17 +73,17 @@ function LunchSlider(){
         <div className="sliders">
           <img src={slide.src0} alt="salad" />
           <span>{slide.name0}</span>
-          <button type="button">Add to cart >></button>
+          <a href="/menu" className="see-menu-a">See our menu</a>
         </div>
         <div className="sliders">
           <img src={slide.src1} alt="meal" />
           <span>{slide.name1}</span>
-          <button type="button">Add to cart >></button>
+          <a href="/menu" className="see-menu-a">See our menu</a>
         </div>
         <div className="sliders">
           <img src={slide.src2} alt="drink"/>
           <span>{slide.name2}</span>
-          <button type="button">Add to cart >></button>
+          <a href="/menu" className="see-menu-a">See our menu</a>
         </div>
       </div>
     )}
@@ -111,17 +111,17 @@ function DinnerSlider(){
         <div className="sliders">
           <img src={slide.src0} alt="salad" />
           <span>{slide.name0}</span>
-          <button type="button">Add to cart >></button>
+          <a href="/menu" className="see-menu-a">See our menu</a>
         </div>
         <div className="sliders">
           <img src={slide.src1} alt="meal" />
           <span>{slide.name1}</span>
-          <button type="button">Add to cart >></button>
+          <a href="/menu" className="see-menu-a">See our menu</a>
         </div>
         <div className="sliders">
           <img src={slide.src2} alt="drink"/>
           <span>{slide.name2}</span>
-          <button type="button">Add to cart >></button>
+          <a href="/menu" className="see-menu-a">See our menu</a>
         </div>
       </div>
     )}

@@ -7,20 +7,16 @@ import Contact from './Components/Contact/Contact';
 import Menu from './Components/Menu/Menu';
 import Cart from './Components/Cart/Cart';
 import Register from './Components/Register/Register';
+import Login from './Components/Login/Login';
+import UserHeader from './Components/UserHeader/UserHeader';
 import AddingPanel from './Components/ItemsAdding/ItemsAdding';
 import {BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom'
 
-function App(props) {
-  const copyCart = JSON.parse(localStorage.getItem('cart'))
-  let totalPrice;
-  if(copyCart){
-  let itemsPrice = copyCart.items.map((a) =>{
-    return parseFloat(a.price);
- }
- );
 
- totalPrice = itemsPrice.reduce((a,b) => a+b)
-}
+function App(props) {
+  let userName = document.querySelector('.userName')
+  console.log(userName)
+
   return (
     <Router>
     <div className="App">
@@ -43,15 +39,10 @@ function App(props) {
               <NavLink exact to='/menu' activeClassName="small-link-active" className="nav-link small-link" >Menu</NavLink>
             </li>
             <li>
-              <NavLink exact to='/login' activeClassName="small-link-active" className="nav-link small-link" >Sign in</NavLink>
-            </li>
-            <li>
               <NavLink exact to='/register' activeClassName="small-link-active" className="nav-link small-link" >Register</NavLink>
             </li>
           </ul>
-          <div className="price-div">
-           <a href ="/cart" className="cart"><span className="price-href">{totalPrice}$</span></a>
-          </div>
+          <UserHeader/>
         </div>
       </div>
 
@@ -82,7 +73,7 @@ function App(props) {
         <Footer/>
       </Route>
       <Route path="/login">
-
+        <Login/>
         <Footer/>
       </Route>
       <Route path="/register">

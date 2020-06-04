@@ -16,16 +16,19 @@ function Title(){
 function ContactForm(){
   return(
     <div className='contact-container'>
-      <div className="container">
-        <form className="contact-form">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" placeholder="Your name"/>
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="email" placeholder="Your E-mail adress"/>
-        <label for="textarea">What do you want to tell us?</label>
-        <textarea rows="6" cols="50" id="textarea" name="textarea"/>
-        <button type="submit" className="contact-submit">Submit</button>
-        </form>
+      <div className="container informations">
+        <div>
+        <span>Adress: </span><span>Lorem ipsum</span>
+        </div>
+        <div>
+        <span>Our Email: </span><span>Lorem ipsum</span>
+        </div>
+        <div>
+        <span>Phone: </span><span>Lorem ipsum</span>
+        </div>
+        <div>
+        <span>Feel free to phone or send us mail</span>
+        </div>
       </div>
     </div>
   )
@@ -33,11 +36,11 @@ function ContactForm(){
 
 export default function Contact(){
   return(
-    <div>
+    <main>
       <Title/>
       <ContactForm/>
       <Boxes/>
       <WelcomeToRestaurant/>
-    </div>
+    </main>
   )
 }

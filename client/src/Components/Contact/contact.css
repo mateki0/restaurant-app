@@ -8,11 +8,6 @@
   text-align:center;
   margin:0 auto;
 }
-
-.contact-form>*{
-  padding:5px 20px;
-  text-align: center;
-}
 .contact-submit{
   margin-top:20px;
 }
@@ -25,4 +20,11 @@ display:flex;
 .title-container>h2{
   margin-left:20px;
   font-weight:500;
+}
+.informations{
+  display:flex;
+  flex-direction: column;
+}
+.informations>*{
+  padding:5px;
 }

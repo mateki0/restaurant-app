@@ -10,11 +10,11 @@ export default function Footer(){
       <div className="footer">
         <div className="company">
           <span>@2014 Company, Inc</span>
-          <a href="/#">Privacy</a>
-          <a href="/#">Terms</a>
+          <a href="/contact">Privacy</a>
+          <a href="/contact">Terms</a>
         </div>
         <div className="top">
-          <a onClick={handleScroll} className="back-top">Back to top</a>
+          <span onClick={handleScroll} className="back-top">Back to top</span>
         </div>
       </div>
     </div>

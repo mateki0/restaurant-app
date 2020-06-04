@@ -4,6 +4,7 @@ const port = process.env.PORT || 5000;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var configDB = require('./config/database.js');
+var flash = require('connect-flash');
 var cors = require('cors')
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -30,7 +31,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash());
 app.use(express.static(__dirname + '/public'));
 
 app.use(cors())

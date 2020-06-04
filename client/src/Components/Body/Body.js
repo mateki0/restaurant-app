@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import './body.css';
@@ -30,19 +30,19 @@ function SecondPanel(){
         <img src={chicken} alt="chicken" />
         <h2 className="meal-name">Chicken</h2>
         <span className="meal-desc">Something very tasty</span><br/>
-        <button type="button">$ 2.5 Add to cart >></button>
+        <a href="/menu" className="see-menu-a">See our menu</a>
       </div>
       <div className="meal second-meal">
         <img src={burger} alt="burger"/>
         <h2 className="meal-name">Burger</h2>
         <span className="meal-desc">Something very tasty</span><br/>
-        <button type="button">$ 2.5 Add to cart >></button>
+        <a href="/menu" className="see-menu-a">See our menu</a>
       </div>
       <div className="meal third-meal">
         <img src={pasta} alt="pasta" />
           <h2 className="meal-name">Pasta</h2>
           <span className="meal-desc">Something very tasty</span><br/>
-          <button type="button">$ 2.5 Add to cart >></button>
+          <a href="/menu" className="see-menu-a">See our menu</a>
       </div>
     </div>
   )
@@ -61,17 +61,23 @@ function Boxes(){
   return(
     <div className="boxes">
       <div className="box box1">
-        <img src={burger} alt="burger"/>
+        <a href="/menu">
+          <img src={burger} className="box-img" alt="burger"/>
+        </a>
         <h3>Burger</h3>
         <span>Here is place for meal description</span>
       </div>
       <div className="box box2">
-        <img src={pasta} alt="pasta"/>
+        <a href="/menu">
+          <img href="/menu" className="box-img" src={pasta} alt="pasta"/>
+        </a>
         <h3>Spaghetti</h3>
         <span>Here is place for meal description</span>
       </div>
       <div className="box box3">
-        <img src={salad} alt="salad"/>
+        <a href="/menu">
+          <img src={salad} alt="salad" className="box-img"/>
+        </a>
         <h3>Salad</h3>
         <span>Here is place for meal description</span>
       </div>
@@ -85,7 +91,7 @@ function WelcomeToRestaurant(){
       <div className="welcome-container">
         <div>
           <h3>Welcome to Restaurant </h3>
-        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor est vitae sapien posuere maximus.
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor est vitae sapien posuere maximus.
            Mauris luctus nulla in condimentum lobortis. Vivamus mollis, est vitae bibendum placerat, dui ligula fermentum nunc,
             sit amet dignissim mauris tellus ut dui. Integer et ante sed urna dictum molestie ut ut sapien. Praesent dignissim,
            augue eu viverra facilisis, mauris turpis ultrices neque, nec condimentum velit nisl ac lacus.</span>
@@ -152,7 +158,7 @@ function MarketingSlider(){
 
 function Body(){
   return(
-    <div>
+    <main>
       <MapContainer/>
       <FirstPanel/>
       <SecondPanel/>
@@ -161,8 +167,7 @@ function Body(){
       <Boxes/>
       <WelcomeToRestaurant/>
       <MarketingSlider/>
-
-    </div>
+    </main>
   )
 }
 export {Body, WelcomeToRestaurant, Boxes};

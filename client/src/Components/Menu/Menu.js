@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './menu.css';
 import {CSSTransitionGroup} from 'react-transition-group';
 import axios from 'axios'
@@ -16,18 +16,29 @@ function MenuTitle(){
 }
 function Meal(data){
   const [expanded, expandMeal] = useState(true);
+  const [user, setUser] = useState({});
   const active = {display:'grid'};
   const nonActive = {display:'none'};
   let cart = {items:[]}
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('/user');
+      setUser(result.data)
+    }
+    fetchData()
+  }, [user]);
+
   function addToCart(e){
 
-    const currentSibling = e.currentTarget.previousSibling.innerText;
+    const currentSibling = e.currentTarget.previousSibling.value;
+
     let obj = {
       item: e.currentTarget.value,
-      price:currentSibling.slice(0,currentSibling.length-1),
+      price:currentSibling,
       count:1
     }
-    console.log(JSON.parse(localStorage.getItem('cart')))
+
+    if(user.local === null || user.local === undefined){
     let itemsFromStorage = JSON.parse(localStorage.getItem('cart'));
     if(JSON.parse(localStorage.getItem('cart')) === null){
       cart.items.push(obj)
@@ -38,7 +49,8 @@ function Meal(data){
       localStorage.setItem('cart', JSON.stringify(itemsFromStorage));
     }
   // window.location.href = ''
-  }
+}
+}
   return(
 
     <div className="menu-container menu-meals">
@@ -60,7 +72,12 @@ function Meal(data){
           </div>
           <div>
             <h4>{a.price}</h4>
-          <button type="button" onClick={addToCart} value={a.name}>Add to cart</button>
+
+          <form method="post" action="/menu">
+              <input type="hidden" value={a.name} name="name" className="name"/>
+            <input type="hidden" value={a.price} name="price" className="price"/>
+          <button type={user.local === undefined ? 'button' : 'submit'} onClick={addToCart} value={a.name}>Add to cart</button>
+            </form>
           </div>
         </div>
         )}
@@ -140,13 +157,18 @@ function Dessers(data){
 }
 function Menu(){
   const [items, setItems] = useState([]);
-
+  const _isMounted = useRef(true)
   useEffect(() => {
    const fetchData = async () => {
+     if(_isMounted.current){
      const result = await axios('/items');
      setItems(result.data)
    }
-   fetchData()
+   }
+   fetchData();
+   return () => {
+     _isMounted.current = false;
+   }
  }, [])
   const meals = items.filter(a=>{return a.type=== 'Meal'})
   const drinks = items.filter(a=>{return a.type=== 'Drink'})
@@ -154,14 +176,14 @@ function Menu(){
   return(
     <>
     {!items.length ? (<div>Loading...</div>) : (
-    <div>
+    <main>
       <MenuTitle/>
 
     <Meal data={meals}/>
-  <Drinks data={drinks}/>
-<Dessers data={dessers}/>
+    <Drinks data={drinks}/>
+    <Dessers data={dessers}/>
 
-    </div>
+</main>
   )}
 </>
   )

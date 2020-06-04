@@ -1,6 +1,6 @@
 .register-container{
   width:1170px;
-  margin:100px auto 0 auto;
+  margin:80px auto 0 auto;
 }
 .register-div{
   background-color:#efefef;
@@ -23,4 +23,21 @@ margin:0 auto;
   width:20.7%;
   margin-top:20px;
   padding:4px;
+  font-weight: 600;
+}
+.register-div>form>button:hover, .show-password:hover{
+  cursor:pointer;
+  color:#c83a3a;
+}
+.show-password{
+  margin-top:5px;
+}
+.error-div{
+  margin:0 auto;
+
+}
+.error-div>h3{
+  font-weight:500;
+  padding:10px 0;
+  text-align:center
 }

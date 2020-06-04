@@ -8,6 +8,7 @@
   background: #efefef;
   display:flex;
   justify-content: space-between;
+  margin-bottom:5px;
 }
 .single-cart-item>*{
   padding:10px;
