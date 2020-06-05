@@ -16,13 +16,14 @@ var session = require('express-session');
 mongoose.connect(`mongodb+srv://${configDB.db}:${configDB.password}.mongodb.net/test?retryWrites=true&w=majority`, {
   useNewUrlParser: true
 });
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.join(__dirname, './client/build')));
+}
 
-app.use(express.static(path.join(__dirname, './client/build')));
-
-
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/build/index.html', 'index.html'));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/build', 'index.html'));
 });
+
 app.use(morgan('dev')) // log req to console
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({
