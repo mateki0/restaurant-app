@@ -19,11 +19,11 @@ mongoose.connect(`mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASSWORD
 });
 console.log(process.env.DB_NAME)
 if(process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname, '../react-ui/build')));
+  app.use(express.static(path.join(__dirname, '/react-ui/build')));
 }
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'../react-ui/build/index.html'));
+  res.sendFile(path.join(__dirname+'/react-ui/build/index.html'));
 });
 
 app.use(morgan('dev')) // log req to console
@@ -44,7 +44,7 @@ app.use(flash());
 app.use(express.static(__dirname + '/public'));
 
 app.use(cors())
-require('./passport')(passport);
+require('./passport.js')(passport);
 require('./app/routes.js')(app, passport);
 
 
