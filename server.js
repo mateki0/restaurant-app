@@ -11,11 +11,13 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-
+const dotenv = require('dotenv');
+dotenv.config();
 
 mongoose.connect(`mongodb+srv://${configDB.db}:${configDB.password}.mongodb.net/test?retryWrites=true&w=majority`, {
   useNewUrlParser: true
 });
+console.log(process.env.NODE_ENV)
 if(process.env.NODE_ENV === 'production'){
   app.use(express.static(path.join(__dirname, './client/build')));
 }

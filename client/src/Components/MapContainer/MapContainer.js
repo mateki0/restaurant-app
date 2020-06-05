@@ -1,12 +1,9 @@
 import React, {useState, useEffect, useRef} from 'react';
 import mapboxgl from 'mapbox-gl';
-import axios from 'axios'
 import './mapContainer.css';
 export default function MapContainer(){
   const [map, setMap] = useState(null);
-  const mapDiv = useRef(null)
-
-
+  const mapDiv = useRef(null);
 
   useEffect(() => {
     // navigator.geolocation.getCurrentPosition(function(position) {

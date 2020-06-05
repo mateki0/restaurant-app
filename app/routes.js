@@ -4,7 +4,7 @@ var http = require('http')
 module.exports = function(app, passport) {
 
   // home page
-
+  
   app.get('/user', (req, res) => {
     res.send(req.user)
   })
