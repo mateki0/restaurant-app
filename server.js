@@ -4,7 +4,7 @@ const port = process.env.PORT || 5000;
 const path = require('path')
 var mongoose = require('mongoose');
 var passport = require('passport');
-var configDB = require('./config/database.js');
+
 var flash = require('connect-flash');
 var cors = require('cors')
 var morgan = require('morgan');
@@ -14,7 +14,7 @@ var session = require('express-session');
 const dotenv = require('dotenv');
 dotenv.config();
 
-mongoose.connect(`mongodb+srv://${configDB.db}:${configDB.password}.mongodb.net/test?retryWrites=true&w=majority`, {
+mongoose.connect(`mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASSWORD}.mongodb.net/test?retryWrites=true&w=majority`, {
   useNewUrlParser: true
 });
 
@@ -44,7 +44,7 @@ app.use(flash());
 app.use(express.static(__dirname + '/public'));
 
 app.use(cors())
-require('./config/passport')(passport);
+require('./passport')(passport);
 require('./app/routes.js')(app, passport);
 
 
