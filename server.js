@@ -17,13 +17,13 @@ dotenv.config();
 mongoose.connect(`mongodb+srv://${configDB.db}:${configDB.password}.mongodb.net/test?retryWrites=true&w=majority`, {
   useNewUrlParser: true
 });
-console.log(process.env.NODE_ENV)
+
 if(process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname, './client/build')));
+  app.use(express.static(path.join(__dirname, 'client/build')));
 }
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/build', 'index.html'));
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 app.use(morgan('dev')) // log req to console
