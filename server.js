@@ -17,7 +17,7 @@ dotenv.config();
 mongoose.connect(`mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASSWORD}.mongodb.net/test?retryWrites=true&w=majority`, {
   useNewUrlParser: true
 });
-
+console.log(process.env.DB_NAME)
 if(process.env.NODE_ENV === 'production'){
   app.use(express.static(path.join(__dirname, 'client/build')));
 }
