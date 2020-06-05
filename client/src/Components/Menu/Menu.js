@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import './menu.css';
-import {CSSTransitionGroup} from 'react-transition-group';
+import {TransitionGroup} from 'react-transition-group';
 import axios from 'axios'
 
 function MenuTitle(){
@@ -57,7 +57,7 @@ function Meal(data){
       <div className="meals-expand" onClick={()=> expanded === false ? expandMeal(true) : expandMeal(false) }>
         <h2>Meals</h2>
       </div>
-      <CSSTransitionGroup
+      <TransitionGroup
         transitionName="menu"
         transitionEnterTimeout={400}
         transitionLeaveTimeout={400}
@@ -82,7 +82,7 @@ function Meal(data){
         </div>
         )}
       </div>
-      </CSSTransitionGroup>
+      </TransitionGroup>
     </div>
 
 )
@@ -97,7 +97,7 @@ function Drinks(data){
       <div className="meals-expand" onClick={()=> expanded === false ? expandMeal(true) : expandMeal(false) }>
         <h2>Drinks</h2>
       </div>
-      <CSSTransitionGroup
+      <TransitionGroup
         transitionName="menu"
         transitionEnterTimeout={400}
         transitionLeaveTimeout={400}
@@ -117,7 +117,7 @@ function Drinks(data){
         </div>
         )}
       </div>
-    </CSSTransitionGroup>
+    </TransitionGroup>
     </div>
   )
 }
@@ -131,7 +131,7 @@ function Dessers(data){
       <div  className="meals-expand" onClick={()=> expanded === false ? expandMeal(true) : expandMeal(false) }>
         <h2>Dessers</h2>
       </div>
-      <CSSTransitionGroup
+      <TransitionGroup
         transitionName="menu"
         transitionEnterTimeout={400}
         transitionLeaveTimeout={400}
@@ -151,7 +151,7 @@ function Dessers(data){
         </div>
        )}
       </div>
-    </CSSTransitionGroup>
+    </TransitionGroup>
     </div>
   )
 }
