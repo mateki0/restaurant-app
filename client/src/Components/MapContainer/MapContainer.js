@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
-import mapboxgl from 'mapbox-gl'
+import mapboxgl from 'mapbox-gl';
+import axios from 'axios'
 import './mapContainer.css';
 export default function MapContainer(){
   const [map, setMap] = useState(null);
@@ -41,7 +42,7 @@ export default function MapContainer(){
   }
   if (!map) initalizeMap({ setMap, mapDiv })
 }, [map])
-  
+
   return(
     <div>
     <div ref={el => (mapDiv.current = el)} id="mapDiv" />
