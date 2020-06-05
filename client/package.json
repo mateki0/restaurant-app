@@ -12,7 +12,8 @@
     "react-animated-slider": "^2.0.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-transition-group": "^4.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -22,8 +23,8 @@
   },
   "proxy": "http://localhost:5000",
   "headers": {
-   "Access-Control-Allow-Origin": "*"
- },
+    "Access-Control-Allow-Origin": "*"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
