@@ -14,9 +14,6 @@ import {BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom'
 
 
 function App(props) {
-  let userName = document.querySelector('.userName')
-  console.log(userName)
-
   return (
     <Router>
     <div className="App">

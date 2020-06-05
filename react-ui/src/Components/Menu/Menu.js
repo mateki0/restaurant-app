@@ -170,6 +170,7 @@ function Menu(){
      _isMounted.current = false;
    }
  }, [])
+  console.log(items)
   const meals = items.filter(a=>{return a.type=== 'Meal'})
   const drinks = items.filter(a=>{return a.type=== 'Drink'})
   const dessers = items.filter(a=>{return a.type=== 'Desser'})

@@ -16,7 +16,7 @@ export default function UserHeader(){
   },[])
   if(user.local === null || user.local === undefined){
   const copyCart = JSON.parse(localStorage.getItem('cart'))
-
+  hello = 'Guest';
   if(copyCart){
   let itemsPrice = copyCart.items.map((a) =>{
     return parseFloat(a.price);
@@ -24,7 +24,7 @@ export default function UserHeader(){
  );
 
  totalPrice = itemsPrice.reduce((a,b) => a+b);
- hello = 'Guest';
+
 }
 } else{
    let index = user.local.email.indexOf('@');
