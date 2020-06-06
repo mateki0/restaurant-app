@@ -28,11 +28,11 @@ module.exports = function(app, passport) {
     failureFlash: true,
 }))
 
-  app.post('/logout', (req,res) => {
+  app.post('/api/logout', (req,res) => {
     req.logout();
     res.redirect('/')
   })
-  app.get('/items', (req, res) => {
+  app.get('/api/items', (req, res) => {
     console.log('item');
     Item.find({}, function(err, item) {
       console.log(item);
@@ -41,7 +41,7 @@ module.exports = function(app, passport) {
 
 });
 
-  app.post('/menu', (req,res)=>{
+  app.post('/api/menu', (req,res)=>{
     let user = req.user;
     let newItem = {
       item:req.body.name,
@@ -57,7 +57,7 @@ module.exports = function(app, passport) {
     })
   })
 
-  app.post('/additem', (req, res) => {
+  app.post('/api/additem', (req, res) => {
     var newItem = Item({
       name: req.body.itemName,
       description: req.body.itemDescription,
@@ -76,6 +76,6 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated())
     return next();
 
-  res.redirect('/login');
+  res.redirect('/api/login');
 
 }
