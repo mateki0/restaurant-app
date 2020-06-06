@@ -21,10 +21,10 @@ console.log(process.env.DB_NAME)
 if(process.env.NODE_ENV === 'production'){
   app.use(express.static(path.join(__dirname, '/react-ui/build')));
 }
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/react-ui/build/index.html'));
-});
+app.use(express.static(__dirname));
+app.get("/*", function (req, res) {
+    res.sendFile(path.join(__dirname, './react-ui/build', 'index.html'));
+})
 
 app.use(morgan('dev')) // log req to console
 app.use(cookieParser());
@@ -41,7 +41,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.use(express.static(__dirname + '/public'));
+
 
 app.use(cors())
 require('./passport.js')(passport);
