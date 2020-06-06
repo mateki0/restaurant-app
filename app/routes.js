@@ -4,7 +4,7 @@ var http = require('http')
 module.exports = function(app, passport) {
 
   // home page
-  
+
   app.get('/user', (req, res) => {
     res.send(req.user)
   })
@@ -33,7 +33,9 @@ module.exports = function(app, passport) {
     res.redirect('/')
   })
   app.get('/items', (req, res) => {
+    console.log('item');
     Item.find({}, function(err, item) {
+      console.log(item);
       res.send(item);
   });
 
