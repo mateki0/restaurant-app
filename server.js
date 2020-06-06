@@ -21,7 +21,7 @@ console.log(process.env.DB_NAME)
 if(process.env.NODE_ENV === 'production'){
   app.use(express.static(path.join(__dirname, '/react-ui/build')));
 }
-app.use(express.static(__dirname));
+app.use(express.static('build'));
 app.get("/*", function (req, res) {
     res.sendFile(path.join(__dirname, './react-ui/build', 'index.html'));
 })
