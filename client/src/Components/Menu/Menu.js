@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import './menu.css';
-import {TransitionGroup} from 'react-transition-group';
-import axios from 'axios'
+import axios from 'axios';
+import {Animated} from 'react-animated-css';
 
 function MenuTitle(){
 
@@ -15,10 +15,10 @@ function MenuTitle(){
   )
 }
 function Meal(data){
-  const [expanded, expandMeal] = useState(true);
+  const [visible, setVisible] = useState(true);
+  const [fading, setFading] = useState(false);
   const [user, setUser] = useState({});
-  const active = {display:'grid'};
-  const nonActive = {display:'none'};
+
   let cart = {items:[]}
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +28,15 @@ function Meal(data){
     fetchData()
   }, [user]);
 
+  function hideMe(){
+    if(visible){
+    setFading(true);
+    setTimeout(() => setVisible(false), 650)
+  } else{
+    setFading(false);
+    setTimeout(() => setVisible(true), 250)
+  }
+  }
   function addToCart(e){
 
     const currentSibling = e.currentTarget.previousSibling.value;
@@ -51,19 +60,20 @@ function Meal(data){
   // window.location.href = ''
 }
 }
+
+
   return(
 
     <div className="menu-container menu-meals">
-      <div className="meals-expand" onClick={()=> expanded === false ? expandMeal(true) : expandMeal(false) }>
+      <div className="meals-expand" onClick={hideMe}>
         <h2>Meals</h2>
       </div>
-      <TransitionGroup
-        transitionName="menu"
-        transitionEnterTimeout={400}
-        transitionLeaveTimeout={400}
-
-        >
-      <div key={expanded} className="meals-list" style={expanded === true ? active : nonActive}>
+      <Animated
+        animationIn='fadeIn'
+        animationOut="fadeOut"
+        isVisible={!fading}
+        style={visible ? {display: "grid"} : {display: "none"}}>
+      <div className="meals-list" >
         {data.data.map(a=>
         <div key={a.name} className="single-item">
           <div>
@@ -76,34 +86,75 @@ function Meal(data){
           <form method="post" action="/menu">
               <input type="hidden" value={a.name} name="name" className="name"/>
             <input type="hidden" value={a.price} name="price" className="price"/>
-          <button type={user.local === undefined ? 'button' : 'submit'} onClick={addToCart} value={a.name}>Add to cart</button>
+          <button className="add-button" type={user.local === undefined ? 'button' : 'submit'} onClick={addToCart} value={a.name}>Add to cart</button>
             </form>
           </div>
         </div>
         )}
       </div>
-      </TransitionGroup>
+      </Animated>
     </div>
 
 )
 
 }
 function Drinks(data){
-  const [expanded, expandMeal] = useState(false);
-  const active = {display:'grid'};
-  const nonActive = {display:'none'};
+  const [visible, setVisible] = useState(false);
+  const [fading, setFading] = useState(false);
+  const [user, setUser] = useState({});
+
+  let cart = {items:[]}
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('/user');
+      setUser(result.data)
+    }
+    fetchData()
+  }, [user]);
+
+  function hideMe(){
+    if(visible){
+    setFading(true);
+    setTimeout(() => setVisible(false), 650)
+  } else{
+    setFading(false);
+    setTimeout(() => setVisible(true), 250)
+  }
+  }
+  function addToCart(e){
+
+    const currentSibling = e.currentTarget.previousSibling.value;
+
+    let obj = {
+      item: e.currentTarget.value,
+      price:currentSibling,
+      count:1
+    }
+
+    if(user.local === null || user.local === undefined){
+    let itemsFromStorage = JSON.parse(localStorage.getItem('cart'));
+    if(JSON.parse(localStorage.getItem('cart')) === null){
+      cart.items.push(obj)
+      localStorage.setItem('cart', JSON.stringify(cart));
+    } else{
+
+      itemsFromStorage.items.push(obj);
+      localStorage.setItem('cart', JSON.stringify(itemsFromStorage));
+    }
+  // window.location.href = ''
+  }
+  }
   return (
     <div className="menu-container drinks">
-      <div className="meals-expand" onClick={()=> expanded === false ? expandMeal(true) : expandMeal(false) }>
+      <div className="meals-expand" onClick={hideMe}>
         <h2>Drinks</h2>
       </div>
-      <TransitionGroup
-        transitionName="menu"
-        transitionEnterTimeout={400}
-        transitionLeaveTimeout={400}
-
-        >
-      <div key={expanded} className="meals-list" style={expanded === true ? active : nonActive}>
+      <Animated
+        animationIn='fadeIn'
+        animationOut="fadeOut"
+        isVisible={!fading}
+        style={visible ? {display: "grid"} : {display: "none"}}>
+      <div className="meals-list">
         {data.data.map(a=>
         <div key={a.name} className="single-item">
           <div>
@@ -112,32 +163,73 @@ function Drinks(data){
           </div>
           <div>
             <h4>{a.price}</h4>
-            <button type="button">Add to cart</button>
+            <button type={user.local === undefined ? 'button' : 'submit'} onClick={addToCart} value={a.name} className="add-button">Add to cart</button>
           </div>
         </div>
         )}
       </div>
-    </TransitionGroup>
+    </Animated>
     </div>
   )
 }
 function Dessers(data){
-  const [expanded, expandMeal] = useState(false);
-  const active = {display:'grid'};
-  const nonActive = {display:'none'};
+  const [visible, setVisible] = useState(false);
+  const [fading, setFading] = useState(false);
+  const [user, setUser] = useState({});
+
+  let cart = {items:[]}
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('/user');
+      setUser(result.data)
+    }
+    fetchData()
+  }, [user]);
+
+  function hideMe(){
+    if(visible){
+    setFading(true);
+    setTimeout(() => setVisible(false), 650)
+  } else{
+    setFading(false);
+    setTimeout(() => setVisible(true), 250)
+  }
+  }
+  function addToCart(e){
+
+    const currentSibling = e.currentTarget.previousSibling.value;
+
+    let obj = {
+      item: e.currentTarget.value,
+      price:currentSibling,
+      count:1
+    }
+
+    if(user.local === null || user.local === undefined){
+    let itemsFromStorage = JSON.parse(localStorage.getItem('cart'));
+    if(JSON.parse(localStorage.getItem('cart')) === null){
+      cart.items.push(obj)
+      localStorage.setItem('cart', JSON.stringify(cart));
+    } else{
+
+      itemsFromStorage.items.push(obj);
+      localStorage.setItem('cart', JSON.stringify(itemsFromStorage));
+    }
+  // window.location.href = ''
+}
+}
   return (
     <div className="menu-container dessers">
 
-      <div  className="meals-expand" onClick={()=> expanded === false ? expandMeal(true) : expandMeal(false) }>
+      <div  className="meals-expand" onClick={hideMe}>
         <h2>Dessers</h2>
       </div>
-      <TransitionGroup
-        transitionName="menu"
-        transitionEnterTimeout={400}
-        transitionLeaveTimeout={400}
-
-        >
-      <div key={expanded} className="meals-list" style={expanded === true ? active : nonActive}>
+      <Animated
+        animationIn='fadeIn'
+        animationOut="fadeOut"
+        isVisible={!fading}
+        style={visible ? {display: "grid"} : {display: "none"}}>
+      <div  className="meals-list" >
         { data.data.map(a=>
         <div key={a.name} className="single-item">
           <div>
@@ -146,18 +238,21 @@ function Dessers(data){
           </div>
           <div>
             <h4>{a.price}</h4>
-            <button type="button">Add to cart</button>
+          <button type={user.local === undefined ? 'button' : 'submit'} onClick={addToCart} value={a.name} className="add-button">Add to cart</button>
           </div>
         </div>
        )}
       </div>
-    </TransitionGroup>
+    </Animated>
     </div>
   )
 }
+
 function Menu(){
   const [items, setItems] = useState([]);
-  const _isMounted = useRef(true)
+  const _isMounted = useRef(true);
+  const [hide, setHide] = useState(null)
+  const [fading, setFading] = useState(false);
   useEffect(() => {
    const fetchData = async () => {
      if(_isMounted.current){
@@ -170,7 +265,7 @@ function Menu(){
      _isMounted.current = false;
    }
  }, [])
-  console.log(items)
+
   const meals = items.filter(a=>{return a.type=== 'Meal'})
   const drinks = items.filter(a=>{return a.type=== 'Drink'})
   const dessers = items.filter(a=>{return a.type=== 'Desser'})
@@ -180,9 +275,9 @@ function Menu(){
     <main>
       <MenuTitle/>
 
-    <Meal data={meals}/>
-    <Drinks data={drinks}/>
-    <Dessers data={dessers}/>
+    <Meal data={meals} />
+    <Drinks data={drinks} />
+    <Dessers data={dessers} />
 
 </main>
   )}

@@ -38,25 +38,15 @@
   margin:100px auto ;
 }
 
-
-/* animation */
-.menu-enter{
-  opacity:0;
+.add-button{
+  font-weight:500;
+  padding:4px 8px;
+}
+.add-button:hover{
+  cursor:pointer;
+  color:#c83a3a;
 }
 
-.menu-enter.menu-enter-active {
-  opacity:1;
-  transition:opacity 800ms ease-in;
-}
-
-.menu-leave{
-  opacity:1;
-}
-
-.menu-leave.menu-leave-active {
-  opacity:0;
-  transition:opacity 500ms ease-in;
-}
 .cart{
   color:#5a5a5a;
 
