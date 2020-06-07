@@ -14,7 +14,7 @@ var session = require('express-session');
 const dotenv = require('dotenv');
 dotenv.config();
 
-mongoose.connect(`mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASSWORD}.mongodb.net/test?retryWrites=true&w=majority`, {
+mongoose.connect(process.env.MONGOLAB_URI, {
   useNewUrlParser: true
 });
 console.log(process.env.DB_NAME)
