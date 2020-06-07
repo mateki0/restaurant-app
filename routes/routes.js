@@ -1,5 +1,5 @@
-var Item = require('../app/models/items');
-var User = require('../app/models/user');
+var Item = require('../models/items');
+var User = require('../models/user');
 var http = require('http')
 module.exports = function(app, passport) {
 

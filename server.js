@@ -18,13 +18,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASSWORD
   useNewUrlParser: true
 });
 console.log(process.env.DB_NAME)
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname, '/react-ui/build')));
-}
-app.use(express.static('build'));
-app.get("/*", function (req, res) {
-    res.sendFile(path.join(__dirname, './react-ui/react-ui/build', 'index.html'));
-})
+
 
 app.use(morgan('dev')) // log req to console
 app.use(cookieParser());
@@ -47,5 +41,12 @@ app.use(cors())
 require('./passport.js')(passport);
 require('./app/routes.js')(app, passport);
 
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.join(__dirname, "client", "build")));
+}
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(process.env.PORT || port, ()=> console.log(`Listening on port ${port}`));
