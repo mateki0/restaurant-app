@@ -14,7 +14,7 @@ var session = require('express-session');
 const dotenv = require('dotenv');
 dotenv.config();
 
-mongoose.connect(process.env.MONGOLAB_URI, {
+mongoose.connect(process.env.MONGOLAB_IVORY_URI, {
   useNewUrlParser: true
 });
 console.log(process.env.DB_NAME)
