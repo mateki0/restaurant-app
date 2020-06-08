@@ -15,6 +15,7 @@ function ItemList(){
   const [user, setUser] = useState({});
   let arr = [];
   let counter = 1;
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios('/user');
@@ -43,6 +44,7 @@ function ItemList(){
     let itemsPrice = [];
     console.log(user.local)
     if(user.local === null || user.local === undefined){
+      if(JSON.parse(localStorage.getItem('cart')) !== null)
       cart = JSON.parse(localStorage.getItem('cart')).items
     } else{
       cart = user.local.cart

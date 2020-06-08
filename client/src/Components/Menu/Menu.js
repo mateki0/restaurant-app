@@ -57,7 +57,7 @@ function Meal(data){
       itemsFromStorage.items.push(obj);
       localStorage.setItem('cart', JSON.stringify(itemsFromStorage));
     }
-  // window.location.href = ''
+    window.location.href = ''
 }
 }
 
@@ -76,12 +76,12 @@ function Meal(data){
       <div className="meals-list" >
         {data.data.map(a=>
         <div key={a.name} className="single-item">
-          <div>
-            <h4>{a.name}</h4>
+          <div className="meal-description-div">
+            <h4 className="meal-description">{a.name}</h4>
           <span>{a.description}</span>
           </div>
           <div>
-            <h4>{a.price}</h4>
+            <h4 className="meal-price-h4">{a.price}</h4>
 
           <form method="post" action="/menu">
               <input type="hidden" value={a.name} name="name" className="name"/>
@@ -157,12 +157,12 @@ function Drinks(data){
       <div className="meals-list">
         {data.data.map(a=>
         <div key={a.name} className="single-item">
-          <div>
-            <h4>{a.name}</h4>
-          <span>{a.description}</span>
+          <div className="meal-description-div">
+            <h4 className="meal-description">{a.name}</h4>
+            <span>{a.description}</span>
           </div>
           <div>
-            <h4>{a.price}</h4>
+            <h4 className="meal-price-h4">{a.price}</h4>
             <button type={user.local === undefined ? 'button' : 'submit'} onClick={addToCart} value={a.name} className="add-button">Add to cart</button>
           </div>
         </div>
@@ -232,12 +232,12 @@ function Dessers(data){
       <div  className="meals-list" >
         { data.data.map(a=>
         <div key={a.name} className="single-item">
-          <div>
-            <h4>{a.name}</h4>
-          <span>{a.description}</span>
+          <div className="meal-description-div">
+            <h4 className="meal-description">{a.name}</h4>
+            <span>{a.description}</span>
           </div>
           <div>
-            <h4>{a.price}</h4>
+            <h4 className="meal-price-h4">{a.price}</h4>
           <button type={user.local === undefined ? 'button' : 'submit'} onClick={addToCart} value={a.name} className="add-button">Add to cart</button>
           </div>
         </div>
@@ -251,8 +251,7 @@ function Dessers(data){
 function Menu(){
   const [items, setItems] = useState([]);
   const _isMounted = useRef(true);
-  const [hide, setHide] = useState(null)
-  const [fading, setFading] = useState(false);
+
   useEffect(() => {
    const fetchData = async () => {
      if(_isMounted.current){

@@ -1,7 +1,4 @@
-.App {
-  text-align: center;
 
-}
 
 
 .App-link {
@@ -85,9 +82,10 @@
 }
 .userName{
   font-weight:500;
-  padding-right:10px;
+    padding-left:10px;
 }
 .logout-div{
+  text-align:center;
   padding-right:10px;
 }
 .logout-div>a{
@@ -100,4 +98,54 @@
 .logout-button:hover{
   cursor:pointer;
   color:#c83a3a;
+}
+
+@media (max-width:1130px) {
+  .nav-div{
+    margin:0;
+  }
+  .header{
+    width:45%;
+    flex-direction:column;
+    justify-content: flex-start;
+    margin:0;
+
+  }
+  .header>ul{
+    text-align:center;
+    margin:0;
+    flex-direction:column;
+  }
+  .nav-link{
+    padding:4px 15px;
+    font-size:13px;
+
+  }
+  .restaurant-name{
+    font-size:15px;
+    line-height: 16px;
+  }
+  .price-div{
+    margin-top:10px;
+    justify-content: space-between;
+    flex-direction:column;
+
+  }
+  .price-href{
+    padding:0;
+  }
+  .userName{
+    padding:0;
+    font-size:13px;
+
+  }
+  .logout-div{
+
+    padding:0;
+  }
+  .logout-button{
+    padding:2px 4px;
+  }
+
+
 }

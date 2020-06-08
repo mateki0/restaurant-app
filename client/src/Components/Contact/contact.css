@@ -28,3 +28,9 @@ display:flex;
 .informations>*{
   padding:5px;
 }
+@media (max-width:813px){
+  .title-container{
+    width:100%;
+    margin:210px 0 0 0;
+  }
+}

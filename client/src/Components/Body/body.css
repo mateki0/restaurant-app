@@ -58,9 +58,13 @@
   color:#5A5A5A;
   background:#efefef;
 }
-.delivery>h1{
-  text-align:center;
+.delivery>div{
   padding:30px 0;
+  text-align:center;
+}
+.delivery>div>span{
+  font-size:24px;
+  font-weight:500;
 }
 
 /* Breakfast Slider */
@@ -177,9 +181,9 @@
 /* Marketing Slider */
 .marketing-container{
   color:#5A5A5A;
-  width:1170px;
-  margin:0 auto ;
-  padding-bottom:50px;
+  width:98%;
+  margin:0;
+
 }
 
 .marketing-slider{
@@ -190,16 +194,166 @@
 }
 
 .marketing-slider-img{
-  width:470px;
-  max-width:100%;
-  height:352px;
+  width:100vw;
+  max-width:470px;
+  height:auto;
 }
 
 .marketing-description{
   text-align:left;
   margin: 50px 0 0 100px;
 }
-.marketing-description>h2{
+.marketing-slide-name{
   font-size:50px;
   font-weight:500;
+}
+.marketing-slide-name-div{
+  padding:20px;
+}
+.marketing-slide-description-div{
+  margin-bottom:50px;
+}
+@media (max-width:1130px) {
+
+
+}
+/* @media (min-width:470px){
+  .marketing-slider-img{
+    height:100%;
+    width:50%;
+  }
+  .marketing-slider{
+    width:100%;
+
+  }
+
+} */
+@media (max-width:1300px){
+  .marketing-container, .meals-container,.lunch-container,.breakfast-container,.boxes,.breakfast-title,.welcome-container,.marketing-slider,.name{
+    width:100%;
+  }
+
+}
+@media (min-width:320px) and (max-width:819px){
+
+  .marketing-slider{
+    margin:20px 0 0 0 ;
+    width:100%;
+    flex-direction: column;
+  }
+  .marketing-description{
+    font-size:13px;
+    margin:0;
+    text-align: center;
+  }
+  .marketing-slide-name-div{
+    margin:0;
+    padding:0;
+  }
+  .marketing-slide-description-div{
+
+  }
+  .marketing-slide-name{
+    font-size:24px;
+  }
+
+}
+@media (min-width:820px) and (max-width:999px){
+  .marketing-slider{
+    width:100%;
+    flex-direction: row;
+  }
+  .marketing-slider-img{
+    width:470px;
+    max-width:100%;
+    height:352px;
+  }
+  .marketing-slide-name{
+    font-size:24px;
+
+  }
+  .marketing-description{
+    margin:85px 0 0 0;
+    text-align:center;
+  }
+}
+
+@media (min-width:320px) and (max-width:999px){
+  .name{
+    width:100%;
+    margin:0;
+  }
+  .name>h1{
+    font-size:24px;
+  }
+  .name>span{
+    font-size:13px;
+  }
+  .meals-container{
+    width:98%;
+    padding-bottom:20px;
+    text-align:center;
+  }
+  .see-menu-a{
+    width:98%;
+    font-size:12px;
+  }
+  .delivery>div{
+    padding:10px 0;
+  }
+  .delivery>div>span{
+    font-size:18px;
+  }
+
+/* sliders */
+
+
+  .breakfast-container,.lunch-container,.breakfast-title{
+    width:98%;
+    margin:0;
+  }
+  .lunch-container>.slider{
+    height:200px;
+    padding:0 5px;
+  }
+
+  .sliders>img{
+    max-height:146px;
+  }
+  .sliders{
+    padding:0 3px;
+  }
+  .boxes{
+    width:98%;
+    margin-top:20px;
+  }
+  .box2,.box3{
+    margin-left:10px;
+  }
+  .box>span{
+    font-size:13px;
+  }
+
+  .welcome{
+    margin-top:20px;
+  }
+  .welcome-container{
+    width:98%;
+    flex-direction: column;
+    margin:0;
+  }
+  .welcome-container>div{
+    width:98%;
+  }
+  .welcome-container>div>h3{
+text-align:center;
+  }
+  .welcome-container>div>span{
+    font-size: 13px;
+  }
+
+}
+
+@media (min-width:1000px) and (max-width:1280px){
+
 }

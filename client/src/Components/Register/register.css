@@ -41,3 +41,27 @@ margin:0 auto;
   padding:10px 0;
   text-align:center
 }
+
+@media (min-width:320px) and (max-width:800px){
+  .register-container{
+    margin-top:20px;
+  }
+}
+@media (min-width:801px) and (max-width:1600px){
+  .register-container{
+    margin-top:40px;
+  }
+}
+@media (max-width:813px){
+  .register-container{
+    width:100%;
+    margin:0;
+  }
+  .register-div>form>input{
+    width:50%;
+
+  }
+  .register-div>form>button{
+    width:50%;
+  }
+}

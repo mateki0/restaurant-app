@@ -51,9 +51,11 @@ function SecondPanel(){
 function ThirdPanel(){
   return(
     <div className="delivery">
-      <h1>
-        Here should be information about online food order system and<br/> delivery options and <br/>pricing
-      </h1>
+      <div>
+        <span>
+          Here should be information about online food order system anddelivery options and pricing
+        </span>
+      </div>
     </div>
   )
 }
@@ -139,15 +141,19 @@ function MarketingSlider(){
 
   return(
     <div className="marketing-container">
-    <Slider autoplay="4000">
+    <Slider >
       {slides.map((slide,index) =>
     <div key={index} className="marketing-slider">
       <img className="marketing-slider-img" src={slide.src} alt={slide.h2}/>
-    <div className="marketing-description">
-      <h2>{slide.h2}</h2>
-      <span>
-        {slide.span}
-      </span>
+      <div className="marketing-description">
+        <div className="marketing-slide-name-div">
+          <span className="marketing-slide-name">{slide.h2}</span>
+        </div>
+        <div className="marketing-slide-description-div">
+          <span className="marketing-slide-description">
+            {slide.span}
+          </span>
+        </div>
       </div>
     </div>
   )}

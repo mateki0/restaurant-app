@@ -15,3 +15,16 @@
 .about-description{
   margin:50px 0 50px 0;
 }
+
+@media (max-width:813px){
+  .title-container{
+    margin:0;
+  }
+  .container{
+    width:100%;
+    margin:0;
+  }
+  .about-description{
+    font-size:13px;
+  }
+}

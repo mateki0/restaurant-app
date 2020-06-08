@@ -18,7 +18,7 @@
 .meals-expand{
   width:100%;
   background-color:#efefef;
-  text-align:center;
+  padding-left:10px;
 }
 .meals-expand>h2{
   margin:10px;
@@ -30,6 +30,15 @@
 .single-item{
   display:flex;
   justify-content: space-between
+}
+.meal-description{
+  text-align: left;
+}
+.meal-description-div{
+  padding-left:20px;
+}
+.meal-price-h4{
+  text-align: center;
 }
 .drinks{
   margin-top:100px;
@@ -50,4 +59,20 @@
 .cart{
   color:#5a5a5a;
 
+}
+
+@media (max-width:813px){
+  .menu-container{
+    width:100%;
+    margin:0 0 20px 0;
+  }
+  .single-item>div{
+    text-align:left
+  }
+  .single-item>div>span{
+    font-size:13px;
+  }
+  .meal-description-div{
+    padding:0;
+  }
 }
