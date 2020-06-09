@@ -181,8 +181,8 @@
 /* Marketing Slider */
 .marketing-container{
   color:#5A5A5A;
-  width:98%;
-  margin:0;
+  width:1170px;
+  margin:0 auto;
 
 }
 
@@ -213,21 +213,7 @@
 .marketing-slide-description-div{
   margin-bottom:50px;
 }
-@media (max-width:1130px) {
 
-
-}
-/* @media (min-width:470px){
-  .marketing-slider-img{
-    height:100%;
-    width:50%;
-  }
-  .marketing-slider{
-    width:100%;
-
-  }
-
-} */
 @media (max-width:1300px){
   .marketing-container, .meals-container,.lunch-container,.breakfast-container,.boxes,.breakfast-title,.welcome-container,.marketing-slider,.name{
     width:100%;
@@ -250,9 +236,7 @@
     margin:0;
     padding:0;
   }
-  .marketing-slide-description-div{
 
-  }
   .marketing-slide-name{
     font-size:24px;
   }
@@ -351,9 +335,5 @@ text-align:center;
   .welcome-container>div>span{
     font-size: 13px;
   }
-
-}
-
-@media (min-width:1000px) and (max-width:1280px){
 
 }

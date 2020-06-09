@@ -42,12 +42,28 @@ function useLocalStorage(key, initialValue){
 function Meal(data){
   const [visible, setVisible] = useState(true);
   const [fading, setFading] = useState(false);
+  const _isMounted = useRef(true)
   const [cart, setCart] = useLocalStorage('cart', {items:[]})
+  const [user, setUser] = useState({});
+  console.log(user)
   useEffect(()=>{
-    if(!window.localStorage.getItem('cart')){
+    if(!cart){
     localStorage.setItem('cart', JSON.stringify({items:[]}))
   }
 }, [])
+useEffect(() => {
+  const fetchData = async () => {
+    if(_isMounted.current){
+    const result = await axios('/user');
+    setUser(result.data)
+  }
+}
+fetchData()
+return () => {
+  _isMounted.current = false;
+}
+
+}, [user]);
 
   function hideMe(){
     if(visible){
@@ -58,7 +74,7 @@ function Meal(data){
     setTimeout(() => setVisible(true), 250)
   }
   }
-
+  
   return(
 
     <div className="menu-container menu-meals">
@@ -83,6 +99,7 @@ function Meal(data){
           <form method="post" action="/menu">
               <input type="hidden" value={a.name} name="name" className="name"/>
             <input type="hidden" value={a.price} name="price" className="price"/>
+          {user === {} ? (
           <button className="add-button" type='button'
             onClick={e=>setCart(
               {
@@ -91,7 +108,11 @@ function Meal(data){
                 count:1
               }
             )}
-            value={a.name}>Add to cart</button>
+            value={a.name}>Add to cart</button>) :
+            (
+            <button className="add-button" type='submit'
+              value={a.name}>Add to cart</button>)
+        }
             </form>
           </div>
         </div>
@@ -106,14 +127,21 @@ function Meal(data){
 function Drinks(data){
   const [visible, setVisible] = useState(false);
   const [fading, setFading] = useState(false);
+  const _isMounted = useRef(true)
   const [user, setUser] = useState({});
   const [cart, setCart] = useLocalStorage('cart', {items:[]})
   useEffect(() => {
     const fetchData = async () => {
+      if(_isMounted.current){
       const result = await axios('/user');
       setUser(result.data)
     }
-    fetchData()
+  }
+  fetchData()
+  return () => {
+    _isMounted.current = false;
+  }
+
   }, [user]);
 
   function hideMe(){
@@ -166,29 +194,36 @@ function Dessers(data){
   const [visible, setVisible] = useState(false);
   const [fading, setFading] = useState(false);
   const [user, setUser] = useState({});
+  const _isMounted = useRef(true);
   const [cart, setCart] = useLocalStorage('cart', {items:[]})
   useEffect(() => {
     const fetchData = async () => {
+      if(_isMounted.current){
       const result = await axios('/user');
       setUser(result.data)
     }
-    fetchData()
+  }
+  fetchData()
+  return () => {
+    _isMounted.current = false;
+  }
+
   }, [user]);
 
-  // function hideMe(){
-  //   if(visible){
-  //   setFading(true);
-  //   setTimeout(() => setVisible(false), 650)
-  // } else{
-  //   setFading(false);
-  //   setTimeout(() => setVisible(true), 250)
-  // }
-  // }
+  function hideMe(){
+    if(visible){
+    setFading(true);
+    setTimeout(() => setVisible(false), 650)
+  } else{
+    setFading(false);
+    setTimeout(() => setVisible(true), 250)
+  }
+  }
 
   return (
     <div className="menu-container dessers">
 
-      <div  className="meals-expand">
+      <div  className="meals-expand" onClick={hideMe}>
         <h2>Dessers</h2>
       </div>
       <Animated
@@ -225,46 +260,7 @@ function Dessers(data){
 
 function Menu(){
   const [items, setItems] = useState([]);
-  const [cart, setCart] = useState([]);
   const _isMounted = useRef(true);
-  const [visible, setVisible] = useState(true);
-  const [fading, setFading] = useState(false);
-  //const [show, setShow] = useState(false)
-
-  const setShow = () => {
-    console.log('asd')
-    if(visible){
-    setFading(true);
-    setTimeout(() => setVisible(false), 650)
-  } else{
-    setFading(false);
-    setTimeout(() => setVisible(true), 250)
-  }
-  }
-  // const pushToCart = (e) => {
-  //   const currentSibling = e.currentTarget.previousSibling.value;
-  //
-  //   let obj = {
-  //     item: e.currentTarget.value,
-  //     price:currentSibling,
-  //     count:1
-  //   }
-  //
-  //   if(user.local === null || user.local === undefined){
-  //   let itemsFromStorage = JSON.parse(localStorage.getItem('cart'));
-  //   if(JSON.parse(localStorage.getItem('cart')) === null){
-  //     cart.items.push(obj)
-  //     localStorage.setItem('cart', JSON.stringify(cart));
-  //   } else{
-  //
-  //     itemsFromStorage.items.push(obj);
-  //     localStorage.setItem('cart', JSON.stringify(itemsFromStorage));
-  //   }
-  // // window.location.href = ''
-  // }
-  // }
-
-
   useEffect(() => {
    const fetchData = async () => {
      if(_isMounted.current){
@@ -289,7 +285,7 @@ function Menu(){
 
     <Meal data={meals} />
     <Drinks data={drinks} />
-  <Dessers data={dessers} show={e=> setShow} visible={visible} fading={fading} />
+  <Dessers data={dessers} />
 
 </main>
   )}

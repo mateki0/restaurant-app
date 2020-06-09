@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 function Title(){
 
@@ -12,13 +12,19 @@ function Title(){
   )
 }
 const Message = () => {
-  const [message, setMessage] = useState([])
+  const [message, setMessage] = useState([]);
+  const _isMounted = useRef(true);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios('/login');
-      setMessage(result.data)
+      if(_isMounted.current){
+        const result = await axios('/login');
+        setMessage(result.data)
+      }
     }
-    fetchData()
+    fetchData();
+  return () => {
+    _isMounted.current = false;
+  }
   },[message])
   return (
     <div className="error-div"><h3>{message.message !== undefined  ? message.message[0] : ''}</h3></div>

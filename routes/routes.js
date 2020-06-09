@@ -33,7 +33,6 @@ module.exports = function(app, passport) {
     res.redirect('/')
   })
   app.get('/items', (req, res) => {
-    console.log('item');
     Item.find({}, function(err, item) {
       res.send(item);
   });
@@ -46,7 +45,7 @@ module.exports = function(app, passport) {
       item:req.body.name,
       price:req.body.price
     }
-
+    console.log(newItem)
     req.user.local.cart.push(newItem)
 
 
