@@ -8,7 +8,7 @@ import Menu from './Components/Menu/Menu';
 import Cart from './Components/Cart/Cart';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
-//import UserHeader from './Components/UserHeader/UserHeader';
+import UserHeader from './Components/UserHeader/UserHeader';
 import AddingPanel from './Components/ItemsAdding/ItemsAdding';
 import {BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom'
 
@@ -39,7 +39,7 @@ function App(props) {
               <NavLink exact to='/register' activeClassName="small-link-active" className="nav-link small-link" >Register</NavLink>
             </li>
           </ul>
-          
+          <UserHeader/>
         </div>
       </div>
 
