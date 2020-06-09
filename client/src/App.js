@@ -15,7 +15,7 @@ import {BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom'
 
 function App(props) {
   return (
-    <Router>
+    <Router basename="/react">
     <div className="App">
       <div className="nav-div">
         <div className="header">

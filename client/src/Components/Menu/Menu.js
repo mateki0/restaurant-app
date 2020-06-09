@@ -242,15 +242,20 @@ function Dessers(data){
           </div>
           <div>
             <h4 className="meal-price-h4">{a.price}</h4>
-          <button type={user.local === undefined ? 'button' : 'submit'}
-            onClick={e=>setCart(
-              {
-                item: e.currentTarget.value,
-                price:e.currentTarget.previousSibling.value,
-                count:1
-              }
-            )}
-            value={a.name} className="add-button">Add to cart</button>
+            {user === {} ? (
+            <button className="add-button" type='button'
+              onClick={e=>setCart(
+                {
+                  item: e.currentTarget.value,
+                  price:e.currentTarget.previousSibling.value,
+                  count:1
+                }
+              )}
+              value={a.name}>Add to cart</button>) :
+              (
+              <button className="add-button" type='submit'
+                value={a.name}>Add to cart</button>)
+          }
           </div>
         </div>
        )}

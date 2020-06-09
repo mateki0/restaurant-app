@@ -16,6 +16,7 @@ const Message = () => {
   const _isMounted = useRef(true);
   useEffect(() => {
     const fetchData = async () => {
+      console.log('asd')
       if(_isMounted.current){
         const result = await axios('/login');
         setMessage(result.data)
@@ -32,14 +33,7 @@ const Message = () => {
 }
 function LoginForm(){
   const [password, setPasswordType] = useState('password');
-  // const [message, setMessage] = useState([])
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await axios('/login');
-  //     setMessage(result.data)
-  //   }
-  //   fetchData()
-  // },[])
+
 
   return(
   <div className="register-container">
