@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from 'react';
 import './menu.css';
 import axios from 'axios';
 import {Animated} from 'react-animated-css';
-import {writeStorage} from '@rehooks/local-storage';
 function MenuTitle(){
 
   return(
@@ -14,6 +13,7 @@ function MenuTitle(){
     </div>
   )
 }
+
 function useLocalStorage(key, initialValue){
   const [storedValue, setStoredValue] = useState(() => {
     try {
@@ -39,40 +39,6 @@ function useLocalStorage(key, initialValue){
   return [storedValue, setValue]
 }
 
-
-function useAddToCart(key, obj){
-  const [user, setUser] = useState({});
-  let cart = {items:[]}
-  //const currentSibling = e.currentTarget.previousSibling.value;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios('/user');
-      setUser(result.data)
-    }
-    fetchData()
-  }, [user]);
-  console.log(user)
-  // let obj = {
-  //   item: e.currentTarget.value,
-  //   price:currentSibling,
-  //   count:1
-  // }
-
-  if(user.local === null || user.local === undefined){
-  let itemsFromStorage = JSON.parse(localStorage.getItem('cart'));
-  if(JSON.parse(localStorage.getItem('cart')) === null){
-    cart.items.push(obj)
-    localStorage.setItem('cart', JSON.stringify(cart));
-  } else{
-
-    itemsFromStorage.items.push(obj);
-    localStorage.setItem('cart', JSON.stringify(itemsFromStorage));
-  }
-
-}
-
-}
 function Meal(data){
   const [visible, setVisible] = useState(true);
   const [fading, setFading] = useState(false);
