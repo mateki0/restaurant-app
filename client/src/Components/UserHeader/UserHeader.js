@@ -17,7 +17,7 @@ export default function UserHeader(){
   if(user.local === null || user.local === undefined){
   const copyCart = JSON.parse(localStorage.getItem('cart'))
   hello = 'Guest';
-  if(copyCart.items.length >0){
+  if(copyCart.items !==null && copyCart.items.length >0){
   let itemsPrice = copyCart.items.map((a) =>{
     return parseFloat(a.price);
  }
