@@ -17,7 +17,8 @@ export default function UserHeader(){
   if(user.local === null || user.local === undefined){
   const copyCart = JSON.parse(localStorage.getItem('cart'))
   hello = 'Guest';
-  if(copyCart.items !==null && copyCart.items.length >0){
+
+   if(copyCart !== null && copyCart.items.length >0){
   let itemsPrice = copyCart.items.map((a) =>{
     return parseFloat(a.price);
  }
@@ -36,6 +37,7 @@ export default function UserHeader(){
    totalPrice = userCart.map(a=> parseFloat(a.price)).reduce((a,b)=>a+b)
  }
 }
+
 return(
   <div className="price-div">
    <span className="userName">Hello, {hello}</span>
