@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import './menu.css';
 import axios from 'axios';
 import {Animated} from 'react-animated-css';
-
+import {writeStorage} from '@rehooks/local-storage';
 function MenuTitle(){
 
   return(
@@ -14,12 +14,37 @@ function MenuTitle(){
     </div>
   )
 }
-function Meal(data){
-  const [visible, setVisible] = useState(true);
-  const [fading, setFading] = useState(false);
-  const [user, setUser] = useState({});
+function useLocalStorage(key, initialValue){
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error){
+      console.log(error);
+      return initialValue
+    }
+  });
 
+  const setValue = value => {
+    try {
+      let item = JSON.parse(window.localStorage.getItem('cart'));
+      const valueToStore =
+      value instanceof Function ? value(storedValue.items.push(value)) : item.items.push(value);
+      setStoredValue(item);
+      window.localStorage.setItem(key, JSON.stringify(item));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  return [storedValue, setValue]
+}
+
+
+function useAddToCart(key, obj){
+  const [user, setUser] = useState({});
   let cart = {items:[]}
+  //const currentSibling = e.currentTarget.previousSibling.value;
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios('/user');
@@ -27,6 +52,36 @@ function Meal(data){
     }
     fetchData()
   }, [user]);
+  console.log(user)
+  // let obj = {
+  //   item: e.currentTarget.value,
+  //   price:currentSibling,
+  //   count:1
+  // }
+
+  if(user.local === null || user.local === undefined){
+  let itemsFromStorage = JSON.parse(localStorage.getItem('cart'));
+  if(JSON.parse(localStorage.getItem('cart')) === null){
+    cart.items.push(obj)
+    localStorage.setItem('cart', JSON.stringify(cart));
+  } else{
+
+    itemsFromStorage.items.push(obj);
+    localStorage.setItem('cart', JSON.stringify(itemsFromStorage));
+  }
+
+}
+
+}
+function Meal(data){
+  const [visible, setVisible] = useState(true);
+  const [fading, setFading] = useState(false);
+  const [cart, setCart] = useLocalStorage('cart', {items:[]})
+  useEffect(()=>{
+    if(!window.localStorage.getItem('cart')){
+    localStorage.setItem('cart', JSON.stringify({items:[]}))
+  }
+}, [])
 
   function hideMe(){
     if(visible){
@@ -37,30 +92,6 @@ function Meal(data){
     setTimeout(() => setVisible(true), 250)
   }
   }
-  function addToCart(e){
-
-    const currentSibling = e.currentTarget.previousSibling.value;
-
-    let obj = {
-      item: e.currentTarget.value,
-      price:currentSibling,
-      count:1
-    }
-
-    if(user.local === null || user.local === undefined){
-    let itemsFromStorage = JSON.parse(localStorage.getItem('cart'));
-    if(JSON.parse(localStorage.getItem('cart')) === null){
-      cart.items.push(obj)
-      localStorage.setItem('cart', JSON.stringify(cart));
-    } else{
-
-      itemsFromStorage.items.push(obj);
-      localStorage.setItem('cart', JSON.stringify(itemsFromStorage));
-    }
-    window.location.href = ''
-}
-}
-
 
   return(
 
@@ -86,7 +117,15 @@ function Meal(data){
           <form method="post" action="/menu">
               <input type="hidden" value={a.name} name="name" className="name"/>
             <input type="hidden" value={a.price} name="price" className="price"/>
-          <button className="add-button" type={user.local === undefined ? 'button' : 'submit'} onClick={addToCart} value={a.name}>Add to cart</button>
+          <button className="add-button" type='button'
+            onClick={e=>setCart(
+              {
+                item: e.currentTarget.value,
+                price:e.currentTarget.previousSibling.value,
+                count:1
+              }
+            )}
+            value={a.name}>Add to cart</button>
             </form>
           </div>
         </div>
@@ -102,8 +141,7 @@ function Drinks(data){
   const [visible, setVisible] = useState(false);
   const [fading, setFading] = useState(false);
   const [user, setUser] = useState({});
-
-  let cart = {items:[]}
+  const [cart, setCart] = useLocalStorage('cart', {items:[]})
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios('/user');
@@ -121,29 +159,7 @@ function Drinks(data){
     setTimeout(() => setVisible(true), 250)
   }
   }
-  function addToCart(e){
 
-    const currentSibling = e.currentTarget.previousSibling.value;
-
-    let obj = {
-      item: e.currentTarget.value,
-      price:currentSibling,
-      count:1
-    }
-
-    if(user.local === null || user.local === undefined){
-    let itemsFromStorage = JSON.parse(localStorage.getItem('cart'));
-    if(JSON.parse(localStorage.getItem('cart')) === null){
-      cart.items.push(obj)
-      localStorage.setItem('cart', JSON.stringify(cart));
-    } else{
-
-      itemsFromStorage.items.push(obj);
-      localStorage.setItem('cart', JSON.stringify(itemsFromStorage));
-    }
-  // window.location.href = ''
-  }
-  }
   return (
     <div className="menu-container drinks">
       <div className="meals-expand" onClick={hideMe}>
@@ -163,7 +179,15 @@ function Drinks(data){
           </div>
           <div>
             <h4 className="meal-price-h4">{a.price}</h4>
-            <button type={user.local === undefined ? 'button' : 'submit'} onClick={addToCart} value={a.name} className="add-button">Add to cart</button>
+            <button type={user.local === undefined ? 'button' : 'submit'}
+              onClick={e=>setCart(
+                {
+                  item: e.currentTarget.value,
+                  price:e.currentTarget.previousSibling.value,
+                  count:1
+                }
+              )}
+              value={a.name} className="add-button">Add to cart</button>
           </div>
         </div>
         )}
@@ -176,8 +200,7 @@ function Dessers(data){
   const [visible, setVisible] = useState(false);
   const [fading, setFading] = useState(false);
   const [user, setUser] = useState({});
-
-  let cart = {items:[]}
+  const [cart, setCart] = useLocalStorage('cart', {items:[]})
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios('/user');
@@ -186,42 +209,20 @@ function Dessers(data){
     fetchData()
   }, [user]);
 
-  function hideMe(){
-    if(visible){
-    setFading(true);
-    setTimeout(() => setVisible(false), 650)
-  } else{
-    setFading(false);
-    setTimeout(() => setVisible(true), 250)
-  }
-  }
-  function addToCart(e){
+  // function hideMe(){
+  //   if(visible){
+  //   setFading(true);
+  //   setTimeout(() => setVisible(false), 650)
+  // } else{
+  //   setFading(false);
+  //   setTimeout(() => setVisible(true), 250)
+  // }
+  // }
 
-    const currentSibling = e.currentTarget.previousSibling.value;
-
-    let obj = {
-      item: e.currentTarget.value,
-      price:currentSibling,
-      count:1
-    }
-
-    if(user.local === null || user.local === undefined){
-    let itemsFromStorage = JSON.parse(localStorage.getItem('cart'));
-    if(JSON.parse(localStorage.getItem('cart')) === null){
-      cart.items.push(obj)
-      localStorage.setItem('cart', JSON.stringify(cart));
-    } else{
-
-      itemsFromStorage.items.push(obj);
-      localStorage.setItem('cart', JSON.stringify(itemsFromStorage));
-    }
-  // window.location.href = ''
-}
-}
   return (
     <div className="menu-container dessers">
 
-      <div  className="meals-expand" onClick={hideMe}>
+      <div  className="meals-expand">
         <h2>Dessers</h2>
       </div>
       <Animated
@@ -238,7 +239,15 @@ function Dessers(data){
           </div>
           <div>
             <h4 className="meal-price-h4">{a.price}</h4>
-          <button type={user.local === undefined ? 'button' : 'submit'} onClick={addToCart} value={a.name} className="add-button">Add to cart</button>
+          <button type={user.local === undefined ? 'button' : 'submit'}
+            onClick={e=>setCart(
+              {
+                item: e.currentTarget.value,
+                price:e.currentTarget.previousSibling.value,
+                count:1
+              }
+            )}
+            value={a.name} className="add-button">Add to cart</button>
           </div>
         </div>
        )}
@@ -250,7 +259,45 @@ function Dessers(data){
 
 function Menu(){
   const [items, setItems] = useState([]);
+  const [cart, setCart] = useState([]);
   const _isMounted = useRef(true);
+  const [visible, setVisible] = useState(true);
+  const [fading, setFading] = useState(false);
+  //const [show, setShow] = useState(false)
+
+  const setShow = () => {
+    console.log('asd')
+    if(visible){
+    setFading(true);
+    setTimeout(() => setVisible(false), 650)
+  } else{
+    setFading(false);
+    setTimeout(() => setVisible(true), 250)
+  }
+  }
+  // const pushToCart = (e) => {
+  //   const currentSibling = e.currentTarget.previousSibling.value;
+  //
+  //   let obj = {
+  //     item: e.currentTarget.value,
+  //     price:currentSibling,
+  //     count:1
+  //   }
+  //
+  //   if(user.local === null || user.local === undefined){
+  //   let itemsFromStorage = JSON.parse(localStorage.getItem('cart'));
+  //   if(JSON.parse(localStorage.getItem('cart')) === null){
+  //     cart.items.push(obj)
+  //     localStorage.setItem('cart', JSON.stringify(cart));
+  //   } else{
+  //
+  //     itemsFromStorage.items.push(obj);
+  //     localStorage.setItem('cart', JSON.stringify(itemsFromStorage));
+  //   }
+  // // window.location.href = ''
+  // }
+  // }
+
 
   useEffect(() => {
    const fetchData = async () => {
@@ -276,7 +323,7 @@ function Menu(){
 
     <Meal data={meals} />
     <Drinks data={drinks} />
-    <Dessers data={dessers} />
+  <Dessers data={dessers} show={e=> setShow} visible={visible} fading={fading} />
 
 </main>
   )}

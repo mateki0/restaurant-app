@@ -35,7 +35,6 @@ module.exports = function(app, passport) {
   app.get('/items', (req, res) => {
     console.log('item');
     Item.find({}, function(err, item) {
-      console.log(item);
       res.send(item);
   });
 
