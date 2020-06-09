@@ -39,12 +39,15 @@ function useLocalStorage(key, initialValue){
   return [storedValue, setValue]
 }
 
+
+
 function Meal(data){
-  const [visible, setVisible] = useState(true);
   const [fading, setFading] = useState(false);
+  const [visible, setVisible] = useState(true);
   const _isMounted = useRef(true)
   const [cart, setCart] = useLocalStorage('cart', {items:[]})
   const [user, setUser] = useState({});
+  const [hide, setHide] = useHideShow(false)
   console.log(user)
   useEffect(()=>{
     if(!cart){
@@ -74,7 +77,7 @@ return () => {
     setTimeout(() => setVisible(true), 250)
   }
   }
-  
+
   return(
 
     <div className="menu-container menu-meals">
