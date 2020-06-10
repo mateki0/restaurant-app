@@ -43,7 +43,7 @@ return(
    <span className="userName">Hello, {hello}</span>
    <a href ="/cart" className="cart"><span className="price-href">{totalPrice}$</span></a>
    <div className="logout-div">
-     <form method="post" action={hello === 'Guest' ? '/login' : '/logout'}>
+     <form method={hello === 'Guest' ? 'get' : 'post'} action={hello === 'Guest' ? '/login' : '/logout'}>
        <button className="logout-button" type="submit">{hello === 'Guest' ? 'Login' : 'Logout'}</button>
      </form>
   </div>
