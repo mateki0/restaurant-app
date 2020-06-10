@@ -47,12 +47,12 @@ function Meal(data){
   const _isMounted = useRef(true)
   const [cart, setCart] = useLocalStorage('cart', {items:[]})
   const [user, setUser] = useState({});
-  console.log(user)
+
   useEffect(()=>{
     if(!cart){
     localStorage.setItem('cart', JSON.stringify({items:[]}))
   }
-}, [])
+}, [cart])
 useEffect(() => {
   const fetchData = async () => {
     if(_isMounted.current){

@@ -50,30 +50,30 @@ function App(props) {
         <Body/>
         <Footer/>
       </Route>
-      <Route path='/about'>
+      <Route exact path='/about'>
         <About/>
         <Footer/>
       </Route>
-      <Route path='/contact'>
+      <Route exact path='/contact'>
         <Contact/>
         <Footer/>
       </Route>
-      <Route path="/menu">
+      <Route exact path="/menu">
         <Menu/>
         <Footer/>
       </Route>
-      <Route path="/itemsAdding">
+      <Route exact path="/itemsAdding">
         <AddingPanel/>
       </Route>
-      <Route path="/cart">
+      <Route exact path="/cart">
         <Cart/>
         <Footer/>
       </Route>
-      <Route path="/login">
+      <Route exact path="/login">
         <Login/>
         <Footer/>
       </Route>
-      <Route path="/register">
+      <Route exact path="/register">
         <Register/>
         <Footer/>
       </Route>
