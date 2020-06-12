@@ -16,7 +16,6 @@ const Message = () => {
   const _isMounted = useRef(true);
   useEffect(() => {
     const fetchData = async () => {
-      console.log('asd')
       if(_isMounted.current){
         const result = await axios('/login');
         setMessage(result.data)

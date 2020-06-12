@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect, useState, useRef} from 'react';
 import './App.css';
 import {Body} from './Components/Body/Body';
 import About from './Components/About/About';
@@ -10,10 +10,30 @@ import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
 import UserHeader from './Components/UserHeader/UserHeader';
 import AddingPanel from './Components/ItemsAdding/ItemsAdding';
+
 import {BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom'
+import axios from 'axios';
 
 
 function App(props) {
+  const _isMounted = useRef(true)
+  const [user, setUser] = useState(null);
+
+  
+  useEffect(() => {
+
+    const fetchData = async () => {
+      if(!_isMounted.current){
+      const result = await axios('/user');
+      setUser(result.data);
+    }
+    }
+    fetchData();
+    return () => {
+      _isMounted.current = false;
+    }
+  }, []);
+
   return (
     <Router >
     <div className="App">
@@ -38,13 +58,17 @@ function App(props) {
             <li>
               <NavLink exact to='/register' activeClassName="small-link-active" className="nav-link small-link" >Register</NavLink>
             </li>
+            <li>
+              <NavLink exact to='/login' activeClassName="small-link-active" className="nav-link small-link" >Login</NavLink>
+            </li>
           </ul>
-          <UserHeader/>
+          <UserHeader user={user}/>
         </div>
       </div>
 
 
     </div>
+
     <Switch>
       <Route exact path='/'>
         <Body/>
@@ -59,14 +83,14 @@ function App(props) {
         <Footer/>
       </Route>
       <Route exact path="/menu">
-        <Menu/>
+        <Menu user={user}/>
         <Footer/>
       </Route>
       <Route exact path="/itemsAdding">
         <AddingPanel/>
       </Route>
       <Route exact path="/cart">
-        <Cart/>
+        <Cart user={user} />
         <Footer/>
       </Route>
       <Route exact path="/login">
@@ -78,6 +102,7 @@ function App(props) {
         <Footer/>
       </Route>
     </Switch>
+
     </Router>
   );
 }

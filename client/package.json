@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+    "eslint-plugin-react-hooks": "0.0.0-33c3af284",
     "mapbox-gl": "^1.10.1",
     "react": "^16.13.1",
     "react-animated-css": "^1.2.1",
@@ -27,7 +28,11 @@
     "Access-Control-Allow-Origin": "*"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "plugins": ["react-hooks"],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
   },
   "browserslist": {
     "production": [

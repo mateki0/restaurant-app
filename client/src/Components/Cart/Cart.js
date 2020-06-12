@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import './cart.css';
-import axios from 'axios';
-function Title(){
 
-  return(
+function Title() {
+
+  return (
     <div className="menu-container">
       <div className="title-container">
         <h2>Your cart:</h2>
@@ -11,101 +11,131 @@ function Title(){
     </div>
   )
 }
-function ItemList(){
-  const [user, setUser] = useState({});
+
+// const useStorage = (storageName) => {
+//   const checkStorage = key => {
+//     const storedData = localStorage.getItem(key);
+//     if(!storedData) 
+//   }
+//   useEffect(()=>{
+//     checkStorage(storageName)
+//     const handler = ({key}) => checkStorage(key);
+//     window.addEventListener('storage', handler);
+//     return () => window.removeEventListener('storage', handler)
+//   })
+// }
+
+
+
+const SingleItem = (props) => (
+  <div className="single-cart-item">
+    <div>
+      <span>{props.item.item}</span>
+    </div>
+    <div>
+      <button value={props.item.item} onClick={props.incrementItem}>+</button>
+      <span>{props.item.count}</span>
+      <button onClick={e => e.currentTarget.previousSibling.value > 1 ? e.currentTarget.previousSibling.value-- : null}>-</button>
+
+      <span className="price-span">{props.item.price.slice(0, props.item.price.length - 1) * props.item.count}$</span>
+    </div>
+  </div>
+);
+
+
+function ItemList(user) {
+  
+  
+  const [cart, setCart] = useState(user.user.user === null ? JSON.parse(localStorage.getItem('cart')).items : user.user.user.local.cart)
+  
+  
+  console.log(cart)
+  const [unique, setUnique] = useState([]);
+  const [price, setPrice] = useState(0)
+
+  
   let arr = [];
   let counter = 1;
-
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios('/user');
-      setUser(result.data);
-
-    }
-    fetchData();
-
-  }, []);
-
-  function compare(a,b){
+    user.user.user === null ? setCart(JSON.parse(localStorage.getItem('cart')).items) : setCart(user.user.user.local.cart)
+  }, [])
+  
+  function compare(a, b) {
     const itemA = a.item.toUpperCase();
     const itemB = b.item.toUpperCase();
     let comparison = 0;
-    if(itemA>itemB){
+    if (itemA > itemB) {
       comparison = 1;
-    } else if (itemA < itemB){
+    } else if (itemA < itemB) {
       comparison = -1;
     }
     return comparison;
   }
+  let itemsPrice = [];
+  
 
-    let cart =[];
-    let unique =[];
-    let price = 0;
-    let itemsPrice = [];
-    console.log(user.local)
-    if(user.local === null || user.local === undefined){
-      if(JSON.parse(localStorage.getItem('cart')) !== null)
-      cart = JSON.parse(localStorage.getItem('cart')).items
-    } else{
-      cart = user.local.cart
+useEffect(() => {
+  itemsPrice = cart.map(a => parseFloat(a.price.slice(0, a.price.length - 1) * parseFloat(a.count)))
+    if (itemsPrice.length > 1) {
+      setPrice(itemsPrice.reduce((a, b) => a + b));
+    } else {
+      setPrice(itemsPrice[0])
+      
     }
-    console.log(cart)
-    itemsPrice = cart.map((a) =>{
-      console.log(parseFloat(a.price.slice(0,a.price.length-1)))
-      return parseFloat(a.price.slice(0,a.price.length-1));
-     });
-     console.log(itemsPrice)
-     cart.sort(compare);
+    console.log(itemsPrice)
+  return () => {
+    
+  };
+}, []);
 
-     for(let i=0; i<cart.length; i++){
-       if(i+1 < cart.length){
-         if(cart[i].item === cart[i+1].item){
-           counter++;
-         } else{
-           unique.push(cart[i]);
-           arr.push(counter);
-           counter = 1;
-         }
-       } else{
-         unique.push(cart[i]);
-         arr.push(1);
-        }
-      }
-      for(let j=0; j<unique.length; j++){
-        unique[j].count = arr[j];
-      }
-      if(itemsPrice.length>1){
-        price = itemsPrice.reduce((a,b) => a+b);
-      } else{
-        price = itemsPrice[0]
-      }
+  const incrementItem = e => {
+    const item = unique.find(a => a.item === e.currentTarget.value)
+    item.count+=1
+    setUnique(unique)
+    console.log(item)
+    console.log(unique)
+    // let obj = {}
+
+    // cart.map(a => {
+    //   if (a.item === e.currentTarget.value) {
+    //     obj.item = a.item;
+    //     obj.price = a.price;
+    //     obj.count = a.count
+    //   }
+    // })
+    // e.currentTarget.nextSibling.innerText = parseInt(e.currentTarget.nextSibling.innerText) + 1
+    // cart.push(obj)
+    
+    // getUniques()
+    
+    // localStorage.setItem('cart', JSON.stringify({ items: cart }))
+    // setCart(unique);
+    
+    //window.location.href =""
+  }
 
 
-
-
-  return(
+  return (
     <div className="items-container">
-      {unique.map(item =>
+      {cart.map(item =>
 
-        <div key={item.item} className="single-cart-item">
-          <div>
-            <span>{item.item} x {item.count}</span>
-          </div>
-          <div>
-            <span>{item.price.slice(0,item.price.length-1) * item.count}$</span>
-          </div>
-        </div>
+        <SingleItem key={item.item} incrementItem={incrementItem} item={item}></SingleItem>
 
       )}
+
+
       <div className="price"><span>Total: {price}$</span></div>
+
     </div>
   )
 }
-export default function Cart(){
-  return(
+
+export default function Cart(user) {
+  
+  return (
     <main>
-      <Title/>
-      <ItemList/>
-  </main>
+      <Title />
+      <ItemList user={user}/>
+    </main>
   )
 }

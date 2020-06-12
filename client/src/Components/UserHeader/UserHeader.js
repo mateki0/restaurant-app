@@ -1,51 +1,67 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React, {useState,useEffect} from 'react';
 
 
-export default function UserHeader(){
-  const [user, setUser] = useState({});
-  let totalPrice = 0;
+
+export default function UserHeader(user){
+
+
+  let itemsPrice = [];
   let hello = '';
-
+  const [cart, setCart] = useState(user.user === null ? JSON.parse(localStorage.getItem('cart')).items : user.user.local.cart)
+  const [price, setPrice] = useState(0)
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios('/user');
-      setUser(result.data)
-    }
-    fetchData()
-  },[]);
-  if(user.local === null || user.local === undefined){
-  const copyCart = JSON.parse(localStorage.getItem('cart'))
+    user.user === null ? setCart(JSON.parse(localStorage.getItem('cart')).items) : setCart(user.user.local.cart)
+  
+  try{
+  if(user.user === null){
+    console.log(cart)
   hello = 'Guest';
 
-   if(copyCart !== null && copyCart.items.length >0){
-  let itemsPrice = copyCart.items.map((a) =>{
-    return parseFloat(a.price);
+   if(cart !== null && cart.length >0){
+      itemsPrice = cart.map(a => parseFloat(a.price.slice(0, a.price.length - 1) * parseFloat(a.count)))
+        if (itemsPrice.length > 1) {
+          setPrice(itemsPrice.reduce((a, b) => a + b));
+        } else {
+          setPrice(itemsPrice[0])
+          
+        }
+        console.log(itemsPrice)
+      return () => {
+        
+      };
  }
- );
- totalPrice = itemsPrice.reduce((a,b) => a+b);
+ 
+ 
 
-}
+
 } else{
-   let index = user.local.email.indexOf('@');
-   hello = user.local.email.slice(0, index);
+   let index = user.user.local.email.indexOf('@');
+   hello = user.user.local.email.slice(0, index);
    if(hello.length>19){
      hello = hello.slice(0,16) + '...'
    }
-   let userCart = user.local.cart;
-   if(user.local.cart.length >0){
-   totalPrice = userCart.map(a=> parseFloat(a.price)).reduce((a,b)=>a+b)
+   let userCart = user.user.local.cart;
+   if(user.user.local.cart.length >0){
+   setPrice(userCart.map(a=> parseFloat(a.price)).reduce((a,b)=>a+b))
  }
 }
+} catch(error) {
+  console.log(error)
+}
+}, [])
 
 return(
   <div className="price-div">
    <span className="userName">Hello, {hello}</span>
-   <a href ="/cart" className="cart"><span className="price-href">{totalPrice}$</span></a>
+   <a href ="/cart" className="cart"><span className="price-href">{price}$</span></a>
    <div className="logout-div">
-     <form method={hello === 'Guest' ? 'get' : 'post'} action={hello === 'Guest' ? '/login' : '/logout'}>
-       <button className="logout-button" type="submit">{hello === 'Guest' ? 'Login' : 'Logout'}</button>
-     </form>
+     {hello === 'Guest' ? (
+       ''
+     ) : (
+       <form method='post' action='/logout'>
+       <button className="logout-button" type="submit">Logout</button>
+        </form>
+     ) }
   </div>
 </div>
 )
