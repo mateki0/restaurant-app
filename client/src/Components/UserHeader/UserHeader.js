@@ -6,16 +6,21 @@ export default function UserHeader(user){
 
 
   let itemsPrice = [];
-  let hello = '';
-  const [cart, setCart] = useState(user.user === null ? JSON.parse(localStorage.getItem('cart')).items : user.user.local.cart)
+  let hello = 'Guest';
+  const [cart, setCart] = useState([])
   const [price, setPrice] = useState(0)
   useEffect(() => {
-    user.user === null ? setCart(JSON.parse(localStorage.getItem('cart')).items) : setCart(user.user.local.cart)
-  
+    console.log(JSON.parse(localStorage.getItem('cart')))
+    if(user.user === null && JSON.parse(localStorage.getItem('cart')) === null){
+      return cart;
+    } else if (user.user !== null){
+      setCart(user.user.local.cart)
+    } else{
+      setCart(JSON.parse(localStorage.getItem('cart')).items)
+    }
   try{
   if(user.user === null){
-    console.log(cart)
-  hello = 'Guest';
+    
 
    if(cart !== null && cart.length >0){
       itemsPrice = cart.map(a => parseFloat(a.price.slice(0, a.price.length - 1) * parseFloat(a.count)))
@@ -25,7 +30,7 @@ export default function UserHeader(user){
           setPrice(itemsPrice[0])
           
         }
-        console.log(itemsPrice)
+        
       return () => {
         
       };

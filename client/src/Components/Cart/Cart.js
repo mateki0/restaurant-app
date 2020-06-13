@@ -46,7 +46,7 @@ const SingleItem = (props) => (
 function ItemList(user) {
   
   
-  const [cart, setCart] = useState(user.user.user === null ? JSON.parse(localStorage.getItem('cart')).items : user.user.user.local.cart)
+  const [cart, setCart] = useState([])
   
   
   console.log(cart)
@@ -57,7 +57,13 @@ function ItemList(user) {
   let arr = [];
   let counter = 1;
   useEffect(() => {
-    user.user.user === null ? setCart(JSON.parse(localStorage.getItem('cart')).items) : setCart(user.user.user.local.cart)
+    if(user.user.user === null && JSON.parse(localStorage.getItem('cart')) === null){
+      return cart;
+    } else if (user.user.user !== null){
+      setCart(user.user.user.local.cart)
+    } else{
+      setCart(JSON.parse(localStorage.getItem('cart')).items)
+    }
   }, [])
   
   function compare(a, b) {
