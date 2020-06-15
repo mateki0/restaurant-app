@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import './menu.css';
 import axios from 'axios';
 import { Animated } from 'react-animated-css';
@@ -48,9 +48,6 @@ function useLocalStorage(value){
         setStoredValue(cart);
         window.localStorage.setItem('cart', JSON.stringify(cart));
       }
-      //setStoredValue(item);
-      //window.localStorage.setItem('cart', JSON.stringify(item));
-      //window.location.href = ''
     } catch (error) {
       console.log(error)
     }
@@ -79,11 +76,11 @@ const SingleMealItem = (props) => (
         <form method="post" action="/menu">
           <input type="hidden" value={a.name} name="name" className="name" />
           <input type="hidden" value={a.price} name="price" className="price" />
-          {isEmpty(props.user) ? <button className="add-button" type='button' onClick={e => props.setCart(
+          {isEmpty(props.user) ? <button className="add-button" type='button' onClick={e => {props.setCart(
             {item:e.currentTarget.value,
               price:e.currentTarget.previousSibling.value,
               count:1
-            })} 
+            }); props.toggleCart() }} 
             value={a.name}>Add to cart</button> : <button className="add-button" type='submit' value={a.name}>Add to cart</button>}
         </form>
       </div>
@@ -92,19 +89,24 @@ const SingleMealItem = (props) => (
 );
 
 
-function Meal(data, user) {
+
+function Meal({data, user, toggle, toggleCart}) {
   
   const [fading, setFading] = useState(false);
   const [visible, setVisible] = useState(true);
   const [cart, setCart] = useLocalStorage();
+  
+  useEffect(() => {
 
+  }, [toggle])
   useEffect(() => {
     if (!window.localStorage.getItem('cart')) {
       localStorage.setItem('cart', JSON.stringify({ items: [] }))
     }
   }, [])
 
-  console.log(localStorage.cart)
+    
+    
   function hideMe() {
     if (visible) {
       setFading(true);
@@ -125,14 +127,14 @@ function Meal(data, user) {
         animationOut="fadeOut"
         isVisible={!fading}
         style={visible ? { display: "grid" } : { display: "none" }}>
-        <SingleMealItem data={data.data} user={user} setCart={setCart}></SingleMealItem>
+        <SingleMealItem data={data} user={user} setCart={setCart} toggleCart={toggleCart} ></SingleMealItem>
       </Animated>
     </div>
 
   )
 
 }
-function Drinks(data, user) {
+function Drinks({data, user}) {
   const [visible, setVisible] = useState(false);
   const [fading, setFading] = useState(false);
   const [cart, setCart] = useLocalStorage('cart', { items: [] })
@@ -146,7 +148,7 @@ function Drinks(data, user) {
       setTimeout(() => setVisible(true), 250)
     }
   }
-
+  
   return (
     <div className="menu-container drinks">
       <div className="meals-expand" onClick={hideMe}>
@@ -157,12 +159,12 @@ function Drinks(data, user) {
         animationOut="fadeOut"
         isVisible={!fading}
         style={visible ? { display: "grid" } : { display: "none" }}>
-        <SingleMealItem data={data.data} user={user} setCart={setCart}></SingleMealItem>
+        <SingleMealItem data={data} user={user} setCart={setCart}></SingleMealItem>
       </Animated>
     </div>
   )
 }
-function Dessers(data, user) {
+function Dessers({data, user}) {
   const [visible, setVisible] = useState(false);
   const [fading, setFading] = useState(false);
   const [cart, setCart] = useLocalStorage('cart', { items: [] })
@@ -189,15 +191,16 @@ function Dessers(data, user) {
         animationOut="fadeOut"
         isVisible={!fading}
         style={visible ? { display: "grid" } : { display: "none" }}>
-        <SingleMealItem data={data.data} user={user} setCart={setCart}></SingleMealItem>
+        <SingleMealItem data={data} user={user} setCart={setCart}></SingleMealItem>
       </Animated>
     </div>
   )
 }
 
-function Menu(user) {
+function Menu({user,toggle,toggleCart}) {
   const [items, setItems] = useState([]);
   const _isMounted = useRef(true);
+  console.log(toggle)
   useEffect(() => {
     const fetchData = async () => {
       if (_isMounted.current) {
@@ -220,7 +223,7 @@ function Menu(user) {
         <main>
           <MenuTitle />
 
-          <Meal data={meals} user={user} />
+          <Meal data={meals} user={user} toggle={toggle} toggleCart={toggleCart}/>
           <Drinks data={drinks} user={user} />
           <Dessers data={dessers} user={user} />
 

@@ -10,7 +10,7 @@ import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
 import UserHeader from './Components/UserHeader/UserHeader';
 import AddingPanel from './Components/ItemsAdding/ItemsAdding';
-
+import PriceProvider from './Components/PriceProvider'
 import {BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom'
 import axios from 'axios';
 
@@ -96,6 +96,16 @@ function App(props) {
   const [busy, setBusy] = useState(false)
   const [price, setPrice] = useState(0)
   const [increment, setIncrement] = useLocalStorage(cart);
+  const [toggle, setToggle] = useState(false);
+  console.log(toggle)
+  const toggleCart = () => {
+    setToggle(true)
+  }
+  useEffect(() => {
+    if (!window.localStorage.getItem('cart')) {
+      localStorage.setItem('cart', JSON.stringify({ items: [] }))
+    }
+  }, [])
   useEffect(() => {
 
     const fetchData = async () => {
@@ -138,15 +148,19 @@ function App(props) {
   useEffect(() => {
     const currentPrice = getPrice();
     setPrice(currentPrice)
+    setToggle(false)
   }, [cart]);
 
-
+  useEffect(() => {
+    const currentCart = getCart();
+    setCart(currentCart);
+  }, [toggle])
  
   return (
     <Router >
     <div className="App">
       <div className="nav-div">
-        <Header user={user} price={price} ></Header>
+        <Header user={user} price={price} />
       </div>
 
 
@@ -165,10 +179,12 @@ function App(props) {
         <Contact/>
         <Footer/>
       </Route>
+      
       <Route exact path="/menu">
-        <Menu user={user}/>
+        <Menu user={user} toggle={toggle} toggleCart={toggleCart}/>
         <Footer/>
       </Route>
+      
       <Route exact path="/itemsAdding">
         <AddingPanel/>
       </Route>
