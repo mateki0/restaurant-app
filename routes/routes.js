@@ -93,7 +93,9 @@ module.exports = function(app, passport) {
   app.post('/decrement', (req, res) => {
     User.findOne({_id:req.user._id}).then(user => {
     let item = user.local.cart.find(a=> a.item === req.body.decrement);
-    item.count-=1;
+    if(item.count>1){
+      item.count-=1;
+    }
     user.markModified('local.cart');
     user.save((err)=>{
       if(err) throw err;

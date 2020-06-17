@@ -104,7 +104,7 @@ function App(props) {
     return user.local.cart
   }
   const toggleCart = () => {
-    setToggle(true)
+    setToggle(!toggle)
   }
   useEffect(() => {
     
@@ -174,8 +174,9 @@ function App(props) {
   }, [localCart,userCart]);
 
   useEffect(() => {
+    console.log(toggle)
     let currentCart;
-    if(isMounted.current){
+    
       if(isLogged !== true) {
         currentCart = getCart();
         setLocalCart(currentCart)
@@ -183,11 +184,9 @@ function App(props) {
         currentCart = getUserCart();
         setUserCart(currentCart);
       }
-  }
-    return () =>{
-      isMounted.current = false
-    }
-  }, [toggle, isLogged])
+  
+   
+  }, [toggle])
  
   return (
     <Router >
