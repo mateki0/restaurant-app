@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './cart.css';
 
 
@@ -15,7 +15,7 @@ function Title() {
 
 
 
-const SingleItem = (props) => (
+const SingleLocalItem = (props) => (
   <div className="single-cart-item">
     <div>
       <span>{props.item.item}</span>
@@ -35,19 +35,49 @@ const SingleItem = (props) => (
     </div>
   </div>
 );
-
-
-function ItemList({cart, handleChange, price}) {
- 
-  
-  
+const SingleUserItem = (props) => (
+  <div className="single-cart-item">
+    <div>
+      <span>{props.item.item}</span>
+    </div>
     
+      <div className="price-count-container">
+        <div className="count-user-div">
+          <form className="single-user-form" action="/increment" method="post">
+            <button id="work" name="increment" value={props.item.item} >+</button>
+            <span>{props.item.count}</span>
+          </form>
+          <form className="single-user-form" action="/decrement" method="post">
+            <button value={props.item.item} name="decrement">-</button>
+          </form>
+        </div>
+        <div className="price-div">
+          <span className="price-span">{props.item.price.slice(0, props.item.price.length - 1) * props.item.count}$</span>
+        </div>
+        <form  className="single-user-form" action="/delete" method="post">
+          <button value={props.item.item}  name="delete">Remove</button>
+        </form>
+    
+      </div>
+    
+  </div>
+);
+
+function ItemList({user, localCart, userCart, handleChange, price ,isLogged}) {
+    
+  
+    console.log(userCart)
+    console.log(localCart)
   return (
     <div className="items-container">
-      {
-      cart.map(item =>
+      {isLogged && userCart !== [] ? 
+      userCart.cart.map(item =>
 
-        <SingleItem key={item.item} incrementItem={handleChange} item={item} ></SingleItem>
+        <SingleUserItem key={item.item} incrementItem={handleChange} item={item} ></SingleUserItem>
+
+      ) : localCart.map(item =>
+
+        <SingleLocalItem key={item.item} incrementItem={handleChange} item={item} ></SingleLocalItem>
 
       ) 
       }
@@ -59,12 +89,12 @@ function ItemList({cart, handleChange, price}) {
 }
 
 
-export default function Cart({cart, handleChange, price}) {
+export default function Cart({user, localCart, userCart, handleChange, price ,isLogged}) {
   
   return (
     <main>
       <Title />
-      <ItemList cart={cart} handleChange={handleChange} price={price}/>
+      <ItemList user={user} localCart={localCart} userCart={userCart} handleChange={handleChange} price={price} isLogged={isLogged}/>
     </main>
   )
 }

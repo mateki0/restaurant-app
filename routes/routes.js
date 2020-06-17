@@ -1,6 +1,7 @@
 var Item = require('../models/items');
 var User = require('../models/user');
-var http = require('http')
+var http = require('http');
+const user = require('../models/user');
 module.exports = function(app, passport) {
 
   // home page
@@ -32,6 +33,7 @@ module.exports = function(app, passport) {
     res.redirect('/')
   })
   app.get('/items', (req, res) => {
+    
     Item.find({}, function(err, item) {
       res.send(item);
   });
@@ -39,19 +41,28 @@ module.exports = function(app, passport) {
 });
 
   app.post('/menu', (req,res)=>{
-    let user = req.user;
-    let newItem = {
-      item:req.body.name,
-      price:req.body.price
-    }
-    console.log(newItem)
-    req.user.local.cart.push(newItem)
-
-
-    user.save((err)=>{
-      if(err) throw err;
-      res.redirect('/menu');
+    User.findOne({_id:req.user._id}).then(user => {
+      
+      let item = user.local.cart.find(a=> a.item === req.body.name);
+      if(item){
+        item.count+=1;
+        user.markModified('local.cart');
+      } else{
+        let newItem = {
+          item:req.body.name,
+          price:req.body.price,
+          count:1,
+        }
+        user.local.cart.push(newItem);
+        user.markModified('cart');
+      }
+      user.save((err)=>{
+        if(err) throw err;
+        res.redirect('/menu');
+      })
     })
+    
+    
   })
 
   app.post('/additem', (req, res) => {
@@ -68,6 +79,41 @@ module.exports = function(app, passport) {
   });
 
 
+  app.post('/increment', (req, res) => {
+    User.findOne({_id:req.user._id}).then(user => {
+    let item = user.local.cart.find(a=> a.item === req.body.increment);
+    item.count+=1;
+    user.markModified('local.cart');
+    user.save((err)=>{
+      if(err) throw err;
+      res.redirect('/cart');
+    })
+  })
+  })
+  app.post('/decrement', (req, res) => {
+    User.findOne({_id:req.user._id}).then(user => {
+    let item = user.local.cart.find(a=> a.item === req.body.decrement);
+    item.count-=1;
+    user.markModified('local.cart');
+    user.save((err)=>{
+      if(err) throw err;
+      res.redirect('/cart');
+    })
+  })
+  })
+
+  app.post('/delete', (req, res) => {
+    User.findOne({_id:req.user._id}).then(user => {
+    let item = user.local.cart.find(a=> a.item === req.body.delete);
+    let index = user.local.cart.indexOf(item);
+    user.local.cart.splice(index, 1);
+    user.markModified('local.cart');
+    user.save((err)=>{
+      if(err) throw err;
+      res.redirect('/cart');
+    })
+  })
+  })
 }
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated())

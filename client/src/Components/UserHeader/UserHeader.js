@@ -4,25 +4,24 @@ import React, {useEffect,useState} from 'react';
 
 export default function UserHeader({user,price}){
   const [name, setName] = useState('Guest')
-  
+  console.log(user)
     useEffect(() => {
-  if(user !== null){
-  
-    let index = user.user.local.email.indexOf('@');
-    setName(user.user.local.email.slice(0, index));
+  if( user !== null && user !== ''){
+    console.log('asd')
+    let index = user.local.email.indexOf('@');
+    setName(user.local.email.slice(0, index));
+    console.log(name)
     if(name.length>19){
       setName(name.slice(0,16)+ '...') 
-    } else{
-      setName('Guest')
-    }
+    } 
   }
   
-  }, [name])
+  }, [user,name])
 
 return(
   <div className="price-div">
    <span className="userName">Hello, {name}</span>
-   <a href ="/cart" className="cart"><span className="price-href">{price}$</span></a>
+   <a href ="/cart" className="cart"><span className="price-href">{price !== undefined ? price : 0}$</span></a>
    <div className="logout-div">
      {name === 'Guest' ? (
        ''

@@ -33,6 +33,12 @@ padding-right:20px;
   justify-content: flex-end;
   padding:10px;
 }
+.count-user-div{
+  display:flex;
+}
+.single-user-form>*{
+  padding:0 5px;
+}
 @media (max-width:1130px){
   .items-container{
     width:100%;
