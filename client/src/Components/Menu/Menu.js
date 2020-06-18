@@ -2,20 +2,7 @@ import React, { useState, useEffect, useRef} from 'react';
 import './menu.css';
 import axios from 'axios';
 import { Animated } from 'react-animated-css';
-
-function MenuTitle() {
-
-  return (
-    <div className="menu-container">
-      <div className="title-container">
-        <h2>Checkout our menu below</h2>
-      </div>
-
-    </div>
-  )
-}
-
-
+import Title from '../Title';
 
 function useLocalStorage(value){
   const [storedValue, setStoredValue] = useState(() => {
@@ -115,20 +102,21 @@ function Meal({data, user, toggleCart}) {
     }
   }
   return (
+    <div>
 
-    <div className="menu-container menu-meals">
-      <div className="meals-expand" onClick={hideMe}>
-        <h2>Meals</h2>
+      <div className="menu-container menu-meals">
+        <div className="meals-expand" onClick={hideMe}>
+          <h2>Meals</h2>
+        </div>
+        <Animated
+          animationIn='fadeIn'
+          animationOut="fadeOut"
+          isVisible={!fading}
+          style={visible ? { display: "grid" } : { display: "none" }}>
+          <SingleMealItem data={data} user={user} setCart={setCart} toggleCart={toggleCart} ></SingleMealItem>
+        </Animated>
       </div>
-      <Animated
-        animationIn='fadeIn'
-        animationOut="fadeOut"
-        isVisible={!fading}
-        style={visible ? { display: "grid" } : { display: "none" }}>
-        <SingleMealItem data={data} user={user} setCart={setCart} toggleCart={toggleCart} ></SingleMealItem>
-      </Animated>
     </div>
-
   )
 
 }
@@ -219,7 +207,7 @@ function Menu({user,toggle,toggleCart}) {
     <>
       {!items.length ? (<div>Loading...</div>) : (
         <main>
-          <MenuTitle />
+          <Title value="Checkout our menu below"/>
 
           <Meal data={meals} user={user} toggleCart={toggleCart}/>
           <Drinks data={drinks} user={user} toggleCart={toggleCart}/>

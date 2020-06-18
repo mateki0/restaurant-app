@@ -2,7 +2,7 @@ import React, {useEffect,useState} from 'react';
 
 
 
-export default function UserHeader({user,price}){
+ const UserHeader = ({user,price})=>{
   const [name, setName] = useState('Guest')
   
     useEffect(() => {
@@ -34,3 +34,4 @@ return(
 </div>
 )
 }
+export default UserHeader

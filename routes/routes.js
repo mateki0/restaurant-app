@@ -119,10 +119,12 @@ module.exports = function(app, passport) {
 
   app.post('/update', (req, res) => {
     const filter = {_id: req.user._id};
-    console.log(req.body)
-    User.findOneAndUpdate(filter, {$set:{'local.cart':req.body}});
-    console.log('updated')
-  })
+    
+    User.findOne(filter).then(user => {
+      user.local.cart = req.body.data;
+      user.save()
+    });
+  });
 }
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated())

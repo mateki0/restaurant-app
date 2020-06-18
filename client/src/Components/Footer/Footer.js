@@ -1,11 +1,11 @@
-import React from 'react';
-import './footer.css';
+import React from "react";
+import "./footer.css";
 
-export default function Footer(){
-  function handleScroll(){
-    window.scrollTo(0,0)
+const Footer = () => {
+  function handleScroll() {
+    window.scrollTo(0, 0);
   }
-  return(
+  return (
     <div className="footer-container">
       <div className="footer">
         <div className="company">
@@ -14,9 +14,13 @@ export default function Footer(){
           <a href="/contact">Terms</a>
         </div>
         <div className="top">
-          <span onClick={handleScroll} className="back-top">Back to top</span>
+          <span onClick={handleScroll} className="back-top">
+            Back to top
+          </span>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default Footer;
