@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,useRef} from 'react';
 import './cart.css';
-
+import axios from 'axios'
 
 function Title() {
 
@@ -43,37 +43,60 @@ const SingleUserItem = (props) => (
     
       <div className="price-count-container">
         <div className="count-user-div">
-          <form className="single-user-form" action="/increment" method="post">
-            <button id="work" name="increment" value={props.item.item} >+</button>
+            <button  value={props.item.item} onClick={e=>props.updateCart({value:e.currentTarget.value,action:'increment'})}>+</button>
             <span>{props.item.count}</span>
-          </form>
-          <form className="single-user-form" action="/decrement" method="post">
             <button value={props.item.item} name="decrement">-</button>
-          </form>
         </div>
         <div className="price-div">
           <span className="price-span">{props.item.price.slice(0, props.item.price.length - 1) * props.item.count}$</span>
         </div>
-        <form  className="single-user-form" action="/delete" method="post">
+        <div >
           <button value={props.item.item}  name="delete">Remove</button>
-        </form>
+        </div>
     
       </div>
     
   </div>
 );
 
-function ItemList({user, localCart, userCart, handleChange, price ,isLogged}) {
-    
-  
+
+function ItemList({user, localCart, userCart, handleChange, price ,isLogged, updateCart, toggle, toggleCart}) {
+  console.log(userCart)
+  const isMounted = useRef(true)
+  const submitChanges = (data) => {
     console.log(userCart)
-    console.log(localCart)
+    axios('/update', {
+      method: "POST",
+      data: data
+    }).then((response)=>{
+      return response.json()
+    }).catch ((err)=>{
+      console.error(err.message)
+    }) 
+  
+  } 
+
+  useEffect(() => {
+    console.log('asd')
+    
+    if(!isMounted.current) return;
+  
+    return () => {
+    
+      submitChanges(userCart);
+      isMounted.current = false;
+      
+      
+      
+    }
+  }, [userCart])
+    
   return (
     <div className="items-container">
       {isLogged && userCart !== [] ? 
-      userCart.cart.map(item =>
+      userCart.map(item =>
 
-        <SingleUserItem key={item.item} incrementItem={handleChange} item={item} ></SingleUserItem>
+        <SingleUserItem key={item.item} updateCart={updateCart} item={item} ></SingleUserItem>
 
       ) : localCart.map(item =>
 
@@ -89,12 +112,12 @@ function ItemList({user, localCart, userCart, handleChange, price ,isLogged}) {
 }
 
 
-export default function Cart({user, localCart, userCart, handleChange, price ,isLogged}) {
+export default function Cart({user, localCart, userCart, handleChange, price ,isLogged, updateCart, toggle, toggleCart}) {
   
   return (
     <main>
       <Title />
-      <ItemList user={user} localCart={localCart} userCart={userCart} handleChange={handleChange} price={price} isLogged={isLogged}/>
+      <ItemList user={user} localCart={localCart} userCart={userCart} handleChange={handleChange} price={price} isLogged={isLogged} updateCart={updateCart} toggle={toggle} toggleCart={toggleCart}/>
     </main>
   )
 }

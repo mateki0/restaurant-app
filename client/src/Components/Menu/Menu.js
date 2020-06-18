@@ -24,32 +24,32 @@ function useLocalStorage(value){
       
       return cart ? cart : {items:[]};
     } catch (error) {
-      console.log(error);
+      
       return ''
     }
     
   });
 
   const setValue = value => {
-    console.log(storedValue)
+    
     try {
       let cart = JSON.parse(window.localStorage.getItem('cart'));
-      console.log(value.item)
+      
       let item = cart.items.find(a=>a.item === value.item);
-      console.log(item)
+      
       if(item){
-        console.log('asd')
+        
         item.count+=1;
         window.localStorage.setItem('cart', JSON.stringify(cart));
       } else{
-        console.log(value)
+        
         const valueToStore =
         value instanceof Function ? value(storedValue.items.push(value)) : cart.items.push(value);
         setStoredValue(cart);
         window.localStorage.setItem('cart', JSON.stringify(cart));
       }
     } catch (error) {
-      console.log(error)
+      
     }
   }
   return [storedValue, setValue]
@@ -90,15 +90,13 @@ const SingleMealItem = (props) => (
 
 
 
-function Meal({data, user, toggle, toggleCart}) {
+function Meal({data, user, toggleCart}) {
   
   const [fading, setFading] = useState(false);
   const [visible, setVisible] = useState(true);
   const [cart, setCart] = useLocalStorage();
   
-  useEffect(() => {
-
-  }, [toggle])
+  
   useEffect(() => {
     if (!window.localStorage.getItem('cart')) {
       localStorage.setItem('cart', JSON.stringify({ items: [] }))
@@ -134,7 +132,7 @@ function Meal({data, user, toggle, toggleCart}) {
   )
 
 }
-function Drinks({data, user}) {
+function Drinks({data, user, toggleCart}) {
   const [visible, setVisible] = useState(false);
   const [fading, setFading] = useState(false);
   const [cart, setCart] = useLocalStorage('cart', { items: [] })
@@ -159,12 +157,12 @@ function Drinks({data, user}) {
         animationOut="fadeOut"
         isVisible={!fading}
         style={visible ? { display: "grid" } : { display: "none" }}>
-        <SingleMealItem data={data} user={user} setCart={setCart}></SingleMealItem>
+        <SingleMealItem data={data} user={user} setCart={setCart} toggleCart={toggleCart}></SingleMealItem>
       </Animated>
     </div>
   )
 }
-function Dessers({data, user}) {
+function Dessers({data, user, toggleCart}) {
   const [visible, setVisible] = useState(false);
   const [fading, setFading] = useState(false);
   const [cart, setCart] = useLocalStorage('cart', { items: [] })
@@ -191,7 +189,7 @@ function Dessers({data, user}) {
         animationOut="fadeOut"
         isVisible={!fading}
         style={visible ? { display: "grid" } : { display: "none" }}>
-        <SingleMealItem data={data} user={user} setCart={setCart}></SingleMealItem>
+        <SingleMealItem data={data} user={user} setCart={setCart} toggleCart={toggleCart}></SingleMealItem>
       </Animated>
     </div>
   )
@@ -200,7 +198,7 @@ function Dessers({data, user}) {
 function Menu({user,toggle,toggleCart}) {
   const [items, setItems] = useState([]);
   const _isMounted = useRef(true);
-  console.log(toggle)
+  
   useEffect(() => {
     const fetchData = async () => {
       if (_isMounted.current) {
@@ -223,9 +221,9 @@ function Menu({user,toggle,toggleCart}) {
         <main>
           <MenuTitle />
 
-          <Meal data={meals} user={user} toggle={toggle} toggleCart={toggleCart}/>
-          <Drinks data={drinks} user={user} />
-          <Dessers data={dessers} user={user} />
+          <Meal data={meals} user={user} toggleCart={toggleCart}/>
+          <Drinks data={drinks} user={user} toggleCart={toggleCart}/>
+          <Dessers data={dessers} user={user} toggleCart={toggleCart}/>
 
         </main>
       )}

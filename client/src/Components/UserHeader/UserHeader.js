@@ -4,13 +4,13 @@ import React, {useEffect,useState} from 'react';
 
 export default function UserHeader({user,price}){
   const [name, setName] = useState('Guest')
-  console.log(user)
+  
     useEffect(() => {
   if( user !== null && user !== ''){
-    console.log('asd')
+    
     let index = user.local.email.indexOf('@');
     setName(user.local.email.slice(0, index));
-    console.log(name)
+    
     if(name.length>19){
       setName(name.slice(0,16)+ '...') 
     } 

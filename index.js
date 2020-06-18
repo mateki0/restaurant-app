@@ -2,16 +2,17 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
 const path = require('path')
-var mongoose = require('mongoose');
-var passport = require('passport');
-
-var flash = require('connect-flash');
-var cors = require('cors')
-var morgan = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var session = require('express-session');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const flash = require('connect-flash');
+const cors = require('cors')
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const session = require('express-session');
 const dotenv = require('dotenv');
+
+
 dotenv.config();
 
 mongoose.connect(process.env.MONGOLAB_IVORY_URI, {

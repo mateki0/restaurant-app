@@ -100,12 +100,44 @@ function App(props) {
   const [toggle, setToggle] = useState(false);
   const [isLogged, setIsLogged] = useState(false)
   const isMounted = useRef(true)
+
+
+
+
+  
+
+ 
+  
   const getUserCart = () =>{
     return user.local.cart
   }
+    
+  
+  const updateCart = data =>{
+    
+    let currentCart = getUserCart();
+    let item = currentCart.find(a=> a.item === data.value);
+    if(data.action === 'increment'){
+      item.count +=1;
+    } else if(data.action === 'decrement' && item.count > 1){
+      item.count-=1;
+    } else {
+      let index = currentCart.indexOf(item)
+      currentCart.slice(index,1);
+    }
+    setToggle(!toggle)
+    setUserCart(currentCart)
+  }
+  
   const toggleCart = () => {
     setToggle(!toggle)
   }
+
+
+
+
+
+
   useEffect(() => {
     
     if (!window.localStorage.getItem('cart')) {
@@ -131,21 +163,20 @@ function App(props) {
       setLocalCart(JSON.parse(window.localStorage.getItem('cart')).items);
     }
     else{
-      setUserCart(user.local);
+      setUserCart(user.local.cart);
       setIsLogged(true)
       
     } 
   },[busy,user, isLogged])
   const getPrice = () => {
     let itemsPrice;
-    console.log(user)
     if(isLogged !== true){
       
     itemsPrice = localCart.map(a => parseFloat(a.price.slice(0, a.price.length - 1) * parseFloat(a.count)))
     
     }
     else{
-      itemsPrice = userCart.cart.map(a => parseFloat(a.price.slice(0, a.price.length - 1) * parseFloat(a.count)))
+      itemsPrice = userCart.map(a => parseFloat(a.price.slice(0, a.price.length - 1) * parseFloat(a.count)))
       
     }
         if (itemsPrice.length > 1) {
@@ -161,9 +192,6 @@ function App(props) {
       if(isLogged !== true) {
         currentCart = getCart();
         setLocalCart(currentCart)
-      }else{
-        currentCart = getUserCart();
-        setUserCart(currentCart);
       }
     }
   useEffect(() => {
@@ -171,10 +199,9 @@ function App(props) {
     setPrice(currentPrice);
     setToggle(false);
     
-  }, [localCart,userCart]);
+  }, [localCart,userCart,toggle]);
 
   useEffect(() => {
-    console.log(toggle)
     let currentCart;
     
       if(isLogged !== true) {
@@ -184,7 +211,8 @@ function App(props) {
         currentCart = getUserCart();
         setUserCart(currentCart);
       }
-  
+      
+     
    
   }, [toggle])
  
@@ -218,8 +246,8 @@ function App(props) {
       <Route exact path="/itemsAdding">
         <AddingPanel/>
       </Route>
-      <Route exact path="/cart">
-        <Cart user={user} price={price} localCart={localCart} userCart={userCart} handleChange={handleChange} isLogged={isLogged}/>
+      <Route exact path="/cart" >
+        <Cart user={user} price={price} localCart={localCart} userCart={userCart} handleChange={handleChange} isLogged={isLogged} updateCart={updateCart} toggle={toggle} toggleCart={toggleCart} />
         <Footer/>
       </Route>
       <Route exact path="/login">
