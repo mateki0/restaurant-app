@@ -1,78 +1,76 @@
-.menu-container{
-  width:1170px;
-  margin:0 auto 0 auto;
-  color:#5a5a5a;
-  display:flex;
+.menu-container {
+  width: 1170px;
+  margin: 0 auto 0 auto;
+  color: #5a5a5a;
+  display: flex;
   flex-direction: column;
 }
-.menu-title-container{
-  margin:150px auto 0 auto;
+.menu-title-container {
+  margin: 150px auto 0 auto;
   background: #efefef;
-  width:100%;
-  display:flex;
+  width: 100%;
+  display: flex;
+}
+.menu-meals {
+  margin-top: 100px;
+}
+.meals-expand {
+  width: 100%;
+  background-color: #efefef;
+  padding-left: 10px;
+}
+.meals-expand > h2 {
+  margin: 10px;
+}
+.meals-expand:hover {
+  cursor: pointer;
+}
 
+.single-item {
+  display: flex;
+  justify-content: space-between;
 }
-.menu-meals{
-  margin-top:100px;
-}
-.meals-expand{
-  width:100%;
-  background-color:#efefef;
-  padding-left:10px;
-}
-.meals-expand>h2{
-  margin:10px;
-}
-.meals-expand:hover{
-  cursor:pointer;
-}
-
-.single-item{
-  display:flex;
-  justify-content: space-between
-}
-.meal-description{
+.meal-description {
   text-align: left;
 }
-.meal-description-div{
-  padding-left:20px;
+.meal-description-div {
+  padding-left: 20px;
 }
-.meal-price-h4{
+.meal-price-h4 {
   text-align: center;
 }
-.drinks{
-  margin-top:100px;
+.drinks {
+  margin-top: 100px;
 }
-.dessers{
-  margin:100px auto ;
-}
-
-.add-button{
-  font-weight:500;
-  padding:4px 8px;
-}
-.add-button:hover{
-  cursor:pointer;
-  color:#c83a3a;
+.desserts {
+  margin: 100px auto;
 }
 
-.cart{
-  color:#5a5a5a;
-
+.add-button {
+  font-weight: 500;
+  padding: 4px 8px;
+}
+.add-button:hover {
+  cursor: pointer;
+  color: #c83a3a;
 }
 
-@media (max-width:813px){
-  .menu-container{
-    width:100%;
-    margin:0 0 20px 0;
+.cart {
+  color: #5a5a5a;
+}
+
+@media (max-width: 813px) {
+  .menu-container {
+    width: 100%;
+    margin: 0 0 20px 0;
   }
-  .single-item>div{
-    text-align:left
+  .single-item > div {
+    text-align: left;
   }
-  .single-item>div>span{
-    font-size:13px;
+  .single-item > div > span {
+    font-size: 13px;
   }
-  .meal-description-div{
-    padding:0;
+  .meal-description-div {
+    padding: 0;
   }
 }

@@ -1,63 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import "./cart.css";
-import axios from "axios";
-import { SingleItem } from "./SingleItem";
 import Title from "../Title";
+import ItemList from "./ItemList";
 
-const ItemList = ({
-  localCart,
-  userCart,
-  handleChange,
-  price,
-  isLogged,
-  updateCart,
-}) => {
-  const isMounted = useRef(true);
-  const submitChanges = () => {
-    axios
-      .post("/update", {
-        data: userCart,
-      })
-      .then((response) => {
-        return response.json();
-      })
-      .catch((err) => {
-        console.error(err.message);
-      });
-  };
-
-  useEffect(() => {
-    return () => {
-      if (userCart.length) {
-        submitChanges();
-      }
-    };
-  }, [userCart]);
-  return (
-    <div className="items-container">
-      {isLogged && userCart !== []
-        ? userCart.map((item) => (
-            <SingleItem
-              key={item.item}
-              increment={updateCart}
-              item={item}
-            ></SingleItem>
-          ))
-        : localCart.map((item) => (
-            <SingleItem
-              key={item.item}
-              incrementItem={handleChange}
-              item={item}
-            ></SingleItem>
-          ))}
-      <div className="price">
-        <span>Total: {price}$</span>
-      </div>
-    </div>
-  );
-};
-
-export default function Cart({
+const Cart = ({
   user,
   localCart,
   userCart,
@@ -65,7 +11,7 @@ export default function Cart({
   price,
   isLogged,
   updateCart,
-}) {
+}) => {
   return (
     <main>
       <Title value="Your Cart:" />
@@ -80,4 +26,5 @@ export default function Cart({
       />
     </main>
   );
-}
+};
+export default Cart;

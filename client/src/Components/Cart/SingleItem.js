@@ -1,5 +1,5 @@
 import React from "react";
-export const SingleItem = (props) => (
+const SingleItem = (props) => (
   <div className="single-cart-item">
     <div>
       <span>{props.item.item}</span>
@@ -54,3 +54,4 @@ export const SingleItem = (props) => (
     </div>
   </div>
 );
+export default SingleItem;

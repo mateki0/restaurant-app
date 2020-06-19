@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Body from "./Components/Body/Body";
 import About from "./Components/About/About";
@@ -92,55 +92,52 @@ const Header = (props) => (
   </div>
 );
 
-const getCart = () => {
-  return JSON.parse(window.localStorage.getItem("cart")).items;
-};
-
-function useLocalStorage(value, action) {
-  const [storedValue, setStoredValue] = useState(() => {
-    try {
-      const cart = JSON.parse(window.localStorage.getItem("cart"));
-
-      return cart ? cart : { items: [] };
-    } catch (error) {}
-  });
-
-  const setValue = (value, action) => {
-    try {
-      let cart = JSON.parse(window.localStorage.getItem("cart"));
-      let item = cart.items.find((a) => a.item === value);
-
-      if (action === "increment") {
-        item.count += 1;
-      }
-      if (action === "decrement" && item.count > 1) {
-        item.count -= 1;
-      }
-      if (action === "delete") {
-        let index = cart.items.indexOf(item);
-        cart.items.splice(index, 1);
-      }
-      window.localStorage.setItem("cart", JSON.stringify(cart));
-    } catch (error) {}
-  };
-  return [storedValue, setValue];
+function isEmpty(obj) {
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) return false;
+  }
+  return true;
 }
-const App = (props) => {
+
+const App = () => {
   const [user, setUser] = useState(null);
   const [localCart, setLocalCart] = useState([]);
   const [userCart, setUserCart] = useState([]);
   const [busy, setBusy] = useState(false);
   const [price, setPrice] = useState(0);
-  const [increment, setIncrement] = useLocalStorage(localCart);
   const [toggle, setToggle] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+
+  // Menu functions !!
+  const handleLocalAdding = (data) => {
+    let currentCart;
+    isEmpty(user)
+      ? (currentCart = localCart.splice(0))
+      : (currentCart = userCart.splice(0));
+    let item = currentCart.find((a) => a.item === data.item);
+    if (item) {
+      item.count += 1;
+    } else {
+      let newItem = {
+        item: data.item,
+        price: data.price,
+        count: 1,
+      };
+      currentCart.push(newItem);
+    }
+    if (isEmpty(user)) {
+      setLocalCart(currentCart);
+    } else {
+      setUserCart(currentCart);
+    }
+  };
 
   const getUserCart = () => {
     return user.local.cart;
   };
 
   const updateCart = (data) => {
-    let currentCart = getUserCart();
+    let currentCart = userCart.splice(0);
     let item = currentCart.find((a) => a.item === data.value);
     if (data.action === "increment") {
       item.count += 1;
@@ -150,12 +147,7 @@ const App = (props) => {
       let index = currentCart.indexOf(item);
       currentCart.slice(index, 1);
     }
-    setToggle(!toggle);
     setUserCart(currentCart);
-  };
-
-  const toggleCart = () => {
-    setToggle(!toggle);
   };
 
   useEffect(() => {
@@ -204,29 +196,27 @@ const App = (props) => {
   };
 
   const handleChange = (data) => {
-    let currentCart;
-    setIncrement(data.value, data.action);
-    if (isLogged !== true) {
-      currentCart = getCart();
-      setLocalCart(currentCart);
+    let currentCart = localCart.splice(0);
+
+    let item = currentCart.find((a) => a.item === data.value);
+
+    if (data.action === "increment") {
+      item.count += 1;
     }
+    if (data.action === "decrement" && item.count > 1) {
+      item.count -= 1;
+    }
+    if (data.action === "delete") {
+      let index = currentCart.indexOf(item);
+      currentCart.splice(index, 1);
+    }
+    setLocalCart(currentCart);
   };
+
   useEffect(() => {
     const currentPrice = getPrice();
     setPrice(currentPrice);
-    setToggle(false);
-  }, [localCart, userCart, toggle]);
-
-  useEffect(() => {
-    let currentCart;
-    if (isLogged !== true) {
-      currentCart = getCart();
-      setLocalCart(currentCart);
-    } else {
-      currentCart = getUserCart();
-      setUserCart(currentCart);
-    }
-  }, [toggle]);
+  }, [localCart, userCart]);
 
   return (
     <Router>
@@ -250,7 +240,12 @@ const App = (props) => {
           <Footer />
         </Route>
         <Route exact path="/menu">
-          <Menu user={user} toggle={toggle} toggleCart={toggleCart} />
+          <Menu
+            user={user}
+            userCart={userCart}
+            localCart={localCart}
+            handleLocalAdding={handleLocalAdding}
+          />
           <Footer />
         </Route>
         <Route exact path="/itemsAdding">
@@ -265,8 +260,6 @@ const App = (props) => {
             handleChange={handleChange}
             isLogged={isLogged}
             updateCart={updateCart}
-            toggle={toggle}
-            toggleCart={toggleCart}
           />
           <Footer />
         </Route>
