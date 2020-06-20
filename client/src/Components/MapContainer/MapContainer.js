@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useRef} from 'react';
-import mapboxgl from 'mapbox-gl';
-import './mapContainer.css';
-export default function MapContainer(){
+import React, { useState, useEffect, useRef } from "react";
+import mapboxgl from "mapbox-gl";
+import "./mapContainer.css";
+export default function MapContainer() {
   const [map, setMap] = useState(null);
   const mapDiv = useRef(null);
 
@@ -11,39 +11,35 @@ export default function MapContainer(){
     //   console.log("Longitude is :", position.coords.longitude);
     // });
     mapboxgl.accessToken = process.env.REACT_APP_MAPS_KEY;
-    const initalizeMap = ({setMap, mapDiv}) => {
-    const map = new mapboxgl.Map({
-      container: mapDiv.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [19.33789868532415 , 50.10313625557342],
-      zoom: 14,
-    });
-    var marker = new mapboxgl.Marker()
-    .setLngLat([19.33789868532415 , 50.10313625557342])
-    .addTo(map);
-    map.on('load', () => {
-      setMap(map);
-      map.resize()
-    })
-    map.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions:{
-          enableHighAcurracy: true
-        },
-        trackUserLocation:true
-      })
-    )
+    const initalizeMap = ({ setMap, mapDiv }) => {
+      const map = new mapboxgl.Map({
+        container: mapDiv.current,
+        style: "mapbox://styles/mapbox/streets-v11",
+        center: [19.33789868532415, 50.10313625557342],
+        zoom: 14,
+      });
+      new mapboxgl.Marker()
+        .setLngLat([19.33789868532415, 50.10313625557342])
+        .addTo(map);
+      map.on("load", () => {
+        setMap(map);
+        map.resize();
+      });
+      map.addControl(
+        new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAcurracy: true,
+          },
+          trackUserLocation: true,
+        })
+      );
+    };
+    if (!map) initalizeMap({ setMap, mapDiv });
+  }, [map]);
 
-
-
-  }
-  if (!map) initalizeMap({ setMap, mapDiv })
-}, [map])
-
-  return(
+  return (
     <div>
-    <div ref={el => (mapDiv.current = el)} id="mapDiv" />
-
+      <div ref={(el) => (mapDiv.current = el)} id="mapDiv" />
     </div>
     //   <maps
     //
@@ -52,6 +48,5 @@ export default function MapContainer(){
     //   >
     //
     // </maps>
-
-  )
+  );
 }

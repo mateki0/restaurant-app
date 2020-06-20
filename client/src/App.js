@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./App.css";
 import Body from "./Components/Body/Body";
 import About from "./Components/About/About";
@@ -103,9 +103,8 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [localCart, setLocalCart] = useState([]);
   const [userCart, setUserCart] = useState([]);
-  const [busy, setBusy] = useState(false);
+  const busy = false;
   const [price, setPrice] = useState(0);
-  const [toggle, setToggle] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
 
   // Menu functions !!
@@ -132,10 +131,6 @@ const App = () => {
     }
   };
 
-  const getUserCart = () => {
-    return user.local.cart;
-  };
-
   const updateCart = (data) => {
     let currentCart = userCart.splice(0);
     let item = currentCart.find((a) => a.item === data.value);
@@ -157,11 +152,14 @@ const App = () => {
   }, []);
   useEffect(() => {
     let didCancel = false;
-    const fetchData = async () => {
-      const result = await axios("/user");
-      setUser(result.data);
-    };
-    fetchData();
+    if (!didCancel) {
+      const fetchData = async () => {
+        const result = await axios("/user");
+        setUser(result.data);
+      };
+
+      fetchData();
+    }
     return () => {
       didCancel = true;
     };
@@ -177,7 +175,7 @@ const App = () => {
       setIsLogged(true);
     }
   }, [busy, user, isLogged]);
-  const getPrice = () => {
+  const getPrice = useCallback(() => {
     let itemsPrice;
     if (isLogged !== true) {
       itemsPrice = localCart.map((a) =>
@@ -193,7 +191,7 @@ const App = () => {
     } else {
       return itemsPrice[0];
     }
-  };
+  }, [localCart, userCart, isLogged]);
 
   const handleChange = (data) => {
     let currentCart = localCart.splice(0);
@@ -216,7 +214,7 @@ const App = () => {
   useEffect(() => {
     const currentPrice = getPrice();
     setPrice(currentPrice);
-  }, [localCart, userCart]);
+  }, [localCart, userCart, getPrice]);
 
   return (
     <Router>

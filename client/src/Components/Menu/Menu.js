@@ -9,6 +9,14 @@ import Meal from "./Meal";
 const Menu = ({ user, userCart, localCart, handleLocalAdding }) => {
   const [items, setItems] = useState([]);
   const _isMounted = useRef(true);
+
+  function isEmpty(obj) {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) return false;
+    }
+    return true;
+  }
+
   const submitChanges = () => {
     axios
       .post("/update", {
@@ -22,12 +30,6 @@ const Menu = ({ user, userCart, localCart, handleLocalAdding }) => {
       });
   };
 
-  function isEmpty(obj) {
-    for (var key in obj) {
-      if (obj.hasOwnProperty(key)) return false;
-    }
-    return true;
-  }
   const submitLocalChanges = () => {
     let items = localCart;
     window.localStorage.setItem("cart", JSON.stringify({ items }));
@@ -52,7 +54,7 @@ const Menu = ({ user, userCart, localCart, handleLocalAdding }) => {
         submitLocalChanges();
       }
     };
-  }, [localCart]);
+  }, [localCart, submitLocalChanges, user]);
   useEffect(() => {
     return () => {
       if (!isEmpty(user) && userCart.length) {
@@ -60,7 +62,7 @@ const Menu = ({ user, userCart, localCart, handleLocalAdding }) => {
         submitChanges();
       }
     };
-  }, [userCart]);
+  }, [userCart, submitChanges, user]);
   const meals = items.filter((a) => {
     return a.type === "Meal";
   });

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import SingleItem from "./SingleItem";
 
@@ -10,8 +10,20 @@ const ItemList = ({
   isLogged,
   updateCart,
 }) => {
-  const didMount = useRef(true);
-  const submitChanges = () => {
+  const isMounted = useRef(true);
+  const submitLocalChanges = useCallback(() => {
+    let items = localCart;
+    window.localStorage.setItem("cart", JSON.stringify({ items }));
+  }, [localCart]);
+  useEffect(() => {
+    return () => {
+      if (isLogged !== true && localCart.length) {
+        console.log("localCart ", localCart);
+        submitLocalChanges();
+      }
+    };
+  }, [localCart, isLogged, submitLocalChanges]);
+  const submitChanges = useCallback(() => {
     axios
       .post("/update", {
         data: userCart,
@@ -22,25 +34,14 @@ const ItemList = ({
       .catch((err) => {
         console.error(err.message);
       });
-  };
-  const submitLocalChanges = () => {
-    let items = localCart;
-    window.localStorage.setItem("cart", JSON.stringify({ items }));
-  };
-  useEffect(() => {
-    return () => {
-      if (isLogged !== true && localCart.length) {
-        submitLocalChanges();
-      }
-    };
-  }, [localCart]);
+  }, [userCart]);
   useEffect(() => {
     return () => {
       if (userCart.length) {
         submitChanges();
       }
     };
-  }, [userCart]);
+  }, [userCart, isLogged, submitChanges]);
 
   return (
     <div className="items-container">
