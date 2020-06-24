@@ -8,102 +8,10 @@ import Menu from "./Components/Menu/Menu";
 import Cart from "./Components/Cart/Cart";
 import Register from "./Components/Register/Register";
 import Login from "./Components/Login/Login";
-import UserHeader from "./Components/UserHeader/UserHeader";
 import AddingPanel from "./Components/ItemsAdding/ItemsAdding";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
-
-const Header = (props) => (
-  <div className="header">
-    <ul>
-      <li>
-        <NavLink to="/" className="restaurant-name nav-link">
-          My Test Restaurant
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          exact
-          to="/"
-          activeClassName="small-link-active"
-          className="nav-link small-link"
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          exact
-          to="/about"
-          activeClassName="small-link-active"
-          className="nav-link small-link"
-        >
-          About Us
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          exact
-          to="/contact"
-          activeClassName="small-link-active"
-          className="nav-link small-link"
-        >
-          Contact
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          exact
-          to="/menu"
-          activeClassName="small-link-active"
-          className="nav-link small-link"
-        >
-          Menu
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          exact
-          to="/register"
-          activeClassName="small-link-active"
-          className="nav-link small-link"
-        >
-          Register
-        </NavLink>
-      </li>
-      {props.user === null || props.user === "" ? (
-        <li>
-          <NavLink
-            exact
-            to="/login"
-            activeClassName="small-link-active"
-            className="nav-link small-link"
-          >
-            Login
-          </NavLink>
-        </li>
-      ) : (
-        ""
-      )}
-      <li>
-        <NavLink
-          exact
-          to="/cart"
-          activeClassName="small-link-active"
-          className="nav-link small-link"
-        >
-          Cart
-        </NavLink>
-      </li>
-    </ul>
-    <UserHeader price={props.price} user={props.user} />
-  </div>
-);
+import Header from "./Header";
 
 function isEmpty(obj) {
   for (var key in obj) {
