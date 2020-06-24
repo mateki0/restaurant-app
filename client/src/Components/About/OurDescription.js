@@ -1,6 +1,6 @@
 import React from "react";
 const OurDescription = () => (
-  <div className="about-description">
+  <div data-testid="description-div" className="about-description">
     <div className="container">
       <span>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer blandit

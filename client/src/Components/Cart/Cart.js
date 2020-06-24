@@ -13,7 +13,7 @@ const Cart = ({
   updateCart,
 }) => {
   return (
-    <main>
+    <main data-testid="cart-div">
       <Title value="Your Cart:" />
       <ItemList
         user={user}

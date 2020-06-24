@@ -6,7 +6,7 @@ const Footer = () => {
     window.scrollTo(0, 0);
   }
   return (
-    <div className="footer-container">
+    <div data-testid="footer-div" className="footer-container">
       <div className="footer">
         <div className="company">
           <span>@2014 Company, Inc</span>
@@ -14,7 +14,7 @@ const Footer = () => {
           <a href="/contact">Terms</a>
         </div>
         <div className="top">
-          <span onClick={handleScroll} className="back-top">
+          <span data-testid="top" onClick={handleScroll} className="back-top">
             Back to top
           </span>
         </div>

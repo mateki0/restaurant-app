@@ -76,15 +76,28 @@ const Header = (props) => (
           Register
         </NavLink>
       </li>
-
+      {props.user === null || props.user === "" ? (
+        <li>
+          <NavLink
+            exact
+            to="/login"
+            activeClassName="small-link-active"
+            className="nav-link small-link"
+          >
+            Login
+          </NavLink>
+        </li>
+      ) : (
+        ""
+      )}
       <li>
         <NavLink
           exact
-          to="/login"
+          to="/cart"
           activeClassName="small-link-active"
           className="nav-link small-link"
         >
-          Login
+          Cart
         </NavLink>
       </li>
     </ul>
@@ -107,6 +120,28 @@ const App = () => {
   const [price, setPrice] = useState(0);
   const [isLogged, setIsLogged] = useState(false);
 
+  // initial set local storage
+  useEffect(() => {
+    if (!window.localStorage.getItem("cart")) {
+      localStorage.setItem("cart", JSON.stringify({ items: [] }));
+    }
+  }, []);
+
+  //fetch user
+  useEffect(() => {
+    let didCancel = false;
+    if (!didCancel) {
+      const fetchData = async () => {
+        const result = await axios("/user");
+        setUser(result.data);
+      };
+
+      fetchData();
+    }
+    return () => {
+      didCancel = true;
+    };
+  }, []);
   // Menu functions !!
   const handleLocalAdding = (data) => {
     let currentCart;
@@ -131,7 +166,9 @@ const App = () => {
     }
   };
 
+  // update user cart
   const updateCart = (data) => {
+    console.log(data);
     let currentCart = userCart.splice(0);
     let item = currentCart.find((a) => a.item === data.value);
     if (data.action === "increment") {
@@ -140,30 +177,11 @@ const App = () => {
       item.count -= 1;
     } else {
       let index = currentCart.indexOf(item);
-      currentCart.slice(index, 1);
+      currentCart.splice(index, 1);
     }
     setUserCart(currentCart);
   };
 
-  useEffect(() => {
-    if (!window.localStorage.getItem("cart")) {
-      localStorage.setItem("cart", JSON.stringify({ items: [] }));
-    }
-  }, []);
-  useEffect(() => {
-    let didCancel = false;
-    if (!didCancel) {
-      const fetchData = async () => {
-        const result = await axios("/user");
-        setUser(result.data);
-      };
-
-      fetchData();
-    }
-    return () => {
-      didCancel = true;
-    };
-  }, []);
   useEffect(() => {
     if (
       (user === null || user === "") &&
@@ -193,6 +211,7 @@ const App = () => {
     }
   }, [localCart, userCart, isLogged]);
 
+  // local Cart update
   const handleChange = (data) => {
     let currentCart = localCart.splice(0);
 

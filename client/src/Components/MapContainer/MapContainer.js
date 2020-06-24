@@ -18,9 +18,7 @@ export default function MapContainer() {
         center: [19.33789868532415, 50.10313625557342],
         zoom: 14,
       });
-      new mapboxgl.Marker()
-        .setLngLat([19.33789868532415, 50.10313625557342])
-        .addTo(map);
+
       map.on("load", () => {
         setMap(map);
         map.resize();

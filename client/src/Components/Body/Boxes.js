@@ -3,7 +3,7 @@ import burger from "./burger.jpg";
 import pasta from "./pasta.jpg";
 import salad from "./salad.jpg";
 const Boxes = () => (
-  <div className="boxes">
+  <div data-testid="boxes-div" className="boxes">
     <div className="box box1">
       <a href="/menu">
         <img src={burger} className="box-img" alt="burger" />
@@ -20,7 +20,12 @@ const Boxes = () => (
     </div>
     <div className="box box3">
       <a href="/menu">
-        <img src={salad} alt="salad" className="box-img" />
+        <img
+          data-testid="boxes-img"
+          src={salad}
+          alt="salad"
+          className="box-img"
+        />
       </a>
       <h3>Salad</h3>
       <span>Here is place for meal description</span>

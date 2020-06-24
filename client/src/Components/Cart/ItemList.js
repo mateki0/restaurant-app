@@ -10,7 +10,6 @@ const ItemList = ({
   isLogged,
   updateCart,
 }) => {
-  const isMounted = useRef(true);
   const submitLocalChanges = useCallback(() => {
     let items = localCart;
     window.localStorage.setItem("cart", JSON.stringify({ items }));
@@ -18,7 +17,6 @@ const ItemList = ({
   useEffect(() => {
     return () => {
       if (isLogged !== true && localCart.length) {
-        console.log("localCart ", localCart);
         submitLocalChanges();
       }
     };

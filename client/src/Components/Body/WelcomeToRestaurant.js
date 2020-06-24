@@ -1,6 +1,6 @@
 import React from "react";
 const WelcomeToRestaurant = () => (
-  <div className="welcome">
+  <div data-testid="welcome-div" className="welcome">
     <div className="welcome-container">
       <div>
         <h3>Welcome to Restaurant </h3>

@@ -7,7 +7,7 @@ import { ContactForm } from "./ContactForm";
 
 export default function Contact() {
   return (
-    <main>
+    <main data-testid="contact-div">
       <Title value="Contact Us" />
       <ContactForm />
       <Boxes />

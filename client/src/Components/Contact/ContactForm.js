@@ -1,6 +1,6 @@
 import React from "react";
 export const ContactForm = () => (
-  <div className="contact-container">
+  <div data-testid="contact-form" className="contact-container">
     <div className="container informations">
       <div>
         <span>Adress: </span>

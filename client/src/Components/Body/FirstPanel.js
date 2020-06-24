@@ -1,6 +1,6 @@
 import React from "react";
 const FirstPanel = () => (
-  <div className="name-container">
+  <div data-testid="first-panel-div" className="name-container">
     <div className="name">
       <h1>My Test Restaurant</h1>
       <span>

@@ -7,6 +7,7 @@ const SingleItem = (props) => (
     <div className="price-count-container">
       <div className="count-div">
         <button
+          data-testid="single-item-button"
           value={props.item.item}
           onClick={(e) =>
             props.incrementItem({
@@ -17,7 +18,7 @@ const SingleItem = (props) => (
         >
           +
         </button>
-        <span>{props.item.count}</span>
+        <span data-testid="single-item-count">{props.item.count}</span>
         <button
           value={props.item.item}
           onClick={(e) =>

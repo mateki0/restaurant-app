@@ -26,7 +26,7 @@ const MarketingSlider = () => {
   ];
 
   return (
-    <div className="marketing-container">
+    <div data-testid="marketing-div" className="marketing-container">
       <Slider>
         {slides.map((slide, index) => (
           <div key={index} className="marketing-slider">
