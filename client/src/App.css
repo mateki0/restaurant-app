@@ -1,151 +1,135 @@
-
-
-
 .App-link {
   color: #61dafb;
 }
 
-
-
 /* Header */
 
-
-.body{
-  color:#5A5A5A;
-
+.body {
+  color: #5a5a5a;
 }
-.nav-div{
-  margin-top:25px;
-  top:0;
-  left:0;
-  right:0;
-  z-index:99;
-  position:absolute;
-  height:54px;
+.nav-div {
+  margin-top: 25px;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  position: absolute;
+  height: 54px;
 }
-.header{
-  margin:0 auto ;
-  width:1170px;
-  background:#efefef;
-  border-bottom:1px solid #FF5200;
-  border-radius:3px;
-  display:flex;
-  z-index:99;
+.header {
+  margin: 0 auto;
+  width: 1170px;
+  background: #efefef;
+  border-bottom: 1px solid #ff5200;
+  border-radius: 3px;
+  display: flex;
+  z-index: 98;
   justify-content: space-between;
 }
 
-.header>ul{
+.header > ul {
   list-style: none;
-  display:flex;
-  padding:0;
-
+  display: flex;
+  padding: 0;
 }
 
-.nav-link{
-  padding:15px;
-  color:#000;
+.nav-link {
+  padding: 15px;
+  color: #000;
   text-decoration: none;
-  font-size:15px;
-
+  font-size: 15px;
 }
 
-.restaurant-name{
-  color:#999999;
-  font-size:18px;
+.restaurant-name {
+  color: #999999;
+  font-size: 18px;
   line-height: 20px;
 }
-.restaurant-name:hover{
-  color:#c83a3a;
+.restaurant-name:hover {
+  color: #c83a3a;
 }
 
-.small-link:hover{
-  color:#c83a3a;
+.small-link:hover {
+  color: #c83a3a;
 }
-.small-link-active{
-  color:#fcfcfc;
+.small-link-active {
+  color: #fcfcfc;
   background: #c83a3a;
 }
-.small-link-active:hover{
-  color:#fff;
+.small-link-active:hover {
+  color: #fff;
 }
-.price-div{
-  display:flex;
+.price-div {
+  display: flex;
   align-items: center;
-  justify-content: flex-end
+  justify-content: flex-end;
 }
-.price-href{
-  padding:15px;
+.price-href {
+  padding: 15px;
 }
-.cart:hover{
-  color:#c83a3a;
-  text-decoration:none;
+.cart:hover {
+  color: #c83a3a;
+  text-decoration: none;
 }
-.userName{
-  font-weight:500;
-    padding-left:10px;
+.userName {
+  font-weight: 500;
+  padding-left: 10px;
 }
-.logout-div{
-  text-align:center;
-  padding-right:10px;
+.logout-div {
+  text-align: center;
+  padding-right: 10px;
 }
-.logout-div>a{
-  color:#000;
+.logout-div > a {
+  color: #000;
 }
-.logout-button{
-  font-weight:500;
-  padding:4px 8px;
+.logout-button {
+  font-weight: 500;
+  padding: 4px 8px;
 }
-.logout-button:hover{
-  cursor:pointer;
-  color:#c83a3a;
+.logout-button:hover {
+  cursor: pointer;
+  color: #c83a3a;
 }
 
-@media (max-width:1130px) {
-  .nav-div{
-    margin:0;
+@media (max-width: 1130px) {
+  .nav-div {
+    margin: 0;
   }
-  .header{
-    width:45%;
-    flex-direction:column;
+  .header {
+    width: 45%;
+    flex-direction: column;
     justify-content: flex-start;
-    margin:0;
-
+    margin: 0;
   }
-  .header>ul{
-    text-align:center;
-    margin:0;
-    flex-direction:column;
+  .header > ul {
+    text-align: center;
+    margin: 0;
+    flex-direction: column;
   }
-  .nav-link{
-    padding:4px 15px;
-    font-size:13px;
-
+  .nav-link {
+    padding: 4px 15px;
+    font-size: 13px;
   }
-  .restaurant-name{
-    font-size:15px;
+  .restaurant-name {
+    font-size: 15px;
     line-height: 16px;
   }
-  .price-div{
-    margin-top:10px;
+  .price-div {
+    margin-top: 10px;
     justify-content: space-between;
-    flex-direction:column;
-
+    flex-direction: column;
   }
-  .price-href{
-    padding:0;
+  .price-href {
+    padding: 0;
   }
-  .userName{
-    padding:0;
-    font-size:13px;
-
+  .userName {
+    padding: 0;
+    font-size: 13px;
   }
-  .logout-div{
-
-    padding:0;
+  .logout-div {
+    padding: 0;
   }
-  .logout-button{
-    padding:2px 4px;
+  .logout-button {
+    padding: 2px 4px;
   }
-
-
 }

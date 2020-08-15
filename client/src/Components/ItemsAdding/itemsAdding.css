@@ -1,13 +1,19 @@
-.itemsAdding>form{
-  display:flex;
+.itemsAdding > form {
+  position: absolute;
+  display: flex;
   flex-direction: column;
-  width:20%;
-  margin:10px auto 0 auto;
-
+  width: 20%;
+  left: 40%;
+  right: 40%;
+  top: 30%;
 }
-.itemsAdding>form>*{
-  padding:5px 0;
+.itemsAdding > form > * {
+  padding: 5px 0;
 }
-.itemsAdding>form>button{
-  margin-top:20px;
+.itemsAdding > form > button {
+  margin-top: 20px;
+}
+#ingredients {
+  display: flex;
+  flex-direction: column;
 }

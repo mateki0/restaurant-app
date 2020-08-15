@@ -1,13 +1,9 @@
-var mongoose = require('mongoose');
-
+var mongoose = require("mongoose");
 
 var itemSchema = mongoose.Schema({
   name: String,
-  description: String,
+  description: Object,
   price: String,
-  type:String,
-
-
-
+  type: String,
 });
-module.exports = mongoose.model("Item", itemSchema)
+module.exports = mongoose.model("Item", itemSchema);

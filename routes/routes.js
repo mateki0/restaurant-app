@@ -68,7 +68,7 @@ module.exports = function (app, passport) {
   app.post("/additem", (req, res) => {
     var newItem = Item({
       name: req.body.itemName,
-      description: req.body.itemDescription,
+      description: req.body.description,
       price: req.body.itemPrice,
       type: req.body.itemType,
     });

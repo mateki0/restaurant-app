@@ -46,19 +46,70 @@
   margin: 100px auto;
 }
 
+.cart {
+  color: #5a5a5a;
+}
+
+.desc-single-ingredient:not(:first-of-type) {
+  margin-left: 10px;
+}
+/* Modal Body */
+
+.modal-body {
+  padding: 20px 60px;
+  display: flex;
+  flex-direction: column;
+}
+.choose-ingredients {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+.meal-modal-name {
+  font-size: 34px;
+  font-weight: 600;
+  text-align: center;
+}
+.single-ingredient {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.ingredient-button {
+  padding: 5px 10px;
+  transition: all 0.5s;
+}
+.ingredient-button:hover {
+  cursor: pointer;
+  color: #c83a3a;
+}
+.item-count {
+  padding: 0 10px;
+  font-size: 18px;
+}
+.item-name {
+  font-size: 24px;
+  text-transform: capitalize;
+}
+
+.modal-price-div {
+  margin: 30px auto;
+}
+.submit-div {
+  display: flex;
+  justify-content: center;
+}
 .add-button {
-  font-weight: 500;
+  font-weight: 600;
   padding: 4px 8px;
+  transition: all 0.5s;
 }
 .add-button:hover {
   cursor: pointer;
   color: #c83a3a;
 }
-
-.cart {
-  color: #5a5a5a;
-}
-
 @media (max-width: 813px) {
   .menu-container {
     width: 100%;

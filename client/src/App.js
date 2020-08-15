@@ -56,12 +56,13 @@ const App = () => {
     isEmpty(user)
       ? (currentCart = localCart.splice(0))
       : (currentCart = userCart.splice(0));
-    let item = currentCart.find((a) => a.item === data.item);
+    let item = currentCart.find((a) => a.item === data.itemName);
     if (item) {
       item.count += 1;
     } else {
       let newItem = {
-        item: data.item,
+        item: data.itemName,
+        description: data.description,
         price: data.price,
         count: 1,
       };
