@@ -45,6 +45,7 @@ const SingleMealItem = (props) => {
     },
   };
   let ingredients = [];
+
   if (!isEmpty(props.data)) {
     ingredients = props.data.map((a, b) => {
       return a.description;

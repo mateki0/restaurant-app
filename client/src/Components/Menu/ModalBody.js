@@ -5,8 +5,18 @@ const ModalBody = ({ ...props }) => {
   const [price, setPrice] = useState(
     parseFloat(props.price.slice(0, props.price.indexOf("$")))
   );
+  const [count, setCount] = useState(1);
   const [disableButton, setDisableButton] = useState(false);
+  const [items, setItems] = useState({});
+  const [desc, setDesc] = useState({});
 
+  useEffect(() => {
+    let items = Object.keys(props.ingredients);
+    items.forEach((a) => {
+      desc[a] = props.ingredients[a].count;
+    });
+    console.log(desc);
+  }, [price]);
   useEffect(() => {
     let counts = [...document.querySelectorAll(".item-count")];
 
@@ -25,32 +35,43 @@ const ModalBody = ({ ...props }) => {
       setDisableButton(false);
     }
   }, [price]);
+  const getItems = (item) => {
+    let items = Object.keys(props.ingredients);
+
+    let filtered = items
+      .map((a) => {
+        if (a === item) {
+          return props.ingredients[a];
+        }
+      })
+      .filter((b) => {
+        return b !== undefined;
+      });
+    return filtered;
+  };
   const handleIncrement = (e) => {
-    e.currentTarget.nextSibling.innerText++;
+    let filtered = getItems(e.currentTarget.value);
+
+    if (parseInt(e.currentTarget.nextSibling.innerText) < 5) {
+      e.currentTarget.nextSibling.innerText++;
+      filtered[0].count = parseInt(filtered[0].count) + 1;
+    }
     let priceInc = parseFloat(
-      e.currentTarget.previousSibling.innerText.slice(
-        0,
-        e.currentTarget.previousSibling.innerText.indexOf("$")
-      )
+      filtered[0].price.slice(0, filtered[0].price.indexOf("$"))
     );
-
-    let endPrice = (price + parseFloat(priceInc)).toFixed(1);
-
+    let endPrice = (price + priceInc).toFixed(1);
     setPrice(parseFloat(endPrice));
   };
 
   const handleDecrement = (e) => {
+    let filtered = getItems(e.currentTarget.value);
     if (e.currentTarget.previousSibling.innerText >= 1) {
       e.currentTarget.previousSibling.innerText--;
     }
-
     let priceDec = parseFloat(
-      e.currentTarget.nextSibling.innerText.slice(
-        0,
-        e.currentTarget.previousSibling.innerText.indexOf("$")
-      )
+      filtered[0].price.slice(0, filtered[0].price.indexOf("$"))
     );
-    let endPrice = (price - parseFloat(priceDec)).toFixed(1);
+    let endPrice = (price - priceDec).toFixed(1);
     setPrice(parseFloat(endPrice));
   };
   return (
@@ -62,8 +83,9 @@ const ModalBody = ({ ...props }) => {
         <SingleIngredient
           key={b}
           item={a}
+          wholeItem={props.ingredients}
           price={props.ingredients[a].price}
-          count={props.ingredients[a].count}
+          count={count}
           handleIncrement={handleIncrement}
           handleDecrement={handleDecrement}
         />
@@ -79,7 +101,7 @@ const ModalBody = ({ ...props }) => {
           onClick={() => {
             props.handleLocalAdding({
               itemName: props.name,
-              description: props.description,
+              description: desc,
               price: props.price,
               count: 1,
             });
