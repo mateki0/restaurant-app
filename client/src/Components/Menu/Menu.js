@@ -84,8 +84,16 @@ const Menu = ({ user, userCart, localCart, handleLocalAdding }) => {
             user={user}
             handleLocalAdding={handleLocalAdding}
           />
-          <Drinks data={drinks} user={user} />
-          <Desserts data={desserts} user={user} />
+          <Drinks
+            data={drinks}
+            user={user}
+            handleLocalAdding={handleLocalAdding}
+          />
+          <Desserts
+            data={desserts}
+            user={user}
+            handleLocalAdding={handleLocalAdding}
+          />
         </main>
       )}
     </>

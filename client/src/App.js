@@ -46,21 +46,31 @@ const App = () => {
 
       fetchData();
     }
+
     return () => {
       didCancel = true;
     };
   }, []);
   // Menu functions !!
+  const findItemInCart = (data) => {
+    let values2 = Object.values(data.description).join("");
+    return values2;
+  };
   const handleLocalAdding = (data) => {
     let currentCart;
     isEmpty(user)
       ? (currentCart = localCart.splice(0))
       : (currentCart = userCart.splice(0));
-    let item = currentCart.find((a) => a.item === data.itemName);
+    const id = data.itemName + findItemInCart(data);
+    let item = currentCart.find((a) => {
+      return a.id === id;
+    });
     if (item) {
+      console.log("incremented");
       item.count += 1;
     } else {
       let newItem = {
+        id: id,
         item: data.itemName,
         description: data.description,
         price: data.price,
@@ -74,10 +84,26 @@ const App = () => {
       setUserCart(currentCart);
     }
   };
-
+  // local Cart update
+  const handleChange = (data) => {
+    let currentCart = localCart.splice(0);
+    let item = currentCart.find((a) => {
+      return a.id === data.value;
+    });
+    if (data.action === "increment") {
+      item.count += 1;
+    }
+    if (data.action === "decrement" && item.count > 1) {
+      item.count -= 1;
+    }
+    if (data.action === "delete") {
+      let index = currentCart.indexOf(item);
+      currentCart.splice(index, 1);
+    }
+    setLocalCart(currentCart);
+  };
   // update user cart
   const updateCart = (data) => {
-    console.log(data);
     let currentCart = userCart.splice(0);
     let item = currentCart.find((a) => a.item === data.value);
     if (data.action === "increment") {
@@ -104,14 +130,13 @@ const App = () => {
   }, [busy, user, isLogged]);
   const getPrice = useCallback(() => {
     let itemsPrice;
+
     if (isLogged !== true) {
-      itemsPrice = localCart.map((a) =>
-        parseFloat(a.price.slice(0, a.price.length - 1) * parseFloat(a.count))
+      itemsPrice = localCart.map(
+        (a) => parseFloat(a.price) * parseInt(a.count)
       );
     } else {
-      itemsPrice = userCart.map((a) =>
-        parseFloat(a.price.slice(0, a.price.length - 1) * parseFloat(a.count))
-      );
+      itemsPrice = userCart.map((a) => parseFloat(a.price) * parseInt(a.count));
     }
     if (itemsPrice.length > 1) {
       return itemsPrice.reduce((a, b) => a + b);
@@ -119,25 +144,6 @@ const App = () => {
       return itemsPrice[0];
     }
   }, [localCart, userCart, isLogged]);
-
-  // local Cart update
-  const handleChange = (data) => {
-    let currentCart = localCart.splice(0);
-
-    let item = currentCart.find((a) => a.item === data.value);
-
-    if (data.action === "increment") {
-      item.count += 1;
-    }
-    if (data.action === "decrement" && item.count > 1) {
-      item.count -= 1;
-    }
-    if (data.action === "delete") {
-      let index = currentCart.indexOf(item);
-      currentCart.splice(index, 1);
-    }
-    setLocalCart(currentCart);
-  };
 
   useEffect(() => {
     const currentPrice = getPrice();

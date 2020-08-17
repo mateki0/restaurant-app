@@ -3,13 +3,6 @@ import Modal from "react-modal";
 import ModalBody from "./ModalBody";
 Modal.setAppElement("#root");
 
-function isEmpty(obj) {
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) return false;
-  }
-  return true;
-}
-
 const SingleMealItem = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
@@ -44,17 +37,6 @@ const SingleMealItem = (props) => {
       transform: "translate(-50%, -50%)",
     },
   };
-  let ingredients = [];
-
-  if (!isEmpty(props.data)) {
-    ingredients = props.data.map((a, b) => {
-      return a.description;
-      // for (let key in a.description) {
-      //   return <span key={b}>{key}</span>;
-      // }
-    });
-    //
-  }
 
   return (
     <div className="meals-list">
@@ -71,10 +53,10 @@ const SingleMealItem = (props) => {
             })}
           </div>
           <div>
-            <h4 className="meal-price-h4">{a.price}</h4>
+            <h4 className="meal-price-h4">{a.price}$</h4>
             <div>
               <button onClick={(e) => openModal(e)} value={a.name}>
-                Open Modal
+                Add To Cart
               </button>
               <Modal
                 isOpen={isOpen}

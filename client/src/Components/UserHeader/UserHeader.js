@@ -20,7 +20,9 @@ const UserHeader = ({ user, price }) => {
         Hello, {name}
       </span>
       <a href="/cart" className="cart">
-        <span className="price-href">{price !== undefined ? price : 0}$</span>
+        <span className="price-href">
+          {price !== undefined ? price.toFixed(1) : 0}$
+        </span>
       </a>
       <div className="logout-div">
         {name === "Guest" ? (

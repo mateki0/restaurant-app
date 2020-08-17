@@ -2,24 +2,20 @@ import React, { useState, useEffect } from "react";
 import SingleIngredient from "./SingleIngredient";
 
 const ModalBody = ({ ...props }) => {
-  const [price, setPrice] = useState(
-    parseFloat(props.price.slice(0, props.price.indexOf("$")))
-  );
-  const [count, setCount] = useState(1);
+  const [price, setPrice] = useState(parseFloat(props.price));
+  const count = 1;
   const [disableButton, setDisableButton] = useState(false);
-  const [items, setItems] = useState({});
-  const [desc, setDesc] = useState({});
+  const desc = {};
 
   useEffect(() => {
     let items = Object.keys(props.ingredients);
     items.forEach((a) => {
       desc[a] = props.ingredients[a].count;
     });
-    console.log(desc);
-  }, [price]);
+  }, [price, props.ingredients, desc]);
+
   useEffect(() => {
     let counts = [...document.querySelectorAll(".item-count")];
-
     let countsNum = counts
       .slice(counts.length - Object.keys(props.ingredients).length)
       .map((a) => {
@@ -31,18 +27,17 @@ const ModalBody = ({ ...props }) => {
 
     if (sum === 0) {
       setDisableButton(true);
+      setPrice(0);
     } else {
       setDisableButton(false);
     }
-  }, [price]);
+  }, [price, props.ingredients]);
   const getItems = (item) => {
     let items = Object.keys(props.ingredients);
 
     let filtered = items
       .map((a) => {
-        if (a === item) {
-          return props.ingredients[a];
-        }
+        if (a === item) return props.ingredients[a];
       })
       .filter((b) => {
         return b !== undefined;
@@ -56,21 +51,18 @@ const ModalBody = ({ ...props }) => {
       e.currentTarget.nextSibling.innerText++;
       filtered[0].count = parseInt(filtered[0].count) + 1;
     }
-    let priceInc = parseFloat(
-      filtered[0].price.slice(0, filtered[0].price.indexOf("$"))
-    );
+    let priceInc = parseFloat(filtered[0].price);
     let endPrice = (price + priceInc).toFixed(1);
     setPrice(parseFloat(endPrice));
   };
 
   const handleDecrement = (e) => {
     let filtered = getItems(e.currentTarget.value);
-    if (e.currentTarget.previousSibling.innerText >= 1) {
+    if (parseInt(e.currentTarget.previousSibling.innerText) >= 1) {
       e.currentTarget.previousSibling.innerText--;
+      filtered[0].count = parseInt(filtered[0].count) - 1;
     }
-    let priceDec = parseFloat(
-      filtered[0].price.slice(0, filtered[0].price.indexOf("$"))
-    );
+    let priceDec = parseFloat(filtered[0].price);
     let endPrice = (price - priceDec).toFixed(1);
     setPrice(parseFloat(endPrice));
   };
@@ -102,7 +94,7 @@ const ModalBody = ({ ...props }) => {
             props.handleLocalAdding({
               itemName: props.name,
               description: desc,
-              price: props.price,
+              price: price,
               count: 1,
             });
           }}

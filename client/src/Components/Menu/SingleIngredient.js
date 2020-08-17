@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const SingleIngredient = ({ ...props }) => {
   return (
     <div className="single-ingredient">
       <div>
-        <span hidden>{props.item}</span>
         <button
           className="ingredient-button"
           onClick={(e) => props.handleIncrement(e)}
@@ -16,10 +15,10 @@ const SingleIngredient = ({ ...props }) => {
         <button
           className="ingredient-button"
           onClick={(e) => props.handleDecrement(e)}
+          value={props.item}
         >
           -
         </button>
-        <span hidden>{props.price}</span>
       </div>
       <div>
         <span className="item-name">{props.item}</span>

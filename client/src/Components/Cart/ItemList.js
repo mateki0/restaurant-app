@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from "react";
+import React, { useEffect, useCallback } from "react";
 import axios from "axios";
 import SingleItem from "./SingleItem";
 
@@ -44,22 +44,22 @@ const ItemList = ({
   return (
     <div className="items-container">
       {isLogged && userCart !== []
-        ? userCart.map((item) => (
+        ? userCart.map((item, index) => (
             <SingleItem
-              key={item.item}
+              key={index}
               incrementItem={updateCart}
               item={item}
             ></SingleItem>
           ))
-        : localCart.map((item) => (
+        : localCart.map((item, index) => (
             <SingleItem
-              key={item.item}
+              key={index}
               incrementItem={handleChange}
               item={item}
             ></SingleItem>
           ))}
       <div className="price">
-        <span>Total: {price}$</span>
+        <span>Total: {price !== undefined ? price.toFixed(1) : 0}$</span>
       </div>
     </div>
   );

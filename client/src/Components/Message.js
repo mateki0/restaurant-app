@@ -15,7 +15,7 @@ const Message = (props) => {
     return () => {
       _isMounted.current = false;
     };
-  }, [message]);
+  }, [message, props.query]);
   return (
     <div className="error-div">
       <h3 data-testid="msg">

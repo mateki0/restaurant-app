@@ -1,58 +1,64 @@
 import React from "react";
-const SingleItem = (props) => (
-  <div className="single-cart-item">
-    <div>
-      <span>{props.item.item}</span>
+const SingleItem = (props) => {
+  console.log(props.item);
+  return (
+    <div className="single-cart-item">
+      <div className="item-with-desc">
+        <span className="item-name">{props.item.item}</span>
+        {Object.keys(props.item.description).map((a, b) => (
+          <span className="item-desc" key={b}>
+            {a}: {props.item.description[a]}
+          </span>
+        ))}
+      </div>
+      <div className="price-count-container">
+        <div className="count-div">
+          <button
+            data-testid="single-item-button"
+            value={props.item.id}
+            onClick={(e) =>
+              props.incrementItem({
+                value: e.currentTarget.value,
+                action: "increment",
+              })
+            }
+          >
+            +
+          </button>
+          <span data-testid="single-item-count">{props.item.count}</span>
+          <button
+            value={props.item.id}
+            onClick={(e) =>
+              props.incrementItem({
+                value: e.currentTarget.value,
+                action: "decrement",
+              })
+            }
+          >
+            -
+          </button>
+        </div>
+        <div className="price-div">
+          <span className="price-span">
+            {(props.item.price * props.item.count).toFixed(1)}$
+          </span>
+        </div>
+        <div>
+          <button
+            value={props.item.id}
+            type="button"
+            onClick={(e) =>
+              props.incrementItem({
+                value: e.currentTarget.value,
+                action: "delete",
+              })
+            }
+          >
+            Remove
+          </button>
+        </div>
+      </div>
     </div>
-    <div className="price-count-container">
-      <div className="count-div">
-        <button
-          data-testid="single-item-button"
-          value={props.item.item}
-          onClick={(e) =>
-            props.incrementItem({
-              value: e.currentTarget.value,
-              action: "increment",
-            })
-          }
-        >
-          +
-        </button>
-        <span data-testid="single-item-count">{props.item.count}</span>
-        <button
-          value={props.item.item}
-          onClick={(e) =>
-            props.incrementItem({
-              value: e.currentTarget.value,
-              action: "decrement",
-            })
-          }
-        >
-          -
-        </button>
-      </div>
-      <div className="price-div">
-        <span className="price-span">
-          {props.item.price.slice(0, props.item.price.length - 1) *
-            props.item.count}
-          $
-        </span>
-      </div>
-      <div>
-        <button
-          value={props.item.item}
-          type="button"
-          onClick={(e) =>
-            props.incrementItem({
-              value: e.currentTarget.value,
-              action: "delete",
-            })
-          }
-        >
-          Remove
-        </button>
-      </div>
-    </div>
-  </div>
-);
+  );
+};
 export default SingleItem;
