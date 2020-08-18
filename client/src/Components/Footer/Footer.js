@@ -9,7 +9,6 @@ const Footer = () => {
     <div data-testid="footer-div" className="footer-container">
       <div className="footer">
         <div className="company">
-          <span>@2014 Company, Inc</span>
           <a href="/contact">Privacy</a>
           <a href="/contact">Terms</a>
         </div>

@@ -59,7 +59,9 @@ const ItemList = ({
             ></SingleItem>
           ))}
       <div className="price">
-        <span>Total: {price !== undefined ? price.toFixed(1) : 0}$</span>
+        <span>
+          Total: <b>{price !== undefined ? price.toFixed(1) : 0}$</b>
+        </span>
       </div>
     </div>
   );

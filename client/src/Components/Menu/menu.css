@@ -77,14 +77,6 @@
   margin-top: 20px;
 }
 
-.ingredient-button {
-  padding: 5px 10px;
-  transition: all 0.5s;
-}
-.ingredient-button:hover {
-  cursor: pointer;
-  color: #c83a3a;
-}
 .item-count {
   padding: 0 10px;
   font-size: 18px;
@@ -101,15 +93,23 @@
   display: flex;
   justify-content: center;
 }
+.openModal,
+.ingredient-button,
 .add-button {
-  font-weight: 600;
-  padding: 4px 8px;
+  padding: 6px 12px;
   transition: all 0.5s;
+  border: none;
+  outline: none;
+  border-radius: 5px;
 }
+.openModal:hover,
+.ingredient-button:hover,
 .add-button:hover {
   cursor: pointer;
-  color: #c83a3a;
+  color: #fff;
+  background: #000;
 }
+
 @media (max-width: 813px) {
   .menu-container {
     width: 100%;

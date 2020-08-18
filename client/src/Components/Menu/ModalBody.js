@@ -97,6 +97,7 @@ const ModalBody = ({ ...props }) => {
               price: price,
               count: 1,
             });
+            props.closeModal();
           }}
         >
           Add to cart

@@ -55,7 +55,11 @@ const SingleMealItem = (props) => {
           <div>
             <h4 className="meal-price-h4">{a.price}$</h4>
             <div>
-              <button onClick={(e) => openModal(e)} value={a.name}>
+              <button
+                className="openModal"
+                onClick={(e) => openModal(e)}
+                value={a.name}
+              >
                 Add To Cart
               </button>
               <Modal
@@ -70,6 +74,7 @@ const SingleMealItem = (props) => {
                   price={price}
                   ingredients={ingr}
                   handleLocalAdding={props.handleLocalAdding}
+                  closeModal={closeModal}
                 />
               </Modal>
             </div>

@@ -27,7 +27,7 @@ const MarketingSlider = () => {
 
   return (
     <div data-testid="marketing-div" className="marketing-container">
-      <Slider>
+      <Slider autoplay="5000">
         {slides.map((slide, index) => (
           <div key={index} className="marketing-slider">
             <img
