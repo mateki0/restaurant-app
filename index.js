@@ -14,8 +14,7 @@ const session = require("express-session");
 const dotenv = require("dotenv");
 
 dotenv.config();
-const uri =
-  "mongodb+srv://restaurantDbUser:rOXIeNOiryDgBFfa@menu-0xci7.mongodb.net/test?retryWrites=true&w=majority";
+const uri = process.env.MONGOLAB_IVORY_URI;
 try {
   mongoose.connect(
     uri,
