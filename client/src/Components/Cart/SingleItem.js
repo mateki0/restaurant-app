@@ -38,12 +38,12 @@ const SingleItem = (props) => {
             -
           </button>
         </div>
-        <div className="price-div">
+        <div className="price-cart-div">
           <span className="price-span">
             {(props.item.price * props.item.count).toFixed(1)}$
           </span>
         </div>
-        <div>
+        <div className="remove-div">
           <button
             value={props.item.id}
             type="button"

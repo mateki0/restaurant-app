@@ -5,7 +5,7 @@
   box-shadow: 0 0 24px #d5d5d5;
 }
 .name {
-  width: 1170px;
+  width: 80vw;
   margin: 0 auto;
   color: #0c0c0c;
   padding-bottom: 15px;
@@ -19,12 +19,8 @@
 /* Second Panel */
 
 .meals-container {
-  width: 1170px;
+  width: 80vw;
   height: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 50px;
 }
 .meal {
   width: 400px;
@@ -34,13 +30,7 @@
   color: #5a5a5a;
   align-items: center;
 }
-.first-meal,
-.third-meal {
-  margin-top: 30px;
-}
-.second-meal {
-  margin-top: 100px;
-}
+
 .meal > img {
   max-width: 100%;
   border-radius: 50%;
@@ -71,11 +61,11 @@
 
 .breakfast-container {
   color: #5a5a5a;
-  width: 1170px;
+  width: 80vw;
   margin: 0 auto;
 }
 .breakfast-title {
-  width: 1170px;
+  width: 80vw;
   font-weight: 500;
   margin-bottom: 15px;
   border-bottom: 1px solid #efefef;
@@ -85,11 +75,21 @@
 .breakfast-slider {
   display: flex;
 }
+.slider {
+}
+.slider a.previousButton,
+.slider a.nextButton {
+  opacity: 0.4;
+  transition: opacity 0.5s;
+}
+.slider a.previousButton:hover,
+.slider a.nextButton:hover {
+  opacity: 1;
+}
 .sliders > img {
   width: 370px;
   max-width: 100%;
-  height: 275px;
-  max-height: 275px;
+  height: auto;
 }
 .sliders {
   width: 100%;
@@ -118,13 +118,13 @@
 
 .lunch-container {
   color: #5a5a5a;
-  width: 1170px;
+  width: 80vw;
   position: relative;
 }
 
 /*  boxes */
 .boxes {
-  width: 1170px;
+  width: 80vw;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -133,7 +133,7 @@
   background-color: #efefef;
   color: #939393;
   text-align: center;
-  width: 360px;
+  width: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,19 +145,21 @@
 }
 .box-img {
   padding: 10px 0;
-  width: 228px;
+  width: 100%;
   max-width: 100%;
-  height: 143px;
+  height: auto;
 }
 
 /* Welcome to restaurant */
 
 .welcome {
+  width: 80vw;
+  margin: 0 auto;
   margin-top: 50px;
   background: #efefef;
 }
 .welcome-container {
-  width: 1170px;
+  width: 80vw;
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
@@ -165,7 +167,7 @@
   color: #5a5a5a;
 }
 .welcome-container > div {
-  width: 360px;
+  width: auto;
 }
 .welcome-container > div > h3 {
   text-align: left;
@@ -178,38 +180,28 @@
 /* Marketing Slider */
 .marketing-container {
   color: #5a5a5a;
-  width: 1170px;
+  width: 80vw;
   margin: 0 auto;
 }
 
 .marketing-slider {
-  width: 1170px;
   display: flex;
-  margin: 50px auto 0 auto;
 }
 
 .marketing-slider-img {
-  width: 100vw;
+  width: 90vw;
   max-width: 470px;
   height: auto;
 }
 
-.marketing-description {
-  text-align: left;
-  margin: 50px 0 0 100px;
-}
 .marketing-slide-name {
-  font-size: 50px;
   font-weight: 500;
 }
 .marketing-slide-name-div {
   padding: 20px;
 }
-.marketing-slide-description-div {
-  margin-bottom: 50px;
-}
 
-@media (max-width: 1300px) {
+@media (min-width: 320px) {
   .marketing-container,
   .meals-container,
   .lunch-container,
@@ -217,16 +209,52 @@
   .boxes,
   .breakfast-title,
   .welcome-container,
+  .welcome,
   .marketing-slider,
   .name {
     width: 100%;
   }
-}
-@media (min-width: 320px) and (max-width: 819px) {
+  .meals-container {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .meal {
+    width: 300px;
+    margin: 25px auto 0 auto;
+    padding: 0;
+  }
+  .see-menu-a {
+    width: 80%;
+    padding: 5px 8px;
+  }
+
+  .lunch-container > .slider {
+    height: 190px;
+  }
+  .box2,
+  .box3 {
+    margin-left: 10px;
+  }
+  .welcome-container {
+    flex-direction: column;
+  }
+  .welcome-container > div {
+    padding: 0;
+    margin-top: 20px;
+  }
+
+  .marketing-container {
+    width: 100%;
+    height: 350px;
+  }
   .marketing-slider {
     margin: 20px 0 0 0;
     width: 100%;
     flex-direction: column;
+  }
+  .marketing-slider-img {
+    width: 100%;
   }
   .marketing-description {
     font-size: 13px;
@@ -241,99 +269,72 @@
   .marketing-slide-name {
     font-size: 24px;
   }
-}
-@media (min-width: 820px) and (max-width: 999px) {
-  .marketing-slider {
-    width: 100%;
-    flex-direction: row;
-  }
-  .marketing-slider-img {
-    width: 470px;
-    max-width: 100%;
-    height: 352px;
-  }
-  .marketing-slide-name {
-    font-size: 24px;
-  }
-  .marketing-description {
-    margin: 85px 0 0 0;
-    text-align: center;
+  .marketing-slide-description-div {
+    margin-bottom: 20px;
   }
 }
-
-@media (min-width: 320px) and (max-width: 999px) {
-  .name {
-    width: 100%;
-    margin: 0;
-  }
-  .name > h1 {
-    font-size: 24px;
-  }
-  .name > span {
-    font-size: 13px;
-  }
-  .meals-container {
-    width: 98%;
-    padding-bottom: 20px;
-    text-align: center;
-  }
-  .see-menu-a {
-    width: 98%;
-    font-size: 12px;
-  }
-  .delivery > div {
-    padding: 10px 0;
-  }
-  .delivery > div > span {
-    font-size: 18px;
-  }
-
-  /* sliders */
-
-  .breakfast-container,
+@media (min-width: 768px) {
+  .marketing-container,
+  .meals-container,
   .lunch-container,
-  .breakfast-title {
-    width: 98%;
-    margin: 0;
+  .breakfast-container,
+  .boxes,
+  .breakfast-title,
+  .welcome-container,
+  .marketing-slider,
+  .name {
+    width: 80vw;
   }
   .lunch-container > .slider {
-    height: 200px;
-    padding: 0 5px;
-  }
-
-  .sliders > img {
-    max-height: 146px;
-  }
-  .sliders {
-    padding: 0 3px;
-  }
-  .boxes {
-    width: 98%;
-    margin-top: 20px;
-  }
-  .box2,
-  .box3 {
-    margin-left: 10px;
-  }
-  .box > span {
-    font-size: 13px;
-  }
-
-  .welcome {
-    margin-top: 20px;
+    height: 260px;
   }
   .welcome-container {
-    width: 98%;
-    flex-direction: column;
-    margin: 0;
+    flex-direction: row;
   }
-  .welcome-container > div {
-    width: 98%;
+  .marketing-slide-name {
+    font-size: 42px;
   }
-  .welcome-container > div > h3 {
-    text-align: center;
+  .marketing-slide-description-div {
+    margin-bottom: 50px;
   }
-  .welcome-container > div > span {
-    font-size: 13px;
+  .marketing-slider {
+    margin: 50px auto 0 auto;
+    flex-direction: row;
+  }
+  .marketing-description {
+    font-size: 16px;
+    text-align: left;
+    margin: 10px 0 0 30px;
+  }
+}
+@media (min-width: 1024px) {
+  .meals-container {
+    flex-direction: row;
+    align-items: center;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+  }
+  .lunch-container > .slider {
+    height: 350px;
+  }
+  .first-meal,
+  .third-meal {
+    margin-top: 30px;
+  }
+  .second-meal {
+    margin-top: 100px;
+  }
+}
+@media (min-width: 1440px) {
+  .lunch-container > .slider {
+    height: 400px;
+  }
+  .marketing-slide-name {
+    font-size: 50px;
+  }
+  .marketing-description {
+    margin: 50px 0 0 70px;
   }
 }

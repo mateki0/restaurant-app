@@ -6,7 +6,7 @@ const Header = (props) => (
     <ul>
       <li>
         <NavLink to="/" className="restaurant-name nav-link">
-          My Test Restaurant
+          My Restaurant
         </NavLink>
       </li>
       <li>

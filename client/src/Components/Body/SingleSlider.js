@@ -5,7 +5,7 @@ const SingleSlider = ({ carousel }) => (
     <div className="breakfast-title">
       <h2>MEALS</h2>
     </div>
-    <Slider autoplay="2000">
+    <Slider>
       {carousel.map((slide, index) => (
         <div key={index} className="breakfast-slider">
           <div className="sliders">

@@ -1,6 +1,6 @@
 import React from "react";
 import burger from "./burger.jpg";
-import pasta from "./pasta.jpg";
+import dessert from "./dessert.jpg";
 import salad from "./salad.jpg";
 const Boxes = () => (
   <div data-testid="boxes-div" className="boxes">
@@ -13,9 +13,9 @@ const Boxes = () => (
     </div>
     <div className="box box2">
       <a href="/menu">
-        <img href="/menu" className="box-img" src={pasta} alt="pasta" />
+        <img href="/menu" className="box-img" src={dessert} alt="desser" />
       </a>
-      <h3>Spaghetti</h3>
+      <h3>Pancakes</h3>
       <span>Here is place for meal description</span>
     </div>
     <div className="box box3">

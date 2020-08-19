@@ -1,5 +1,5 @@
 .register-container {
-  width: 1170px;
+  width: 80vw;
   margin: 80px auto 0 auto;
 }
 .register-div {
@@ -18,6 +18,10 @@
 .register-div > form > input {
   width: 20%;
   padding: 3px;
+}
+#email,
+#password {
+  border: none;
 }
 .register-div > form > button {
   width: 20.7%;

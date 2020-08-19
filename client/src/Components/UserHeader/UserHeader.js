@@ -25,15 +25,15 @@ const UserHeader = ({ user, price }) => {
         </span>
       </a>
       <div className="logout-div">
-        {name === "Guest" ? (
+        {/* {name === "Guest" ? (
           ""
-        ) : (
-          <form method="post" action="/logout">
-            <button className="logout-button" type="submit">
-              Logout
-            </button>
-          </form>
-        )}
+        ) : ( */}
+        <form method="post" action="/logout">
+          <button className="logout-button" type="submit">
+            Logout
+          </button>
+        </form>
+        {/* )} */}
       </div>
     </div>
   );

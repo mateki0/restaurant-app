@@ -1,36 +1,35 @@
-.contact-container{
-
-  margin-bottom:50px;
+.contact-container {
+  margin-bottom: 50px;
 }
-.contact-form{
-  display:flex;
-  flex-direction:column;
-  text-align:center;
-  margin:0 auto;
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 auto;
 }
-.contact-submit{
-  margin-top:20px;
+.contact-submit {
+  margin-top: 20px;
 }
-.title-container{
-margin:150px auto 0 auto;
-background: #efefef;
-width:100%;
-display:flex;
+.title-container {
+  margin: 150px auto 0 auto;
+  background: #efefef;
+  width: 100%;
+  display: flex;
 }
-.title-container>h2{
-  margin-left:20px;
-  font-weight:500;
+.title-container > h2 {
+  margin-left: 20px;
+  font-weight: 500;
 }
-.informations{
-  display:flex;
+.informations {
+  display: flex;
   flex-direction: column;
 }
-.informations>*{
-  padding:5px;
+.informations > * {
+  padding: 5px;
 }
-@media (max-width:813px){
-  .title-container{
-    width:100%;
-    margin:210px 0 0 0;
+@media (max-width: 813px) {
+  .title-container {
+    width: 100%;
+    margin: 250px 0 0 0;
   }
 }

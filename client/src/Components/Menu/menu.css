@@ -1,5 +1,5 @@
 .menu-container {
-  width: 1170px;
+  width: 80vw;
   margin: 0 auto 0 auto;
   color: #5a5a5a;
   display: flex;
@@ -110,10 +110,41 @@
   background: #000;
 }
 
+@media (min-width: 320px) {
+  .single-item {
+    flex-direction: column;
+  }
+  .add-to-cart-div {
+    display: flex;
+    justify-content: center;
+  }
+  .meal-description {
+    text-align: center;
+  }
+  .meal-description-div > div {
+    font-size: 14px;
+    text-align: center;
+  }
+}
+@media (min-width: 768px) {
+  .single-item {
+    flex-direction: row;
+  }
+  .meal-description-div > div {
+    font-size: 16px;
+    text-align: left;
+  }
+  .meal-description {
+    text-align: left;
+  }
+}
 @media (max-width: 813px) {
   .menu-container {
     width: 100%;
     margin: 0 0 20px 0;
+  }
+  .single-item {
+    padding: 0 10px;
   }
   .single-item > div {
     text-align: left;
@@ -123,5 +154,8 @@
   }
   .meal-description-div {
     padding: 0;
+  }
+  .choose-ingredients {
+    font-size: 18px;
   }
 }

@@ -44,17 +44,19 @@ const SingleMealItem = (props) => {
         <div key={b} className="single-item">
           <div className="meal-description-div">
             <h4 className="meal-description">{a.name}</h4>
-            {Object.keys(a.description).map((key, index) => {
-              return (
-                <span className="desc-single-ingredient" key={index}>
-                  {key.charAt(0).toUpperCase() + key.substring(1)}
-                </span>
-              );
-            })}
+            <div>
+              {Object.keys(a.description).map((key, index) => {
+                return (
+                  <span className="desc-single-ingredient" key={index}>
+                    {key.charAt(0).toUpperCase() + key.substring(1)}
+                  </span>
+                );
+              })}
+            </div>
           </div>
           <div>
             <h4 className="meal-price-h4">{a.price}$</h4>
-            <div>
+            <div className="add-to-cart-div">
               <button
                 className="openModal"
                 onClick={(e) => openModal(e)}
