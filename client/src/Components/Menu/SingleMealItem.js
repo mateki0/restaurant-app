@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import ModalBody from "./ModalBody";
-Modal.setAppElement("#root");
 
 const SingleMealItem = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,8 +27,7 @@ const SingleMealItem = (props) => {
   };
   const customStyles = {
     content: {
-      zIndex: "99",
-      top: "50%",
+      top: "40%",
       left: "50%",
       right: "auto",
       bottom: "auto",
@@ -37,7 +35,12 @@ const SingleMealItem = (props) => {
       transform: "translate(-50%, -50%)",
     },
   };
-
+  useEffect(() => {
+    Modal.setAppElement("body");
+    return () => {
+      Modal.unsetAppElement("body");
+    };
+  }, []);
   return (
     <div className="meals-list">
       {props.data.map((a, b) => (

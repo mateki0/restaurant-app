@@ -21,7 +21,7 @@ const SingleIngredient = ({ ...props }) => {
         </button>
       </div>
       <div>
-        <span className="item-name">{props.item}</span>
+        <span className="modal-ingredient-name">{props.item}</span>
       </div>
     </div>
   );

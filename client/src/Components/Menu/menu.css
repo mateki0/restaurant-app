@@ -1,3 +1,6 @@
+.ReactModal__Overlay--after-open {
+  z-index: 999;
+}
 .menu-container {
   width: 80vw;
   margin: 0 auto 0 auto;
@@ -17,7 +20,6 @@
 .meals-expand {
   width: 100%;
   background-color: #efefef;
-  padding-left: 10px;
 }
 .meals-expand > h2 {
   margin: 10px;
@@ -30,9 +32,7 @@
   display: flex;
   justify-content: space-between;
 }
-.meal-description {
-  text-align: left;
-}
+
 .meal-description-div {
   padding-left: 20px;
 }
@@ -61,9 +61,7 @@
   flex-direction: column;
 }
 .choose-ingredients {
-  font-size: 28px;
   font-weight: 600;
-  letter-spacing: 1.5px;
 }
 .meal-modal-name {
   font-size: 34px;
@@ -76,18 +74,14 @@
   align-items: center;
   margin-top: 20px;
 }
-
-.item-count {
-  padding: 0 10px;
-  font-size: 18px;
-}
-.item-name {
-  font-size: 24px;
+.modal-ingredient-name {
   text-transform: capitalize;
 }
-
 .modal-price-div {
   margin: 30px auto;
+}
+.modal-price {
+  font-weight: 600;
 }
 .submit-div {
   display: flex;
@@ -125,6 +119,19 @@
     font-size: 14px;
     text-align: center;
   }
+  .choose-ingredients {
+    font-size: 14px;
+  }
+  .ingredient-button {
+    padding: 3px 8px;
+  }
+  .item-count {
+    padding: 0 5px;
+    font-size: 16px;
+  }
+  .modal-ingredient-name {
+    font-size: 14px;
+  }
 }
 @media (min-width: 768px) {
   .single-item {
@@ -137,25 +144,24 @@
   .meal-description {
     text-align: left;
   }
-}
-@media (max-width: 813px) {
-  .menu-container {
-    width: 100%;
-    margin: 0 0 20px 0;
-  }
-  .single-item {
-    padding: 0 10px;
-  }
-  .single-item > div {
-    text-align: left;
-  }
-  .single-item > div > span {
-    font-size: 13px;
-  }
-  .meal-description-div {
-    padding: 0;
+  .modal-ingredient-name {
+    font-size: 16px;
   }
   .choose-ingredients {
+    font-size: 20px;
+  }
+}
+@media (min-width: 1440px) {
+  .item-count {
+    padding: 0 10px;
     font-size: 18px;
+  }
+  .modal-ingredient-name {
+    font-size: 24px;
+    text-transform: capitalize;
+  }
+  .choose-ingredients {
+    font-size: 28px;
+    letter-spacing: 1.5px;
   }
 }
