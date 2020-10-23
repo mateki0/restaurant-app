@@ -325,6 +325,9 @@
   .lunch-container > .slider {
     height: 350px;
   }
+  .meal {
+    margin: 0;
+  }
   .first-meal,
   .third-meal {
     margin-top: 30px;
