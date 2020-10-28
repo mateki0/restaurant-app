@@ -37,9 +37,6 @@ const SingleMealItem = (props) => {
   };
   useEffect(() => {
     Modal.setAppElement("body");
-    return () => {
-      Modal.unsetAppElement("body");
-    };
   }, []);
   return (
     <div className="meals-list">
