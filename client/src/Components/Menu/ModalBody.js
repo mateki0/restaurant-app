@@ -51,6 +51,9 @@ const ModalBody = ({ ...props }) => {
       e.currentTarget.nextSibling.innerText++;
       filtered[0].count = parseInt(filtered[0].count) + 1;
     }
+    if (parseInt(e.currentTarget.nextSibling.innerText) === 5){
+      e.currentTarget.disabled = true;
+    }
     let priceInc = parseFloat(filtered[0].price);
     let endPrice = (price + priceInc).toFixed(1);
     setPrice(parseFloat(endPrice));
@@ -61,6 +64,9 @@ const ModalBody = ({ ...props }) => {
     if (parseInt(e.currentTarget.previousSibling.innerText) >= 1) {
       e.currentTarget.previousSibling.innerText--;
       filtered[0].count = parseInt(filtered[0].count) - 1;
+    }
+    if (parseInt(e.currentTarget.previousSibling.innerText) < 5){
+      e.currentTarget.previousSibling.previousSibling.disabled = false;
     }
     let priceDec = parseFloat(filtered[0].price);
     let endPrice = (price - priceDec).toFixed(1);
