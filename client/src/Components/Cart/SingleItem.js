@@ -1,6 +1,5 @@
 import React from "react";
 const SingleItem = (props) => {
-  console.log(props.item);
   return (
     <div className="single-cart-item">
       <div className="item-with-desc">

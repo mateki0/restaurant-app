@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Message from "../Message";
+
 const LoginForm = () => {
   const [password, setPasswordType] = useState("password");
 
   return (
     <div className="register-container">
-      <Message query="/login" />
+      {/* <Message query="/login" />
       <div className="register-div">
         <form method="post" action="/login">
           <label htmlFor="email">Email</label>
@@ -30,7 +30,7 @@ const LoginForm = () => {
           </span>
           <button type="submit">Sign In</button>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 };

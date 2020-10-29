@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./menu.css";
 import axios from "axios";
-import Title from "../Title";
 import Desserts from "./Desserts";
 import Drinks from "./Drinks";
 import Meal from "./Meal";
@@ -78,7 +77,7 @@ const Menu = ({ user, userCart, localCart, handleLocalAdding }) => {
         <div>Loading...</div>
       ) : (
         <main>
-          <Title value="Checkout our menu below" />
+          
           <Meal
             data={meals}
             user={user}

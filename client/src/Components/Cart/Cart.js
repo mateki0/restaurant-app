@@ -1,6 +1,6 @@
 import React from "react";
 import "./cart.css";
-import Title from "../Title";
+
 import ItemList from "./ItemList";
 
 const Cart = ({
@@ -14,7 +14,7 @@ const Cart = ({
 }) => {
   return (
     <main data-testid="cart-div">
-      <Title value="Your Cart:" />
+      
       <ItemList
         user={user}
         localCart={localCart}

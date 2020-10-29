@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Message from "../Message";
+
 export function RegisterForm() {
   const [password, setPasswordType] = useState("password");
 
   return (
     <div className="register-container">
-      <Message query="/register" />
+      {/* <Message query="/register" />
       <div className="register-div">
         <form method="post" action="/register">
           <label htmlFor="email">Email</label>
@@ -30,7 +30,7 @@ export function RegisterForm() {
           </span>
           <button type="submit">Create account</button>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -1,17 +1,17 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
-import Body from "../Components/Body/Body";
-import FirstPanel from "../Components/Body/FirstPanel";
-import SecondPanel from "../Components/Body/SecondPanel";
-import ThirdPanel from "../Components/Body/ThirdPanel";
-import Sliders from "../Components/Body/Sliders";
-import SingleSlider from "../Components/Body/SingleSlider";
+import Body from "../Pages/HomePage";
+import FirstPanel from "../Pages/HomePage/FirstPanel";
+import SecondPanel from "../Pages/HomePage/SecondPanel";
+import ThirdPanel from "../Pages/HomePage/ThirdPanel";
+import Sliders from "../Pages/HomePage/Sliders";
+import SingleSlider from "../Pages/HomePage/SingleSlider";
 import salad from "../Components/Body/salad.jpg";
 import pancakes from "../Components/Body/pancakes.jpg";
 import eggs from "../Components/Body/eggs.jpg";
-import Boxes from "../Components/Body/Boxes";
-import WelcomeToRestaurant from "../Components/Body/WelcomeToRestaurant";
-import MarketingSlider from "../Components/Body/MarketingSlider";
+import Boxes from "../Pages/HomePage/Boxes";
+import WelcomeToRestaurant from "../Pages/HomePage/WelcomeToRestaurant";
+import MarketingSlider from "../Pages/HomePage/MarketingSlider";
 
 afterEach(cleanup);
 

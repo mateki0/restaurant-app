@@ -1,8 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import "./App.css";
-import Body from "./Components/Body/Body";
-import About from "./Components/About/About";
-import Footer from "./Components/Footer/Footer";
+import Footer from "./Components/Footer";
 import Contact from "./Components/Contact/Contact";
 import Menu from "./Components/Menu/Menu";
 import Cart from "./Components/Cart/Cart";
@@ -11,7 +8,9 @@ import Login from "./Components/Login/Login";
 import AddingPanel from "./Components/ItemsAdding/ItemsAdding";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
-import Header from "./Header";
+import Header from "./Components/Header" ;
+import HomePage from "./Pages/HomePage";
+import AboutPage from "./Pages/AboutPage";
 
 function isEmpty(obj) {
   for (var key in obj) {
@@ -43,10 +42,8 @@ const App = () => {
         const result = await axios("/user");
         setUser(result.data);
       };
-
       fetchData();
     }
-
     return () => {
       didCancel = true;
     };
@@ -66,7 +63,6 @@ const App = () => {
       return a.id === id;
     });
     if (item) {
-      console.log("incremented");
       item.count += 1;
     } else {
       let newItem = {
@@ -152,19 +148,14 @@ const App = () => {
 
   return (
     <Router>
-      <div className="App">
-        <div className="nav-div">
           <Header user={user} price={price} />
-        </div>
-      </div>
-
       <Switch>
         <Route exact path="/">
-          <Body />
+          <HomePage />
           <Footer />
         </Route>
         <Route exact path="/about">
-          <About />
+          <AboutPage />
           <Footer />
         </Route>
         <Route exact path="/contact">
