@@ -10,6 +10,7 @@ const StyledCarousel = styled(CarouselProvider)<{ customHeight?: string }>`
   .carousel__slider--horizontal {
     width: 100%;
     height: 100%;
+    margin: 0 auto;
   }
   .carousel__dot-group {
     position: absolute;

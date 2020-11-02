@@ -5,5 +5,6 @@ const SliderLinkWrapper = styled.div`
   margin: 40px auto 0 auto;
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 export default SliderLinkWrapper;

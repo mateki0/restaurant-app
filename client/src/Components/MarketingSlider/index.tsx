@@ -39,11 +39,11 @@ const MarketingSlider = () => {
         naturalSlideHeight={400}
         naturalSlideWidth={1500}
         totalSlides={slides.length}
-        customHeight="250px"
+        customHeight="470px"
       >
         <Slider>
           {slides.map((item, index) => (
-            <Slide index={index}>
+            <Slide index={index} key={index}>
               <SlideWrapper>
                 <MarketingSliderImg src={item.src} alt={item.h2} />
                 <SliderDescriptionContainer>

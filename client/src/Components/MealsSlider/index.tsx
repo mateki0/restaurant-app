@@ -53,7 +53,7 @@ const MealsSlider = () => {
       >
         <Slider>
           {carousel.map((item, i) => (
-            <Slide index={i}>
+            <Slide index={i} key={i}>
               <SliderImage src={item.src0} />
               <SliderImage src={item.src1} />
               <SliderImage src={item.src2} />

@@ -8,10 +8,12 @@ import SpecalitiesBoxes from '../../Components/SpecialitiesBoxes';
 import MarketingSlider from '../../Components/MarketingSlider';
 import WelcomeBox from '../../Components/WelcomeBox';
 import InfoBar from '../../Components/InfoBar';
+import StyledMain from '../../Components/Layout/StyledMain';
+import Footer from '../../Components/Footer';
 
 const HomePage = () => {
   return (
-    <main>
+    <StyledMain>
       <MapContainer />
       <RestaurantHeading />
       <MenuAdvertise />
@@ -23,7 +25,8 @@ const HomePage = () => {
       <SpecalitiesBoxes />
       <WelcomeBox />
       <MarketingSlider />
-    </main>
+      <Footer />
+    </StyledMain>
   );
 };
 export default HomePage;

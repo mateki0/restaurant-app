@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import Navigation from './styled/Navigation';
 import NavList from './styled/NavList';
@@ -11,27 +11,39 @@ import PriceSpan from './styled/PriceSpan';
 import LogoutButton from './styled/LogoutButton';
 
 import Menu from './styled/Menu';
+import HamburgerContainer from './styled/HamburgerContainer';
+import Hamburger from './styled/Hamburger';
+import Cross from './styled/Cross';
+import HamburgerSpan from './styled/HamburgerSpan';
+import CrossSpan from './styled/CrossSpan';
+import TotalPriceContext from '../../Contexts/TotalPriceContext';
+import LocalCartContext from '../../Contexts/LocalCartContext';
 
-const Header = ({ user, price }: { user: any; price: number }) => {
+const Header = () => {
+  const { totalPrice } = useContext(TotalPriceContext);
   const [name, setName] = useState('Guest');
-  const [isOpen, setIsOpen] = useState(true);
-  useEffect(() => {
-    if (user !== null && user !== '') {
-      let index = user.local.email.indexOf('@');
-      setName(user.local.email.slice(0, index));
+  const [isOpen, setIsOpen] = useState(false);
+  const [pr, setPr] = useState();
 
-      if (name.length > 19) {
-        setName(name.slice(0, 16) + '...');
-      }
-    }
-  }, [user, name]);
+  // useEffect(() => {
+  //   if (user !== null && user !== '') {
+  //     let index = user.local.email.indexOf('@');
+  //     setName(user.local.email.slice(0, index));
+
+  //     if (name.length > 19) {
+  //       setName(name.slice(0, 16) + '...');
+  //     }
+  //   }
+  // }, [user, name]);
+
+  console.log(totalPrice);
   return (
     <header>
       <Navigation>
         <Menu isOpen={isOpen}>
           <NavList>
             <NavListItem>
-              <NavLink to="/" className="restaurant-name nav-link">
+              <NavLink to="/" onClick={() => setIsOpen(false)}>
                 My Restaurant
               </NavLink>
             </NavListItem>
@@ -40,7 +52,7 @@ const Header = ({ user, price }: { user: any; price: number }) => {
                 exact
                 to="/"
                 activeClassName="small-link-active"
-                className="nav-link small-link"
+                onClick={() => setIsOpen(false)}
               >
                 Home
               </NavLink>
@@ -50,7 +62,7 @@ const Header = ({ user, price }: { user: any; price: number }) => {
                 exact
                 to="/about"
                 activeClassName="small-link-active"
-                className="nav-link small-link"
+                onClick={() => setIsOpen(false)}
               >
                 About Us
               </NavLink>
@@ -61,7 +73,7 @@ const Header = ({ user, price }: { user: any; price: number }) => {
                 exact
                 to="/contact"
                 activeClassName="small-link-active"
-                className="nav-link small-link"
+                onClick={() => setIsOpen(false)}
               >
                 Contact
               </NavLink>
@@ -72,7 +84,7 @@ const Header = ({ user, price }: { user: any; price: number }) => {
                 exact
                 to="/menu"
                 activeClassName="small-link-active"
-                className="nav-link small-link"
+                onClick={() => setIsOpen(false)}
               >
                 Menu
               </NavLink>
@@ -83,31 +95,27 @@ const Header = ({ user, price }: { user: any; price: number }) => {
                 exact
                 to="/register"
                 activeClassName="small-link-active"
-                className="nav-link small-link"
+                onClick={() => setIsOpen(false)}
               >
                 Register
               </NavLink>
             </NavListItem>
             <NavListItem>
-              {user === null || user === '' ? (
-                <NavLink
-                  exact
-                  to="/login"
-                  activeClassName="small-link-active"
-                  className="nav-link small-link"
-                >
-                  Login
-                </NavLink>
-              ) : (
-                ''
-              )}
+              <NavLink
+                exact
+                to="/login"
+                activeClassName="small-link-active"
+                onClick={() => setIsOpen(false)}
+              >
+                Login
+              </NavLink>
             </NavListItem>
             <NavListItem>
               <NavLink
                 exact
                 to="/cart"
                 activeClassName="small-link-active"
-                className="nav-link small-link"
+                onClick={() => setIsOpen(false)}
               >
                 Cart
               </NavLink>
@@ -115,8 +123,8 @@ const Header = ({ user, price }: { user: any; price: number }) => {
           </NavList>
           <UserInfoContainer>
             <UserName>Hello, {name}</UserName>
-            <CartLink href="/link">
-              <PriceSpan>{price !== undefined ? price.toFixed(1) : 0}$</PriceSpan>
+            <CartLink href="/link" onClick={() => setIsOpen(false)}>
+              <PriceSpan>{totalPrice}$</PriceSpan>
             </CartLink>
             <div>
               <form method="post" action="/logout">
@@ -125,6 +133,17 @@ const Header = ({ user, price }: { user: any; price: number }) => {
             </div>
           </UserInfoContainer>
         </Menu>
+        <HamburgerContainer onClick={() => setIsOpen(!isOpen)}>
+          <Hamburger isOpen={isOpen}>
+            <HamburgerSpan isOpen={isOpen}></HamburgerSpan>
+            <HamburgerSpan isOpen={isOpen}></HamburgerSpan>
+            <HamburgerSpan isOpen={isOpen}></HamburgerSpan>
+          </Hamburger>
+          <Cross>
+            <CrossSpan isOpen={isOpen}></CrossSpan>
+            <CrossSpan isOpen={isOpen}></CrossSpan>
+          </Cross>
+        </HamburgerContainer>
       </Navigation>
     </header>
   );

@@ -13,6 +13,9 @@ const NavListItem = styled.li`
     color: #fcfcfc;
     background: #c83a3a;
   }
+  &:first-of-type {
+    font-size: 18px;
+  }
   @media screen and (min-width: 1024px) {
     padding: 0;
     > * {
