@@ -1,18 +1,15 @@
 import React from 'react';
 import Footer from '../../Components/Footer';
+import { IUser } from '../../Components/Header';
 import StyledMain from '../../Components/Layout/StyledMain';
 import MenuComponent from '../../Components/MenuComponent';
 import PageTitle from '../../Components/PageTitle';
 
-interface IMenuPage {
-  user: any;
-  handleLocalAdding: any;
-}
-const MenuPage = ({ user, handleLocalAdding }: IMenuPage) => {
+const MenuPage = ({ user }: IUser) => {
   return (
     <StyledMain>
       <PageTitle title="Checkout our menu below" />
-      <MenuComponent />
+      <MenuComponent user={user} />
       <Footer />
     </StyledMain>
   );

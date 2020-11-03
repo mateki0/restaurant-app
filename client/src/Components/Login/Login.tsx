@@ -8,7 +8,7 @@ const Login = () => {
   return (
     <RegisterContainer>
       <Form method="post" action="/login">
-        <InputComponent name="login" label="Login" type="text" />
+        <InputComponent name="email" label="Email" type="text" />
         <InputComponent name="password" label="Password" type="password" />
         <SubmitButton>Log In</SubmitButton>
       </Form>

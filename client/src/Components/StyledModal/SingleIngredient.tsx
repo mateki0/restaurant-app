@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { SingleItemProps } from '../SingleMenuBox/SingleMealItem';
+import React, { useState } from 'react';
 import CounterContainer from './styled/CounterContainer';
 import IngredientButton from './styled/IngredientButton';
 import IngredientCount from './styled/IngredientCount';
 import SingleIngredientContainer from './styled/SingleIngredientContainer';
-// {ingredient,count,setPrice,itemPrice,price}
+
 interface IngredientProps {
   ingredientName: string;
   count: number;
-  ingredientPrice: number;
-  setItemPrice: (price: number) => void;
-  itemPrice: number;
   item: any;
   priceCalc: any;
 }
-const SingleIngredient = ({
-  ingredientName,
-  count,
-  ingredientPrice,
-  setItemPrice,
-  itemPrice,
-  item,
-  priceCalc,
-}: IngredientProps) => {
+const SingleIngredient = ({ ingredientName, count, item, priceCalc }: IngredientProps) => {
   const [itemCount, setItemCount] = useState<number>(count);
 
   const handleIncrement = () => {

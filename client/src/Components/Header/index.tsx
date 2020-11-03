@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import Navigation from './styled/Navigation';
 import NavList from './styled/NavList';
@@ -9,34 +9,38 @@ import UserName from './styled/UserName';
 import CartLink from './styled/CartLink';
 import PriceSpan from './styled/PriceSpan';
 import LogoutButton from './styled/LogoutButton';
-
 import Menu from './styled/Menu';
 import HamburgerContainer from './styled/HamburgerContainer';
 import Hamburger from './styled/Hamburger';
 import Cross from './styled/Cross';
 import HamburgerSpan from './styled/HamburgerSpan';
 import CrossSpan from './styled/CrossSpan';
-import TotalPriceContext from '../../Contexts/TotalPriceContext';
-import LocalCartContext from '../../Contexts/LocalCartContext';
+import CartContext from '../../Contexts/CartContext';
 
-const Header = () => {
-  const { totalPrice } = useContext(TotalPriceContext);
+export interface IUser {
+  user?: {
+    cart: Array<any>;
+    email: string;
+    password: string;
+  };
+}
+const Header = ({ user }: IUser) => {
+  console.log(user);
+  const { price } = useContext(CartContext);
   const [name, setName] = useState('Guest');
   const [isOpen, setIsOpen] = useState(false);
-  const [pr, setPr] = useState();
-
-  // useEffect(() => {
-  //   if (user !== null && user !== '') {
-  //     let index = user.local.email.indexOf('@');
-  //     setName(user.local.email.slice(0, index));
-
-  //     if (name.length > 19) {
-  //       setName(name.slice(0, 16) + '...');
-  //     }
-  //   }
-  // }, [user, name]);
-
-  console.log(totalPrice);
+  const handleName = useCallback(async () => {
+    if (user) {
+      let index = user.email.indexOf('@');
+      setName(user.email.slice(0, index));
+      if (name.length > 19) {
+        setName(name.slice(0, 16) + '...');
+      }
+    }
+  }, [user]);
+  useEffect(() => {
+    handleName();
+  }, [user]);
   return (
     <header>
       <Navigation>
@@ -124,12 +128,18 @@ const Header = () => {
           <UserInfoContainer>
             <UserName>Hello, {name}</UserName>
             <CartLink href="/link" onClick={() => setIsOpen(false)}>
-              <PriceSpan>{totalPrice}$</PriceSpan>
+              <PriceSpan>{price === null ? 0 : price}$</PriceSpan>
             </CartLink>
             <div>
-              <form method="post" action="/logout">
-                <LogoutButton type="submit">Logout</LogoutButton>
-              </form>
+              {user ? (
+                <form method="post" action="/logout">
+                  <LogoutButton type="submit">Logout</LogoutButton>
+                </form>
+              ) : (
+                <LogoutButton as="a" href="/login">
+                  Login
+                </LogoutButton>
+              )}
             </div>
           </UserInfoContainer>
         </Menu>

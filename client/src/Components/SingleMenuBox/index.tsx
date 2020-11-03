@@ -8,17 +8,21 @@ import SingleMealItem from './SingleMealItem';
 interface ISingleMenuBox {
   title: string;
   data: ItemsProps[];
+  user: {
+    cart: Array<any>;
+    email: string;
+    password: string;
+  };
 }
 
-const SingleMenuBox = ({ title, data }: ISingleMenuBox) => {
-  console.log(data);
+const SingleMenuBox = ({ title, data, user }: ISingleMenuBox) => {
   return (
     <BoxWrapper>
       <BoxTitleWrapper>
         <BoxTitle>{title}</BoxTitle>
       </BoxTitleWrapper>
       {data.map((item, index) => (
-        <SingleMealItem item={item} key={index} />
+        <SingleMealItem item={item} key={index} user={user} />
       ))}
     </BoxWrapper>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useState } from 'react';
 import StyledModal from '../StyledModal';
 import StyledModalWrapper from '../StyledModal/styled/StyledModalWrapper';
 import MealDescription from './styled/MealDescription';
@@ -20,14 +20,17 @@ export interface SingleItemProps {
     }[];
     price: string;
     type: string;
+    count: number;
+  };
+  user: {
+    cart: Array<any>;
+    email: string;
+    password: string;
   };
 }
 
-const SingleMealItem = ({ item }: SingleItemProps) => {
+const SingleMealItem = ({ item, user }: SingleItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const [localCart, setLocalCart] = useState<any>([]);
-
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
@@ -52,7 +55,7 @@ const SingleMealItem = ({ item }: SingleItemProps) => {
         onBackgroundClick={toggleModal}
         onEscapeKeydown={toggleModal}
       >
-        <StyledModal item={item} setIsOpen={setIsOpen}></StyledModal>
+        <StyledModal item={item} setIsOpen={setIsOpen} user={user}></StyledModal>
       </StyledModalWrapper>
     </SingleMealItemContainer>
   );

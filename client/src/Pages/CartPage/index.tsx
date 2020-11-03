@@ -1,15 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import Cart from '../../Components/Cart';
+import { IUser } from '../../Components/Header';
 import StyledMain from '../../Components/Layout/StyledMain';
 import PageTitle from '../../Components/PageTitle';
-import LocalCartContext from '../../Contexts/LocalCartContext';
-import TotalPriceContext from '../../Contexts/TotalPriceContext';
 
-const CartPage = () => {
-  const { totalPrice } = useContext(TotalPriceContext);
-  console.log(totalPrice);
+const CartPage = ({ user }: IUser) => {
   return (
     <StyledMain>
       <PageTitle title="Cart" />
+      <Cart user={user} />
     </StyledMain>
   );
 };
