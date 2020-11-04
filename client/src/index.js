@@ -4,11 +4,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
-
-html {
-  
-}
-
   body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -16,10 +11,7 @@ html {
     sans-serif;
   padding: 0;
   min-height: 100%;
-  
 }
-
-
 `
 ReactDOM.render(
   <React.StrictMode>

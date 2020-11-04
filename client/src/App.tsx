@@ -10,8 +10,7 @@ import { ModalProvider } from 'styled-react-modal';
 import LoginPage from './Pages/LoginPage';
 import RegisterPage from './Pages/RegisterPage';
 import CartPage from './Pages/CartPage';
-import { CartContextProvider } from './Contexts/CartContext';
-
+import CartContext, { CartContextProvider } from './Contexts/CartContext';
 export interface UserProps {
   local: {
     cart: Array<any>;
@@ -22,54 +21,46 @@ export interface UserProps {
 }
 const App = () => {
   const [user, setUser] = useState<UserProps | null>(null);
+  const state = useContext(CartContext);
   const fetchUser = useCallback(async () => {
     const result = await axios('/user');
     setUser(result.data);
   }, []);
   useEffect(() => {
     fetchUser();
+    if (user) {
+      const items = user.local.cart;
+      state.setCart(items);
+    }
   }, []);
-  console.log(user);
   return (
     <Router>
-      <CartContextProvider>{user ? <Header user={user.local} /> : <Header />}</CartContextProvider>
-      <Switch>
-        <Route exact path="/">
-          <CartContextProvider>
+      <CartContextProvider>
+        {user ? <Header user={user.local} /> : <Header />}
+        <Switch>
+          <Route exact path="/">
             <HomePage />
-          </CartContextProvider>
-        </Route>
-        <Route exact path="/about">
-          <CartContextProvider>
+          </Route>
+          <Route exact path="/about">
             <AboutPage />
-          </CartContextProvider>
-        </Route>
-        <Route exact path="/contact">
-          <CartContextProvider>
+          </Route>
+          <Route exact path="/contact">
             <ContactPage />
-          </CartContextProvider>
-        </Route>
-        <Route exact path="/menu">
-          <CartContextProvider>
+          </Route>
+          <Route exact path="/menu">
             <ModalProvider>{user ? <MenuPage user={user.local} /> : <MenuPage />}</ModalProvider>
-          </CartContextProvider>
-        </Route>
-        <Route exact path="/cart">
-          <CartContextProvider>
+          </Route>
+          <Route exact path="/cart">
             <CartPage />
-          </CartContextProvider>
-        </Route>
-        <Route exact path="/login">
-          <CartContextProvider>
+          </Route>
+          <Route exact path="/login">
             <LoginPage />
-          </CartContextProvider>
-        </Route>
-        <Route exact path="/register">
-          <CartContextProvider>
+          </Route>
+          <Route exact path="/register">
             <RegisterPage />
-          </CartContextProvider>
-        </Route>
-      </Switch>
+          </Route>
+        </Switch>
+      </CartContextProvider>
     </Router>
   );
 };

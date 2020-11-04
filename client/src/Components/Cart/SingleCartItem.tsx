@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import CartContext from '../../Contexts/CartContext';
 import { ItemsProps } from '../MenuComponent';
+import IngredientButton from '../StyledModal/styled/IngredientButton';
 import IngredientCount from '../StyledModal/styled/IngredientCount';
 import CartIncrementButton from './styled/CartIncrementButton';
 import ItemDesc from './styled/ItemDesc';
 import ItemName from './styled/ItemName';
 import NameDescDiv from './styled/NameDescDiv';
 import PriceCountContainer from './styled/PriceCountContainer';
+import RemoveButton from './styled/RemoveButton';
 import SingleCartItemContainer from './styled/SingleCartItemContainer';
 
 interface ItemProps {
@@ -27,8 +29,15 @@ interface ISingleCartItemProps {
   item: ItemProps;
   items: ItemsProps[];
 }
+const compareItems = (a: number[], b: number[]) => {
+  return (
+    Array.isArray(a) &&
+    Array.isArray(b) &&
+    a.length === b.length &&
+    a.every((val, index) => val === b[index])
+  );
+};
 const SingleCartItem = ({ ingredients, name, item, items }: ISingleCartItemProps) => {
-  console.log(items);
   const state = useContext(CartContext);
   const [count, setCount] = useState(item.count);
   const calcTotalPrice = (items: ItemsProps[]) => {
@@ -46,9 +55,20 @@ const SingleCartItem = ({ ingredients, name, item, items }: ISingleCartItemProps
   };
 
   const handleDecrement = (item: ItemProps) => {
-    if (item.count > 0) {
+    if (item.count > 1) {
       item.count--;
       setCount(item.count);
+      state.setPrice(calcTotalPrice(items));
+    }
+  };
+  const handleRemove = (item: ItemsProps) => {
+    let searchedItem = items.find((a: any) => {
+      const ingredientsSum = a.ingredients.map((a: any) => a.count);
+      const itemSum = item.ingredients.map((a: any) => a.count);
+      return compareItems(ingredientsSum, itemSum) && a.name === item.name;
+    });
+    if (searchedItem) {
+      items.splice(items.indexOf(searchedItem), 1);
       state.setPrice(calcTotalPrice(items));
     }
   };
@@ -63,10 +83,11 @@ const SingleCartItem = ({ ingredients, name, item, items }: ISingleCartItemProps
         ))}
       </NameDescDiv>
       <PriceCountContainer>
-        <CartIncrementButton onClick={() => handleIncrement(item)}>+</CartIncrementButton>
+        <IngredientButton onClick={() => handleIncrement(item)}>+</IngredientButton>
         <IngredientCount>{count}</IngredientCount>
-        <CartIncrementButton onClick={() => handleDecrement(item)}>-</CartIncrementButton>
+        <IngredientButton onClick={() => handleDecrement(item)}>-</IngredientButton>
       </PriceCountContainer>
+      <RemoveButton onClick={() => handleRemove(item)}>Remove</RemoveButton>
     </SingleCartItemContainer>
   );
 };

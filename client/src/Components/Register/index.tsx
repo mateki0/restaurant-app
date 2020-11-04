@@ -10,7 +10,6 @@ const Register = () => {
 
   const toggleVisibility = () =>
     passwordType === 'password' ? setPasswordType('text') : setPasswordType('password');
-  console.log();
   return (
     <RegisterContainer>
       <Form method="post" action="/register">

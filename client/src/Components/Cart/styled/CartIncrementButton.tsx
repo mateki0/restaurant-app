@@ -5,7 +5,7 @@ const CartIncrementButton = styled.button`
   transition: all 0.5s;
   border: none;
   background-color: transparent;
-  box-shadow: 2px 2px 15px 2px #000000;
+  box-shadow: 2px 2px 15px 2px #555555;
   border-radius: 8px;
 
   &:hover {

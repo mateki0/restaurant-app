@@ -3,7 +3,8 @@ import styled from 'styled-components';
 const PriceCountContainer = styled.div`
   padding: 10px 0;
   display: grid;
-  grid-template-columns: 85px 85px 85px;
+  grid-template-columns: 50px 30px 50px;
+  justify-self: center;
   justify-items: center;
   align-content: center;
   > span {

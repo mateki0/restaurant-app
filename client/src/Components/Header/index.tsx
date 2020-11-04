@@ -1,5 +1,4 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-
 import Navigation from './styled/Navigation';
 import NavList from './styled/NavList';
 import NavListItem from './styled/NavListItem';
@@ -25,7 +24,6 @@ export interface IUser {
   };
 }
 const Header = ({ user }: IUser) => {
-  console.log(user);
   const { price } = useContext(CartContext);
   const [name, setName] = useState('Guest');
   const [isOpen, setIsOpen] = useState(false);

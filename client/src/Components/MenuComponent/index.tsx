@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
+
 import SubPageWrapper from '../About/styled/SubPageWrapper';
 import SingleMenuBox from '../SingleMenuBox';
 import { IUser } from '../Header';
+import LoadingIcon from '../LoadingIcon/LoadingIcon';
+import LoadingWrapper from './LoadingWrapper';
 export interface ItemsProps {
   id: string;
   name: string;
@@ -29,9 +32,19 @@ const MenuComponent = ({ user }: IUser) => {
     return (
       <SubPageWrapper>
         <SingleMenuBox title="Meals" data={items.filter((a) => a.type === 'Meal')} user={user} />
+        <SingleMenuBox title="Drinks" data={items.filter((a) => a.type === 'Drink')} user={user} />
+        <SingleMenuBox
+          title="Desserts"
+          data={items.filter((a) => a.type === 'Dessert')}
+          user={user}
+        />
       </SubPageWrapper>
     );
   }
-  return <div>Loading...</div>;
+  return (
+    <LoadingWrapper>
+      <LoadingIcon />
+    </LoadingWrapper>
+  );
 };
 export default MenuComponent;

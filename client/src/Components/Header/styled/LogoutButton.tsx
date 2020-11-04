@@ -2,9 +2,8 @@ import styled from 'styled-components';
 
 const LogoutButton = styled.button`
   border: none;
-  border-radius: 5px;
-  background-color: transparent;
-  box-shadow: 2px 2px 10px 2px #000000;
+  border-radius: 3px;
+  background-color: #fff;
   color: #000000;
   text-decoration: none;
   font-weight: 600;
@@ -13,7 +12,6 @@ const LogoutButton = styled.button`
   transition: all 0.3s;
   &:hover {
     cursor: pointer;
-    color: #c83a3a;
   }
 `;
 

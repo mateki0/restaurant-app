@@ -7,8 +7,14 @@ import SingleIngredientContainer from './styled/SingleIngredientContainer';
 interface IngredientProps {
   ingredientName: string;
   count: number;
-  item: any;
-  priceCalc: any;
+  item: {
+    count: number;
+    ingredients: Array<object>;
+    name: string;
+    price: string;
+    type: string;
+  };
+  priceCalc: () => void;
 }
 const SingleIngredient = ({ ingredientName, count, item, priceCalc }: IngredientProps) => {
   const [itemCount, setItemCount] = useState<number>(count);

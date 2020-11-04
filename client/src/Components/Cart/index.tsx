@@ -1,21 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { ItemsProps } from '../MenuComponent';
 import SingleCartItem from './SingleCartItem';
 import CartContainer from './styled/CartContainer';
 import { IUser } from '../Header';
+import CartContext from '../../Contexts/CartContext';
+import CartLink from '../Header/styled/CartLink';
 
 const Cart = ({ user }: IUser) => {
-  const { items } = JSON.parse(window.localStorage.getItem('cart')!);
-  const calcTotalPrice = (items: ItemsProps[]) => {
-    let calc = items.map((a) => {
-      return parseFloat(a.price) * a.count;
-    });
-    return calc.reduce((a: any, b: any) => a + b, 0);
+  const { cart } = useContext(CartContext);
+  console.log(cart.items);
+  const calcTotalPrice = (items: any) => {
+    if (cart && cart.items) {
+      let calc = items.map((a: any) => {
+        return parseFloat(a.price) * a.count;
+      });
+      return calc.reduce((a: number, b: number) => a + b, 0);
+    }
   };
-  useEffect(() => {
-    calcTotalPrice(items);
-  }, [items]);
+
   const updateDatabaseCart = (items: ItemsProps[]) => {
     axios
       .post('/update', {
@@ -29,30 +32,40 @@ const Cart = ({ user }: IUser) => {
       });
   };
   useEffect(() => {
+    calcTotalPrice(cart.items);
+  }, [cart.items]);
+  useEffect(() => {
     return () => {
-      window.localStorage.setItem('cart', JSON.stringify({ items }));
-      if (user) {
+      if (cart && cart.items) {
+        const items = [...cart.items];
+        window.localStorage.setItem('price', JSON.stringify(calcTotalPrice(cart.items)));
         window.localStorage.setItem('cart', JSON.stringify({ items }));
-        updateDatabaseCart(items);
+      }
+      if (user) {
+        updateDatabaseCart(cart.items);
       }
     };
   });
-  if (items && items.length > 0) {
+  if (cart.items && cart.items.length > 0) {
     return (
       <CartContainer>
-        {items.map((item: ItemsProps, b: number) => (
+        {cart.items.map((item: ItemsProps, b: number) => (
           <SingleCartItem
             key={b}
             item={item}
             ingredients={item.ingredients}
             name={item.name}
-            items={items}
+            items={cart.items}
           />
         ))}
       </CartContainer>
     );
   } else {
-    return <div>No items</div>;
+    return (
+      <CartContainer>
+        <CartLink href="/menu">Please add something from our menu</CartLink>
+      </CartContainer>
+    );
   }
 };
 
