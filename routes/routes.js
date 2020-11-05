@@ -30,6 +30,7 @@ module.exports = function (app, passport) {
       successRedirect: "/",
       failureRedirect: "/register",
       failureFlash: true,
+      failureFlash: "Invalid email or password."
     })
   );
 
@@ -87,8 +88,4 @@ module.exports = function (app, passport) {
     });
   });
 };
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) return next();
 
-  res.redirect("/login");
-}
