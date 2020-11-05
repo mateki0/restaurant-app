@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import BoxWrapper from './styled/BoxWrapper';
 import BoxTitleWrapper from './styled/BoxTitleWrapper';
 import BoxTitle from './styled/BoxTitle';
@@ -6,6 +6,7 @@ import { ItemsProps } from '../MenuComponent';
 import SingleMealItem from './SingleMealItem';
 import axios from 'axios';
 import CartContext from '../../Contexts/CartContext';
+import StyledAnimated from './styled/StyledAnimated';
 
 interface ISingleMenuBox {
   title: string;
@@ -35,9 +36,22 @@ const compareItems = (a: number[], b: number[]) => {
     a.every((val, index) => val === b[index])
   );
 };
+
 const SingleMenuBox = ({ title, data, user }: ISingleMenuBox) => {
   const state = useContext(CartContext);
   const { cart } = useContext(CartContext);
+  const [fading, setFading] = useState(false);
+  const [visible, setVisible] = useState(true);
+
+  const handleAnimation = () => {
+    if (visible) {
+      setFading(true);
+      setTimeout(() => setVisible(false), 650);
+    } else {
+      setFading(false);
+      setTimeout(() => setVisible(true), 250);
+    }
+  };
   let items: ItemsProps[];
 
   useEffect(() => {
@@ -98,12 +112,19 @@ const SingleMenuBox = ({ title, data, user }: ISingleMenuBox) => {
   }, []);
   return (
     <BoxWrapper>
-      <BoxTitleWrapper>
+      <BoxTitleWrapper onClick={handleAnimation}>
         <BoxTitle>{title}</BoxTitle>
       </BoxTitleWrapper>
-      {data.map((item, index) => (
-        <SingleMealItem item={item} key={index} user={user} handleItemAdding={handleItemAdding} />
-      ))}
+      <StyledAnimated
+        animationIn="fadeInDown"
+        animationOut="fadeOutUp"
+        fading={visible}
+        isVisible={!fading}
+      >
+        {data.map((item, index) => (
+          <SingleMealItem item={item} key={index} user={user} handleItemAdding={handleItemAdding} />
+        ))}
+      </StyledAnimated>
     </BoxWrapper>
   );
 };

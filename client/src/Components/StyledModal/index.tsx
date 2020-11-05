@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useCallback, useState } from 'react';
 import { ItemsProps } from '../MenuComponent';
 import { SingleItemProps } from '../SingleMenuBox/SingleMealItem';

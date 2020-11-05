@@ -45,7 +45,7 @@ module.exports = function(passport) {
           if (user) {
             return done(null, false, req.flash('signupMessage', 'That email is already taken'));
           } else if (password.length < 8 || password.length > 100) {
-            return done(null, false, req.flash('signupMessage', 'Minimum password length is 8 signs '));
+            return done(null, false, req.flash('signupMessage', 'Minimum password length is 8 signs'));
 
           } else {
 
@@ -91,11 +91,11 @@ module.exports = function(passport) {
           return done(err);
 
         if (!user)
-          return done(null, false, req.flash('loginMessage', 'No user found.'));
+          return done(null, false, req.flash('loginMessage', 'No user found'));
 
         //wrong password
         if (!user.validPassword(password))
-          return done(null, false, req.flash('loginMessage', 'Wrong password.'));
+          return done(null, false, req.flash('loginMessage', 'Wrong password'));
 
         return done(null, user);
       });

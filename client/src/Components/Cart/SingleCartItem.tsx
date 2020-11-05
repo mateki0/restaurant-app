@@ -3,7 +3,6 @@ import CartContext from '../../Contexts/CartContext';
 import { ItemsProps } from '../MenuComponent';
 import IngredientButton from '../StyledModal/styled/IngredientButton';
 import IngredientCount from '../StyledModal/styled/IngredientCount';
-import CartIncrementButton from './styled/CartIncrementButton';
 import ItemDesc from './styled/ItemDesc';
 import ItemName from './styled/ItemName';
 import NameDescDiv from './styled/NameDescDiv';

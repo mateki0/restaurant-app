@@ -49,7 +49,7 @@ const MealsSlider = () => {
         isPlaying={true}
         infinite={true}
         interval={3000}
-        customHeight="100px"
+        customheight="100px"
       >
         <Slider>
           {carousel.map((item, i) => (

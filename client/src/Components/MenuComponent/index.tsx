@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
-
 import SubPageWrapper from '../About/styled/SubPageWrapper';
 import SingleMenuBox from '../SingleMenuBox';
 import { IUser } from '../Header';

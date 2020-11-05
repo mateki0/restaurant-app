@@ -36,10 +36,10 @@ const MarketingSlider = () => {
         isPlaying={true}
         infinite={true}
         interval={3000}
-        naturalSlideHeight={400}
+        naturalSlideHeight={380}
         naturalSlideWidth={1500}
         totalSlides={slides.length}
-        customHeight="470px"
+        customheight="380px"
       >
         <Slider>
           {slides.map((item, index) => (

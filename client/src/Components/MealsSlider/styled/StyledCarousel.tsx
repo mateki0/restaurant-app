@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { CarouselProvider } from 'pure-react-carousel';
 
-const StyledCarousel = styled(CarouselProvider)<{ customHeight?: string }>`
+const StyledCarousel = styled(CarouselProvider)<{ customheight?: string }>`
   position: relative;
-  height: ${(props) => props.customHeight};
+  height: ${(props) => props.customheight};
   @media screen and (min-width: 1024px) {
     height: 365px;
   }

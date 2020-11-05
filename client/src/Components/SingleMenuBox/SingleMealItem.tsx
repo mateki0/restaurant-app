@@ -63,7 +63,7 @@ const SingleMealItem = ({ item, user, handleItemAdding }: SingleItemProps) => {
           toggleModal={toggleModal}
           item={item}
           user={user}
-        ></StyledModal>
+        />
       </StyledModalWrapper>
     </SingleMealItemContainer>
   );
