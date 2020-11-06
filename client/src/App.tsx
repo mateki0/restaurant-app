@@ -33,6 +33,11 @@ const App = () => {
       state.setCart(items);
     }
   }, []);
+  useEffect(() => {
+    if (!window.localStorage.getItem('cart')) {
+      localStorage.setItem('cart', JSON.stringify({ items: [] }));
+    }
+  }, []);
   return (
     <Router>
       <CartContextProvider>

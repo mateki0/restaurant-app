@@ -53,12 +53,6 @@ const SingleMenuBox = ({ title, data, user }: ISingleMenuBox) => {
     }
   };
   let items: ItemsProps[];
-
-  useEffect(() => {
-    if (!window.localStorage.getItem('cart')) {
-      localStorage.setItem('cart', JSON.stringify({ items: [] }));
-    }
-  }, []);
   const calcTotalPrice = (items: ItemsProps[]) => {
     if (items) {
       let calc = items.map((a) => {
