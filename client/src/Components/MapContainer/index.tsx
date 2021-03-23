@@ -2,15 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl, { Map } from 'mapbox-gl';
 import MapDiv from './MapDiv';
 
-// navigator.geolocation.getCurrentPosition(function(position) {
-//   console.log("Latitude is :", position.coords.latitude);
-//   console.log("Longitude is :", position.coords.longitude);
-// });
-
 interface IMap {
   setMap: React.Dispatch<React.SetStateAction<any>>;
   mapDiv: React.RefObject<HTMLElement>;
 }
+
 const MapContainer = () => {
   const [map, setMap] = useState<Map>();
   const mapDiv = useRef<HTMLDivElement | null>(null);

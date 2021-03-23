@@ -9,7 +9,7 @@ import CartLink from '../Header/styled/CartLink';
 
 const Cart = ({ user }: IUser) => {
   const { cart } = useContext(CartContext);
-  console.log(cart.items);
+  
   const calcTotalPrice = (items: any) => {
     if (cart && cart.items) {
       let calc = items.map((a: any) => {
@@ -32,8 +32,11 @@ const Cart = ({ user }: IUser) => {
       });
   };
   useEffect(() => {
-    calcTotalPrice(cart.items);
-  }, [cart.items]);
+    if (cart && cart.items && cart.items.length > 0){
+      calcTotalPrice(cart.items);
+    }
+  }, [cart]);
+
   useEffect(() => {
     return () => {
       if (cart && cart.items) {
@@ -46,7 +49,8 @@ const Cart = ({ user }: IUser) => {
       }
     };
   });
-  if (cart.items && cart.items.length > 0) {
+
+  if (cart && cart.items && cart.items.length > 0) {
     return (
       <CartContainer>
         {cart.items.map((item: ItemsProps, b: number) => (
